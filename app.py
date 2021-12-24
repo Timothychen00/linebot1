@@ -7,17 +7,17 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 app=Flask(__name__)
-
+line_bot_api = LineBotApi('Qi7XZPL25/HKPXECrtPOJjA3mwTPAkS+eppoWlXNDhAEVe4qmyuTX7tsdjgBA9z27xzOyPo+eqP5oJMCf6+Gz1S5JzisSb2A9Viap0sWrajVfWAeld1ZefrGjWOWFOtcPZLLmsb4SYPmHV+pdrP8ygdB04t89/1O/w1cDnyilFU=')
 # app.static_folder='static'
 
 @app.route('/')
 def home():
     return render_template('home.html')
 
-line_bot_api = LineBotApi('Qi7XZPL25/HKPXECrtPOJjA3mwTPAkS+eppoWlXNDhAEVe4qmyuTX7tsdjgBA9z27xzOyPo+eqP5oJMCf6+Gz1S5JzisSb2A9Viap0sWrajVfWAeld1ZefrGjWOWFOtcPZLLmsb4SYPmHV+pdrP8ygdB04t89/1O/w1cDnyilFU=')
+
 
 @app.route('/messages')
-def home():
+def messages():
     return 'fuck'
 @app.route('/push')
 def push():
