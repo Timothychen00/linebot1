@@ -1,3 +1,4 @@
 Flask
 python-dotenv
-line-bot-sdk==2.0.1
+line-bot-sdk
+linebot
