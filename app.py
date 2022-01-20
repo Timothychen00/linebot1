@@ -13,7 +13,7 @@ app=Flask(__name__)
 
 
 
-db = client.Flask
+# db = client.Flask
 # collection=db.settings
 # result=collection.find_one()
 
