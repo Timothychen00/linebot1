@@ -48,7 +48,6 @@ def messages():
 
 #     return 'OK'
 
-
 # def load_settings():
 #     collection=db.settings
 #     result=collection.find_one()
