@@ -4,14 +4,12 @@ from linebot.models import TextSendMessage,MessageEvent,TextMessage
 from linebot.exceptions import LineBotApiError,InvalidSignatureError
 import pymongo,os
 from dotenv import load_dotenv
-from flask_debug import Debug
 load_dotenv()
 
 
 client = pymongo.MongoClient("mongodb+srv://"+os.environ['DB_USER']+":"+os.environ['DB_PASSWORD']+"@cluster0.mgwi6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 
 app=Flask(__name__)
-Debug(app)
 
 
 # db = client.Flask
