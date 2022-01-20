@@ -1,3 +1,5 @@
 Flask
 python-dotenv
 line-bot-sdk
+bson
+pymongo[srv]==3.12.0
