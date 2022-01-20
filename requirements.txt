@@ -1,5 +1,5 @@
-Flask
+Flask==1.1.2
 python-dotenv
-line-bot-sdk
+line-bot-sdk==2.0.1
 bson
 pymongo[srv]==3.12.0
