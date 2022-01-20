@@ -1,4 +1,4 @@
-from flask import Flask,request
+from flask import Flask,request,abort
 from flask import render_template
 from linebot import LineBotApi,WebhookHandler
 from linebot.models import TextSendMessage,MessageEvent,TextMessage
@@ -19,7 +19,8 @@ collection=db.settings
 result=collection.find_one()
 
 print(result)    
-# line_bot_api = LineBotApi('Qi7XZPL25/HKPXECrtPOJjA3mwTPAkS+eppoWlXNDhAEVe4qmyuTX7tsdjgBA9z27xzOyPo+eqP5oJMCf6+Gz1S5JzisSb2A9Viap0sWrajVfWAeld1ZefrGjWOWFOtcPZLLmsb4SYPmHV+pdrP8ygdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi('Qi7XZPL25/HKPXECrtPOJjA3mwTPAkS+eppoWlXNDhAEVe4qmyuTX7tsdjgBA9z27xzOyPo+eqP5oJMCf6+Gz1S5JzisSb2A9Viap0sWrajVfWAeld1ZefrGjWOWFOtcPZLLmsb4SYPmHV+pdrP8ygdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('3d35c2610fb78762643b8b7a58414ba7')
 @app.route('/')
 def home():
     return render_template('home.html')
