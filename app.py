@@ -19,11 +19,10 @@ Debug(app)
 # result=collection.find_one()
 
 # print(result)
-try:
-    line_bot_api = LineBotApi('Qi7XZPL25/HKPXECrtPOJjA3mwTPAkS+eppoWlXNDhAEVe4qmyuTX7tsdjgBA9z27xzOyPo+eqP5oJMCf6+Gz1S5JzisSb2A9Viap0sWrajVfWAeld1ZefrGjWOWFOtcPZLLmsb4SYPmHV+pdrP8ygdB04t89/1O/w1cDnyilFU=')
-    handler = WebhookHandler('3d35c2610fb78762643b8b7a58414ba7')
-except:
-    print(1)
+
+line_bot_api = LineBotApi('Qi7XZPL25/HKPXECrtPOJjA3mwTPAkS+eppoWlXNDhAEVe4qmyuTX7tsdjgBA9z27xzOyPo+eqP5oJMCf6+Gz1S5JzisSb2A9Viap0sWrajVfWAeld1ZefrGjWOWFOtcPZLLmsb4SYPmHV+pdrP8ygdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('3d35c2610fb78762643b8b7a58414ba7')
+
 @app.route('/')
 def home():
     return render_template('home.html')
