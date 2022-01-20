@@ -1,10 +1,10 @@
 from flask import Flask,request,abort,render_template
-# from linebot import LineBotApi,WebhookHandler
-# from linebot.models import TextSendMessage,MessageEvent,TextMessage
-# from linebot.exceptions import LineBotApiError,InvalidSignatureError
-# import pymongo,os
-# from dotenv import load_dotenv
-# load_dotenv()
+from linebot import LineBotApi,WebhookHandler
+from linebot.models import TextSendMessage,MessageEvent,TextMessage
+from linebot.exceptions import LineBotApiError,InvalidSignatureError
+import pymongo,os
+from dotenv import load_dotenv
+load_dotenv()
 
 
 # client = pymongo.MongoClient("mongodb+srv://"+os.environ['DB_USER']+":"+os.environ['DB_PASSWORD']+"@cluster0.mgwi6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
@@ -23,8 +23,6 @@ app=Flask(__name__)
 @app.route('/')
 def home():
     return render_template('home.html')
-
-
 
 @app.route('/messages')
 def messages():
