@@ -13,7 +13,7 @@ app=Flask(__name__)
 
 
 
-db = client.Flask
+# db = client.Flask
 # collection=db.settings
 # result=collection.find_one()
 
@@ -24,9 +24,9 @@ handler = WebhookHandler('3d35c2610fb78762643b8b7a58414ba7')
 def home():
     return render_template('home.html')
 
-@app.route('/messages')
-def messages():
-    return 'fuck'
+# @app.route('/messages')
+# def messages():
+#     return 'fuck'
 
 # @app.route("/callback", methods=['POST'])
 # def callback():
