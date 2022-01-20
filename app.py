@@ -46,10 +46,10 @@ def callback():
 
     return 'OK'
 
-def load_settings():
-    collection=db.settings
-    result=collection.find_one()
-    settings=result
+# def load_settings():
+#     collection=db.settings
+#     result=collection.find_one()
+#     settings=result
 
 if __name__=='__main__':
     app.run(debug=True)
