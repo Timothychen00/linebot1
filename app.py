@@ -47,7 +47,7 @@ def callback():
     return 'OK'
 
 @handler.add(MessageEvent,message=TextMessage)
-def SaveId(event):
+def echo(event):
     LineBotApi.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
 
 
