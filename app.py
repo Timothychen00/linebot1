@@ -33,16 +33,17 @@ def name(name):
 @app.route("/callback", methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']
-
+    
     body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
-    print(body)
-    # handle webhook body
-    try:
-        handler.handle(body, signature)
-    except InvalidSignatureError:
-        print("Invalid signature. Please check your channel access token/channel secret.")
-        abort(400)
+    if body['event']:
+        app.logger.info("Request body: " + body)
+        print(body)
+        # handle webhook body
+        try:
+            handler.handle(body, signature)
+        except InvalidSignatureError:
+            print("Invalid signature. Please check your channel access token/channel secret.")
+            abort(400)
 
     return 'OK'
 
