@@ -44,7 +44,7 @@ def callback():
 
 @handler.add(MessageEvent,message=TextMessage)
 def SaveId(event):
-    LineBotApi.reply_message(event.reply_token,TextSendMessage(text=str(event.source)))
+    LineBotApi.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
 
 
 def load_settings():
