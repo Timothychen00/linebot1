@@ -37,7 +37,7 @@ def callback():
     # get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
-
+    print(body)
     # handle webhook body
     try:
         handler.handle(body, signature)
@@ -47,10 +47,16 @@ def callback():
 
     return 'OK'
 
-# def load_settings():
-#     collection=db.settings
-#     result=collection.find_one()
-#     settings=result
+@handler.add(MessageEvent,message=TextMessage)
+def SaveId(event):
+    LineBotApi.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
+    print(event)
+
+
+def load_settings():
+    collection=db.settings
+    result=collection.find_one()
+    settings=result
 
 if __name__=='__main__':
     app.run(debug=True)
