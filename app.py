@@ -48,7 +48,7 @@ def callback():
 
 @handler.add(MessageEvent,message=TextMessage)
 def echo(event):
-    LineBotApi.reply_message(event.reply_token,message=TextSendMessage(text=event.message.text))
+    LineBotApi.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
 
 
 def load_settings():
