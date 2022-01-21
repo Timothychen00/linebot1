@@ -25,16 +25,11 @@ handler = WebhookHandler('3d35c2610fb78762643b8b7a58414ba7')
 def home():
     return render_template('home.html')
 
-# @app.route('/messages')
-# def messages():
-#     return 'fuck'
 
 @app.route("/callback", methods=['POST'])
 def callback():
-    # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
 
-    # get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
     print(body)
@@ -49,8 +44,7 @@ def callback():
 
 @handler.add(MessageEvent,message=TextMessage)
 def SaveId(event):
-    LineBotApi.reply_message(event.reply_token,TextSendMessage(text=str(event)))
-    print(event)
+    LineBotApi.reply_message(event.reply_token,TextSendMessage(text=str(event.source)))
 
 
 def load_settings():
