@@ -49,7 +49,7 @@ def callback():
 
 @handler.add(MessageEvent,message=TextMessage)
 def SaveId(event):
-    LineBotApi.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
+    LineBotApi.reply_message(event.reply_token,TextSendMessage(text=str(event)))
     print(event)
 
 
