@@ -25,6 +25,10 @@ handler = WebhookHandler('3d35c2610fb78762643b8b7a58414ba7')
 def home():
     return render_template('home.html')
 
+@app.route("/<name>")
+def name(name):
+    print(name)
+    return name
 
 @app.route("/callback", methods=['POST'])
 def callback():
