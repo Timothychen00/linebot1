@@ -1,15 +1,16 @@
 {
     "message": {
-        "id": "15460063389001",
-         "text": "\u547c\u53eb\u6a5f\u5668\u4eba",
+        "id": "15473118231536",
+         "text": "\u592a\u50cf\u4e86\u55ce\ud83e\udd23",
          "type": "text"
     },
      "mode": "active",
-     "replyToken": "33772b509d71433db4550615a0887b64",
+     "replyToken": "6b68582752264cbc9a870572f8141e8b",
      "source": {
-        "type": "user",
-         "userId": "U6feaa10ddbb90decf621c4feb49e351c"
+        "groupId": "Ccfc1d6f42c17493567d57bff916ff1f9",
+         "type": "group",
+         "userId": "Ucdb272bac34b11e2d1b3b8c88af2325e"
     },
-     "timestamp": 1642818241903,
+     "timestamp": 1643024339210,
      "type": "message"
 }

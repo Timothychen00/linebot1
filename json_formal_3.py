@@ -1,6 +1,8 @@
-def json_formal_output(input_filename,output_filename):
-    with open(input_filename,'r')as file1:
-        jsonString=file1.read()
+def json_formal_output(jsonString,output_filename,input_filename='none'):
+    if not jsonString:
+        with open(input_filename,'r')as file1:
+            jsonString=file1.read()
+
     enterChar=[',','{','[','}',']']#所有的特殊字元
     nowIndent=[0,0]
     indentWidth=4
