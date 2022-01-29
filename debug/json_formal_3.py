@@ -1,12 +1,9 @@
-def json_formal_output(jsonString,output_filename,input_filename='none'):
+def json_formal_output(jsonString,output_filename,input_filename=None,indentWidth=4):
     if not jsonString:
         with open(input_filename,'r')as file1:
             jsonString=file1.read()
 
     enterChar=[',','{','[','}',']']#所有的特殊字元
-    nowIndent=[0,0]
-    indentWidth=4
-    stringChar=['\'','\"']#自傳的識別字元
     pointer=0#表示目前所在字串的位置
     inString=[False,False]#表示是否位於字串中（是的話就忽略）
 
@@ -30,9 +27,13 @@ def json_formal_output(jsonString,output_filename,input_filename='none'):
     jsonString=jsonString.split('\n')
     #縮排+輸出檔案
     with open(output_filename,'w')as file2:
+        nowIndent=[0,0]
         for eachline in jsonString:
+            # if eachline[0]==" ":
+            #     eachline=eachline[1:]
             inString=[False,False]
             pointer=0
+            indentWidth=4
             for char in eachline:
                 if char =='\'':
                     inString[0]=not inString[0]
@@ -43,9 +44,10 @@ def json_formal_output(jsonString,output_filename,input_filename='none'):
                     nowIndent[1]+=1
                 #減少縮排
                 elif char in enterChar[3:] and inString[0]==False and inString[1]==False:
-                    nowIndent[1]-=1
                     nowIndent[0]-=1
+                    nowIndent[1]-=1
                 pointer+=1
             file2.write((nowIndent[0]*indentWidth*" ")+eachline+'\n')
             nowIndent[0]=nowIndent[1]
+            
 

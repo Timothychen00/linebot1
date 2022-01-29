@@ -1,6 +1,6 @@
-from json_formal_3 import json_formal_output
+from debug.json_formal_3 import json_formal_output
 def message_event_debug(event,users=False):
-    json_formal_output(output_filename='output.json',jsonString=str(event))#print out formal json
+    json_formal_output(output_filename='debug/event.json',jsonString=str(event))#print out formal json
     print("="*20)
     #message type
     print("message_type:"+event.message.type)
