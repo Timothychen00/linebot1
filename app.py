@@ -117,6 +117,7 @@ def name(name):
     line_bot_api.push_message(list(settings['user-id']),TextSendMessage(text="終於"))
     return name
 
+
 @app.route("/callback", methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']
