@@ -1,6 +1,5 @@
 from flask import Blueprint,render_template
 app_route=Blueprint("app_basic",__name__,static_folder='static',template_folder='templates')
-
 @app_route.route('/')
 def home():
     return render_template('base.html')

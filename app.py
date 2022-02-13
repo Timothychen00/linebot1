@@ -1,5 +1,4 @@
 from flask import Flask,request,abort,render_template
-from linebot import LineBotApi,WebhookHandler
 from linebot.models import TextSendMessage,MessageEvent,TextMessage,StickerMessage,StickerSendMessage
 from linebot.exceptions import LineBotApiError,InvalidSignatureError
 import pymongo,os,random,datetime,time
@@ -12,17 +11,19 @@ from flask_apscheduler import APScheduler
 from ProjectPackage.config import Config
 from ProjectPackage.routes import app_route
 from ProjectPackage.tools import process_search_data
+from ProjectPackage import line_bot_api,handler
 load_dotenv()
 
 client = pymongo.MongoClient("mongodb+srv://"+os.environ['DB_USER']+":"+os.environ['DB_PASSWORD']+"@cluster0.mgwi6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-tz=datetime.timezone(datetime.timedelta(hours=+8))
-app=Flask(__name__)
-
 db = client.Flask
+tz=datetime.timezone(datetime.timedelta(hours=+8))
+app=Flask(__name__,static_folder='ProjectPackage/static/',template_folder='ProjectPackage/templates/')
+
+
 # users=set()
 settings=dict()
-line_bot_api = LineBotApi(os.environ['Channel_access_token'])
-handler = WebhookHandler(os.environ['Channel_secret'])
+# line_bot_api = LineBotApi(os.environ['Channel_access_token'])
+# handler = WebhookHandler(os.environ['Channel_secret'])
 commands=["!bot help","!bot bind","!bot unbind","!bot reload settings","!bot now bounded","!bot search","!bot settings"]
 today_notify={}#今日提醒的日期
 today_task={}#今日待完成的日期
