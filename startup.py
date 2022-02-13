@@ -1,1 +1,0 @@
-from linebot.app import app

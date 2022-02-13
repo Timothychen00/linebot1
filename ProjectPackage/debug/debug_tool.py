@@ -1,4 +1,4 @@
-from debug.json_formal_3 import json_formal_output
+from ProjectPackage.debug.json_formal_3 import json_formal_output
 def message_event_debug(event,users=False):
     json_formal_output(output_filename='debug/event.json',jsonString=str(event))#print out formal json
     print("="*20)

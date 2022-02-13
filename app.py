@@ -4,14 +4,14 @@ from linebot.models import TextSendMessage,MessageEvent,TextMessage,StickerMessa
 from linebot.exceptions import LineBotApiError,InvalidSignatureError
 import pymongo,os,random,datetime,time
 from dotenv import load_dotenv
-from debug.json_formal_3 import json_formal_output
-from debug.debug_tool import message_event_debug
+from ProjectPackage.debug.json_formal_3 import json_formal_output
+from ProjectPackage.debug.debug_tool import message_event_debug
 from re import match
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask_apscheduler import APScheduler
-from config import Config
-from routes import app_route
-from tools import process_search_data
+from ProjectPackage.config import Config
+from ProjectPackage.routes import app_route
+from ProjectPackage.tools import process_search_data
 load_dotenv()
 
 client = pymongo.MongoClient("mongodb+srv://"+os.environ['DB_USER']+":"+os.environ['DB_PASSWORD']+"@cluster0.mgwi6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
