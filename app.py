@@ -11,6 +11,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from flask_apscheduler import APScheduler
 import datetime,time
 from config import Config
+from routes import app_route
 load_dotenv()
 
 client = pymongo.MongoClient("mongodb+srv://"+os.environ['DB_USER']+":"+os.environ['DB_PASSWORD']+"@cluster0.mgwi6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
@@ -31,6 +32,7 @@ task=[]
 #scheduler
 scheduler = APScheduler(BackgroundScheduler(timezone="Asia/Shanghai"))
 
+app.register_blueprint(app_route)
 @app.route('/settings/reload')
 def load_settings():
     global settings
@@ -106,18 +108,6 @@ def process_search_data(results):
         text+="無\n"
     return text
 
-@app.route('/')
-def home():
-    return render_template('home.html')
-
-@app.route("/<name>")
-def name(name):
-    global settings
-    print(settings['user-id'])
-    line_bot_api.push_message(list(settings['user-id']),TextSendMessage(text="終於"))
-    return name
-
-
 @app.route("/callback", methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']
@@ -128,6 +118,7 @@ def callback():
     except InvalidSignatureError:
         abort(400)
     return 'OK'
+
 
 @handler.add(MessageEvent,message=TextMessage)
 def echo(event):

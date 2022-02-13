@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+
+<head>
+    <title>Iteration</title>
+    <link rel="stylesheet" href="/static/css/template.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    {% block main_content %}
+    <div class="gif-box d-flex justify-content-center align-items-center" id="logo-box">
+        <img src="/static/images/logo.gif " id='logo' alt="logo " style='max-width:100vw;max-height:100vh;'/>
+    </div>
+    <main id="main">
+        <section class="middle ">
+            <div class="left-board ">
+                <div style="text-align:center;padding:0em 0;padding-left:8%;padding-right:8% ">
+                    <div style="height:115px; " class='d-flex align-items-center text-center justify-content-around mt-4'>
+                        <h1 id='hour' class='box'></h1>
+                        <h1>:</h1>
+                        <h1 id='minutes' class='box'></h1>
+                        <h1>:</h1>
+                        <h1 id='sec' class='box'></h1>
+                    </div>
+                </div>
+                <div class="left-down-board ">
+                    <ul>
+                        <li>這是測試訊息</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="cursor: pointer; " onclick="location.href='/settings'" class="menu-button1 menu-button-box ">
+                <img src="/static/images/settings.png " width="20% " alt="Setting button ">
+                <h1>Settings設定</h1>
+            </div>
+
+            <div style="cursor: pointer; " onclick="location.href='/delay'" class="menu-button2 menu-button-box ">
+                <img src="/static/images/time.png " width="20% " alt="Delay button ">
+                <h1>Delay延期</h1>
+            </div>
+            <div style="cursor: pointer; " onclick="location.href='/finish'" class="menu-button3 menu-button-box ">
+                <img src="/static/images/finish.png " width="20% " alt="Finish button ">
+                <h1>Finish完成</h1>
+            </div>
+
+        </section>
+
+    </main>
+    {% endblock main_content %}
+
+    {% block js_extend %}
+        <script>
+            setTimeout(function() { document.getElementById("main").style.display = "none" }, 0)
+            setTimeout(function() { document.getElementById("main").style.display = "" }, 1700)
+            setTimeout(function() { 
+                document.getElementById("logo-box").style.display = "none" ;
+                document.getElementById("logo").style.display = "none";
+            }, 1700)
+        </script>
+    {% endblock js_extend %}
+
+    <script src='/static/js/timer.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js " integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p " crossorigin="anonymous "></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js " integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF " crossorigin="anonymous "></script>
+</body>
+
+</html>

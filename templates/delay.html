@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block main_content %}
+    <main>
+        <div class='title'>
+            <img src="/static/images/time.png" width=50px height="60px" alt="Setting button ">
+            <h1>Delay<br>延期</h1>
+        </div>
+        <div style="cursor: pointer; " onclick="window.location='/'" class='home'>
+            <img src="/static/images/home-2.png " height=25% width=25% alt="Setting button ">
+            <h3>home<br>主頁面</h3>
+        </div>
+        <section class="middle ">
+            <div class="left-board ">
+                <div style="text-align:center;padding:0em 0;padding-left:8%;padding-right:8% ">
+                    <div style="height:115px; " class='d-flex align-items-center text-center justify-content-around mt-4'>
+                        <h1 id='hour' class='box'></h1>
+                        <h1>:</h1>
+                        <h1 id='minutes' class='box'></h1>
+                        <h1>:</h1>
+                        <h1 id='sec' class='box'></h1>
+                    </div>
+                </div>
+                <div class="sfd-left-down-board ">
+                    <ul>
+                        <li>這是測試訊息</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="fd-button1 fd-button-box ">
+                <select class="form-select  select " aria-label="Default select example ">
+                    <option selected>客戶</option>
+                    <option value="1 ">人</option>
+                    <option value="2 ">人</option>
+                    <option value="3 ">人</option>
+                  </select>
+            </div>
+
+            <div class="fd-button2 fd-button-box ">
+                <select class="form-select  select " aria-label="Default select example ">
+                    <option selected>部件</option>
+                    <option value="1 ">部件</option>
+                    <option value="2 ">部件</option>
+                    <option value="3 ">部件</option>
+                  </select>
+            </div>
+            <div class="fd-button3 fd-button-box ">
+                <select class="form-select  select " aria-label="Default select example ">
+                    <option selected>延遲天數</option>
+                    <option value="1 ">1天</option>
+                    <option value="2 ">2天</option>
+                    <option value="3 ">3天</option>
+                  </select>
+            </div>
+            <div style="cursor: pointer; " onclick="window.location='https:google.com/' ; " class="delay-ok-button ">
+                <h3>確認後送出</h3>
+            </div>
+        </section>
+
+    </main>
+{% endblock main_content %}
+{% block js_extend %}{% endblock js_extend %}
