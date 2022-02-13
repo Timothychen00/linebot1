@@ -2,16 +2,16 @@ from flask import Flask,request,abort,render_template
 from linebot import LineBotApi,WebhookHandler
 from linebot.models import TextSendMessage,MessageEvent,TextMessage,StickerMessage,StickerSendMessage
 from linebot.exceptions import LineBotApiError,InvalidSignatureError
-import pymongo,os,random
+import pymongo,os,random,datetime,time
 from dotenv import load_dotenv
 from debug.json_formal_3 import json_formal_output
 from debug.debug_tool import message_event_debug
 from re import match
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask_apscheduler import APScheduler
-import datetime,time
 from config import Config
 from routes import app_route
+from tools import process_search_data
 load_dotenv()
 
 client = pymongo.MongoClient("mongodb+srv://"+os.environ['DB_USER']+":"+os.environ['DB_PASSWORD']+"@cluster0.mgwi6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
@@ -84,29 +84,6 @@ def job3():
     print(datetime.datetime.now(tz).strftime("%H %M %S"))
 if settings['notification-time']:
     scheduler.add_job(id='jobx', func=job3, trigger='cron', day='*',hour=settings['notification-time'].split(":")[0],minute=settings['notification-time'].split(":")[1])
-
-def process_search_data(results):
-    text='今天提醒:\n'
-    if results[0]:
-        text+=results[3]+"\n"
-        for each_notify in results[0]:
-            print(each_notify)
-            for each_content in each_notify:
-                text+=str(each_content)+"  "
-            text+="\n"
-    else:
-        text+="無\n"
-    text+="\n今日待更換:\n"
-    if results[1]:
-        text+=results[3]+"\n"
-        for each_task in results[1]:
-            print(each_task)
-            for each_content in each_task:
-                text+=str(each_content)+"  "
-            text+="\n"
-    else:
-        text+="無\n"
-    return text
 
 @app.route("/callback", methods=['POST'])
 def callback():
