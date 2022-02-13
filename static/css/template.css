@@ -3,7 +3,6 @@
      margin: 0;
      box-sizing: border-box;
  }
- 
  main {
      z-index: 0;
      min-height: 100vh;
@@ -11,6 +10,9 @@
      display: flex;
      align-items: center;
      justify-content: center;
+     position: absolute;
+     top: 0;
+     width:100vw;
  }
  
  .box {
