@@ -11,19 +11,14 @@ from flask_apscheduler import APScheduler
 from ProjectPackage.config import Config
 from ProjectPackage.routes import app_route
 from ProjectPackage.tools import process_search_data
-from ProjectPackage import line_bot_api,handler
+from ProjectPackage import line_bot_api,handler,db
 load_dotenv()
 
-client = pymongo.MongoClient("mongodb+srv://"+os.environ['DB_USER']+":"+os.environ['DB_PASSWORD']+"@cluster0.mgwi6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-db = client.Flask
 tz=datetime.timezone(datetime.timedelta(hours=+8))
 app=Flask(__name__,static_folder='ProjectPackage/static/',template_folder='ProjectPackage/templates/')
 
-
 # users=set()
 settings=dict()
-# line_bot_api = LineBotApi(os.environ['Channel_access_token'])
-# handler = WebhookHandler(os.environ['Channel_secret'])
 commands=["!bot help","!bot bind","!bot unbind","!bot reload settings","!bot now bounded","!bot search","!bot settings"]
 today_notify={}#今日提醒的日期
 today_task={}#今日待完成的日期
@@ -75,7 +70,6 @@ def search():
     return notification,task,str(duration),label
 
 load_settings()
-
 
 def job3():
     results=search()
@@ -143,8 +137,6 @@ def echo(event):
         message=message.split("index=")
         profile=line_bot_api.get_profile(settings['user-id'][int(message[1])])
         line_bot_api.reply_message(reply_token,TextSendMessage(text="username:\n"+profile.display_name+"\n\nuser_id:\n"+profile.user_id+"\n\npicture_url:\n"+profile.picture_url))
-    # else:
-    #     line_bot_api.reply_message(reply_token,TextSendMessage(text=event.message.text))
 
 @handler.add(MessageEvent,message=StickerMessage)
 def f(event):
