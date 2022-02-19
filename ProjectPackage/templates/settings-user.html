@@ -22,7 +22,9 @@
                 </div>
                 <div class="sfd-left-down-board ">
                     <ul>
-                        <li>這是linebot綁定用戶</li>
+                        {% for i in user['user-id'] %}
+                        <li>{{i}}</li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>

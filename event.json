@@ -1,0 +1,15 @@
+{
+    "message": {
+        "id": "15614346435841",
+         "text": "!bot settings",
+         "type": "text"
+    },
+     "mode": "active",
+     "replyToken": "2a6fd40479d4418e9fdfcdd7b427c4fe",
+     "source": {
+        "type": "user",
+         "userId": "U6feaa10ddbb90decf621c4feb49e351c"
+    },
+     "timestamp": 1645244215507,
+     "type": "message"
+}

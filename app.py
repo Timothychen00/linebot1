@@ -1,154 +1,31 @@
 from flask import Flask,request,abort,render_template
-from linebot.models import TextSendMessage,MessageEvent,TextMessage,StickerMessage,StickerSendMessage
-from linebot.exceptions import LineBotApiError,InvalidSignatureError
-import pymongo,os,random,datetime,time
-from dotenv import load_dotenv
-from ProjectPackage.debug.json_formal_3 import json_formal_output
-from ProjectPackage.debug.debug_tool import message_event_debug
-from re import match
+import datetime
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask_apscheduler import APScheduler
 from ProjectPackage.config import Config
 from ProjectPackage.routes import app_route
 from ProjectPackage.tools import process_search_data
-from ProjectPackage import line_bot_api,handler,db
-load_dotenv()
+from ProjectPackage import parameter
+from linebot.models import TextSendMessage
 
-tz=datetime.timezone(datetime.timedelta(hours=+8))
 app=Flask(__name__,static_folder='ProjectPackage/static/',template_folder='ProjectPackage/templates/')
 
-# users=set()
-settings=dict()
-commands=["!bot help","!bot bind","!bot unbind","!bot reload settings","!bot now bounded","!bot search","!bot settings"]
-today_notify={}#今日提醒的日期
-today_task={}#今日待完成的日期
-notification=[]
-task=[]
-
+parameter.settings
 #scheduler
 scheduler = APScheduler(BackgroundScheduler(timezone="Asia/Shanghai"))
+app.register_blueprint(app_route)#register blueprint
 
-app.register_blueprint(app_route)
-@app.route('/settings/reload')
-def load_settings():
-    global settings
-    collection=db.settings
-    result=collection.find_one()
-    settings=result
-    return "settings reloaded"
-
-def search():
-    global today_notify,today_task,notification,task
-    notification=[]#今日通知內容
-    task=[]#今日待更換內容
-    today_notify={}#今日通知應該的日期
-    today_task={}#今日待更換應該的日期
-    collection=db.customers
-    results=collection.find()
-    st_time=time.time()
-    #先獲取提醒、代辦應該的時間
-    for component in settings['component-lifetime'].keys():
-        today_notify[component]=datetime.datetime.strftime(datetime.datetime.now(tz)+datetime.timedelta(days=settings['days-in-advance']),"%Y-%m-%d")
-        today_task[component]=datetime.datetime.strftime(datetime.datetime.now(tz),"%Y-%m-%d")
-    for customer in results:#找到即輸出
-        for component,next_date in customer['component'].items():
-            if next_date==today_notify[component]:
-                notification.append([customer['_id'],component,next_date,customer['phone'],customer['address']])
-            elif next_date==today_task[component]:
-                task.append([customer['_id'],component,next_date,customer['phone'],customer['address']])
-    end_time=time.time()
-    duration=end_time-st_time
-    print(notification)
-    print(task)
-    json_formal_output(str(notification).replace('\'','\"'),'debug/notification.json')
-    json_formal_output(str(task).replace('\'','\"'),'debug/task.json')
-    print(duration)
-    label=['編號',"姓名","下次更換日期","聯繫方式","地址"]
-    label=str(label)
-    label=label[1:-1].replace(','," ")
-    label=label.replace('\'',"")
-    return notification,task,str(duration),label
-
-load_settings()
+parameter.load_settings()
 
 def job3():
-    results=search()
-    tokens=settings['user-id']
+    results=parameter.search()
+    tokens=parameter.settings['user-id']
     for token in tokens:
-        line_bot_api.reply_message(token,TextSendMessage(text=process_search_data(results)+"\n搜索耗時:\n"+results[2]))
-    print(datetime.datetime.now(tz).strftime("%H %M %S"))
-if settings['notification-time']:
-    scheduler.add_job(id='jobx', func=job3, trigger='cron', day='*',hour=settings['notification-time'].split(":")[0],minute=settings['notification-time'].split(":")[1])
-
-@app.route("/callback", methods=['POST'])
-def callback():
-    signature = request.headers['X-Line-Signature']
-    body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
-    try:
-        handler.handle(body, signature)
-    except InvalidSignatureError:
-        abort(400)
-    return 'OK'
-
-
-@handler.add(MessageEvent,message=TextMessage)
-def echo(event):
-    global settings
-    message_event_debug(event,str(settings['user-id']))
-    message=event.message.text
-    reply_token=event.reply_token
-
-    if match("!bot bind",message):
-        if event.source.type=="group":
-            if not event.source.group_id in settings['user-id']:
-                settings['user-id'].append(event.source.group_id)
-        else:
-            if not event.source.user_id in settings['user-id']:
-                settings['user-id'].append(event.source.user_id)
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="已綁定"))
-        update_settings("user-id")#強制更新
-
-    elif match("!bot unbind",message):
-        load_settings()
-        if event.source.type=='group':
-            if event.source.group_id in settings['user-id']:
-                settings['user-id'].remove(event.source.group_id)
-        else:
-            if event.source.user_id in settings['user-id']:
-                settings['user-id'].remove(event.source.user_id)
-        line_bot_api.reply_message(reply_token,TextSendMessage(text="done!"))
-        update_settings("user-id")#強制更新
-
-    elif match("!bot help",message):
-        line_bot_api.reply_message(reply_token,TextSendMessage(text="Available Commands:\n"+str(commands)))
-    elif match("!bot reload settings",message):
-        load_settings()
-        line_bot_api.reply_message(reply_token,TextSendMessage(text="reload settings"))
-    elif match("!bot now bounded",message):
-        line_bot_api.reply_message(reply_token,TextSendMessage(text=str(settings['user-id'])))
-    elif match("!bot search",message):
-        results=search()
-        line_bot_api.reply_message(reply_token,TextSendMessage(text=process_search_data(results)+"\n搜索耗時:\n"+results[2]))
-    elif match("!bot settings",message):
-        line_bot_api.reply_message(reply_token,TextSendMessage(text="已經綁定的用戶:\n"+str(settings['user-id'])+"\n\n提醒提前天數:"+str(settings['days-in-advance'])+"\n\n提醒時間:"+settings['notification-time']+"\n\n部件壽命:\n"+str(settings['component-lifetime'])))
-    elif match("!bot profile index=",message):
-        print(message)
-        message=message.split("index=")
-        profile=line_bot_api.get_profile(settings['user-id'][int(message[1])])
-        line_bot_api.reply_message(reply_token,TextSendMessage(text="username:\n"+profile.display_name+"\n\nuser_id:\n"+profile.user_id+"\n\npicture_url:\n"+profile.picture_url))
-
-@handler.add(MessageEvent,message=StickerMessage)
-def f(event):
-    message_event_debug(event)
-    line_bot_api.reply_message(event.reply_token,StickerSendMessage(package_id=446,sticker_id=random.choice(list(range(2001,2027)))))
-
-def update_settings(key):
-    global settings
-    collection=db.settings
-    print(settings)
-    print(settings['user-id'])
-    collection.update_one({'type':"settings"},{"$set":{key:settings[key]}})
+        parameter.line_bot_api.reply_message(token,TextSendMessage(text=process_search_data(results)+"\n搜索耗時:\n"+results[2]))
+    print(datetime.datetime.now(parameter.timezone).strftime("%H %M %S"))
+    
+if parameter.settings['notification-time']:
+    scheduler.add_job(id='jobx', func=job3, trigger='cron', day='*',hour=parameter.settings['notification-time'].split(":")[0],minute=parameter.settings['notification-time'].split(":")[1])
 
 if __name__=='__main__':
     app.config.from_object(Config())

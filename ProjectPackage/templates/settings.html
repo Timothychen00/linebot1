@@ -22,7 +22,9 @@
                 </div>
                 <div class="sfd-left-down-board ">
                     <ul>
-                        <li>這是linebot綁定用戶</li>
+                        {% for i in user['user-id'] %}
+                        <li>{{i}}</li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
@@ -41,19 +43,6 @@
                     <option value="9 ">270天</option>
                     <option value="10 ">300天</option>
                     <option value="11 ">330天</option>
-                    <option value="12 ">1年</option>
-                    <option value="13 ">1年1個月</option>
-                    <option value="14 ">1年2個月</option>
-                    <option value="15 ">1年3個月</option>
-                    <option value="16 ">1年4個月</option>
-                    <option value="17 ">1年5個月</option>
-                    <option value="18 ">1年6個月</option>
-                    <option value="19 ">1年7個月</option>
-                    <option value="20 ">1年8個月</option>
-                    <option value="21 ">1年9個月</option>
-                    <option value="21 ">1年10個月</option>
-                    <option value="21 ">1年11個月</option>
-                    <option value="21 ">2年</option>
                   </select>
             </div>
 

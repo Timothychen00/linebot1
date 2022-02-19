@@ -33,7 +33,7 @@ for i in range(1,test_size+1):
             data['component'][j]='2022-04-27'
     collection.insert_one(data)
 #output answers
-with open('debug/test_ans.txt','w') as f1:
+with open('./test_ans.txt','w') as f1:
     f1.write("ans_notify="+str(ans_notify))
     f1.write("\nans_task="+str(ans_task))
 e_time=time.time()
