@@ -1,7 +1,7 @@
 from flask import Blueprint,render_template,abort,request
 from ProjectPackage import parameter
 from linebot.exceptions import LineBotApiError,InvalidSignatureError
-from ProjectPackage.linebot_control import echo,f
+from ProjectPackage.linebot_control import echo,f #一定要匯入被綁定的函式才能讓裝飾器發揮作用
 
 app_route=Blueprint("app_basic",__name__,static_folder='static',template_folder='templates')
 @app_route.route('/')
@@ -19,7 +19,7 @@ def settings_user():
 @app_route.route('/settings/')
 def settings():
     print(parameter.settings)
-    return render_template('settings.html',user=parameter.settings)
+    return render_template('settings.html',settings=parameter.settings)
 
 @app_route.route('/finish/')
 def finish():
