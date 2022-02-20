@@ -1,4 +1,8 @@
 gunicorn
+MarkupSafe==2.1.0
+Jinja2==3.0.3
+itsdangerous==2.1.0
+Werkzeug==2.0.3
 Flask==2.0.3
 python-dotenv
 line-bot-sdk==2.0.1
