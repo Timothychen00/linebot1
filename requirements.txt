@@ -1,5 +1,5 @@
 gunicorn
-Flask==1.1.2
+Flask==2.0.3
 python-dotenv
 line-bot-sdk==2.0.1
 pymongo[srv]==3.12.0
