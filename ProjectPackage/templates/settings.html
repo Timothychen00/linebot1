@@ -29,43 +29,45 @@
                 </div>
             </div>
 
-            <div class="setting-button1 setting-button-box ">
-                <h2 class="setting-text">部件名稱測試</h2>
-                <select class="form-select  setting-select " aria-label="Default select example ">
-                    <option selected value="1 ">30天</option>
-                    <option value="2 ">60天</option>
-                    <option value="3 ">90天</option>
-                    <option value="4 ">120天</option>
-                    <option value="5 ">150天</option>
-                    <option value="6 ">180天</option>
-                    <option value="7 ">210天</option>
-                    <option value="8 ">240天</option>
-                    <option value="9 ">270天</option>
-                    <option value="10 ">300天</option>
-                    <option value="11 ">330天</option>
-                  </select>
-            </div>
+            <form action="/settings/" method="post" >
+                {{form.csrf_token()}}
+                <div class="setting-button1 setting-button-box">
+                    {{form.component1.label(class_="setting-text")}}
+                    {{form.component1(class_="form-input setting-select",value=settings['component-lifetime']['A'])}}
+                </div>
 
-            <div class="setting-button6 setting-button-box-1 ">
-                <h2 class="setting-text">提醒時間</h2>
-                <select class="form-select  setting-select " aria-label="Default select example ">
-                    <option selected value="1 ">30天</option>
-                    <option value="2 ">60天</option>
-                  </select>
-            </div>
-            <div class="setting-button7 setting-button-box-1 ">
-                <h2 class="setting-text">提前天數</h2>
-                <select class="form-select  setting-select " aria-label="Default select example ">
-                    <option selected value="1 ">30天</option>
-                    <option value="2 ">60天</option>
-                  </select>
-            </div>
-            <div style="cursor: pointer; " onclick="window.location='/settings/customer_data' ; " class="setting-user-button ">
-                <h4>客戶中心</h4>
-            </div>
-            <div style="cursor: pointer; " onclick="window.location='https:google.com/' ; " class="setting-ok-button ">
-                <h3>確認</h3>
-            </div>
+                <div class="setting-button2 setting-button-box">
+                    {{form.component2.label(class_="setting-text")}}
+                    {{form.component2(class_="form-input setting-select",value=settings['component-lifetime']['B'])}}
+                </div>
+                
+                <div class="setting-button3 setting-button-box">
+                    {{form.component3.label(class_="setting-text")}}
+                    {{form.component3(class_="form-input setting-select",value=settings['component-lifetime']['C'])}}
+                </div>
+                
+                <div class="setting-button4 setting-button-box">
+                    {{form.component4.label(class_="setting-text")}}
+                    {{form.component4(class_="form-input setting-select",value=settings['component-lifetime']['D'])}}
+                </div>
+
+                <div class="setting-button5 setting-button-box">
+                    {{form.component5.label(class_="setting-text")}}
+                    {{form.component5(class_="form-input setting-select",value=settings['component-lifetime']['E'])}}
+                </div>
+                
+                <div class="setting-button6 setting-button-box">
+                    {{form.component6.label(class_="setting-text")}}
+                    {{form.component6(class_="form-input setting-select",value=settings['component-lifetime']['F'])}}
+                </div>
+
+                <div style="cursor: pointer; " onclick="window.location='/settings/customer_data' ; " class="setting-user-button ">
+                    <h4>客戶中心</h4>
+                </div>
+                <div style="cursor: pointer; " onclick="window.location='https:google.com/' ; " class="setting-ok-button ">
+                    {{form.submit(value="確認",class_='h4',style='background-color:transparent;border:0;color:white')}}
+                </div>
+            </form>
     </section>
 </main>
 {% endblock main_content %}

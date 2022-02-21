@@ -2,6 +2,7 @@ from flask import Blueprint,render_template,abort,request
 from ProjectPackage import parameter
 from linebot.exceptions import LineBotApiError,InvalidSignatureError
 from ProjectPackage.linebot_control import echo,f #一定要匯入被綁定的函式才能讓裝飾器發揮作用
+from ProjectPackage.forms import SettingsForm
 
 app_route=Blueprint("app_basic",__name__,static_folder='static',template_folder='templates')
 @app_route.route('/')
@@ -16,10 +17,14 @@ def delay():
 def settings_user():
     return render_template('settings-user.html',user=parameter.settings)
 
-@app_route.route('/settings/')
+@app_route.route('/settings/',methods=['GET','POST'])
 def settings():
+    form=SettingsForm()
+    if form.validate_on_submit():
+        for each in form:
+            print(each.data)
     print(parameter.settings)
-    return render_template('settings.html',settings=parameter.settings)
+    return render_template('settings.html',settings=parameter.settings,form=form)
 
 @app_route.route('/finish/')
 def finish():
