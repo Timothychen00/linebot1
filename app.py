@@ -21,7 +21,7 @@ app.register_blueprint(app_route)#register blueprint
 
 
     
-parameter.load_settings(job3)
+parameter.load_settings()
 # if parameter.settings['notification-time']:
 #     parameter.scheduler.add_job(id='jobx', func=job3, trigger='cron', day='*',hour=parameter.settings['notification-time'].split(":")[0],minute=parameter.settings['notification-time'].split(":")[1])
 

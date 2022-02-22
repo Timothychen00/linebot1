@@ -41,7 +41,7 @@ def echo(event):
     elif re.match("!bot help",message):
         parameter.line_bot_api.reply_message(reply_token,TextSendMessage(text="Available Commands:\n"+str(parameter.bot['commands'])))
     elif re.match("!bot reload settings",message):
-        parameter.load_settings(job3)
+        parameter.load_settings()
         parameter.line_bot_api.reply_message(reply_token,TextSendMessage(text="reload settings"))
     elif re.match("!bot now bounded",message):
         parameter.line_bot_api.reply_message(reply_token,TextSendMessage(text=str(parameter.settings['user-id'])))

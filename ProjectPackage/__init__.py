@@ -5,6 +5,7 @@ from ProjectPackage.debug.json_formal_3 import json_formal_output
 import time,datetime
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask_apscheduler import APScheduler
+from ProjectPackage.linebot_control import job3
 
 load_dotenv()
 class Parameter:
@@ -33,12 +34,12 @@ class Parameter:
         print(self.settings['user-id'])
         collection.update_one({'type':"settings"},{"$set":{key:self.settings[key]}})
 
-    def load_settings(self,fuc):
+    def load_settings(self):
         collection=parameter.db.settings
         result=collection.find_one()
         self.settings=result
         if self.settings['notification-time']:
-            self.scheduler.add_job(id='jobx', func=fuc, trigger='cron', day='*',hour=parameter.settings['notification-time'].split(":")[0],minute=parameter.settings['notification-time'].split(":")[1])
+            self.scheduler.add_job(id='jobx', func=job3, trigger='cron', day='*',hour=parameter.settings['notification-time'].split(":")[0],minute=parameter.settings['notification-time'].split(":")[1])
         return "settings reloaded"
     
     def search(self):
