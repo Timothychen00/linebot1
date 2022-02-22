@@ -14,6 +14,7 @@ parameter.settings
 #scheduler
 scheduler = APScheduler(BackgroundScheduler(timezone="Asia/Shanghai"))
 app.register_blueprint(app_route)#register blueprint
+app.secret_key='123456789'
 
 parameter.load_settings()
 
