@@ -4,6 +4,13 @@ from ProjectPackage.debug.debug_tool import message_event_debug
 from ProjectPackage.tools import process_search_data
 import random,re,datetime
 
+def job3():
+    results=parameter.search()
+    tokens=parameter.settings['user-id']
+    for token in tokens:
+        parameter.line_bot_api.push_message(token,TextSendMessage(text=process_search_data(results)+"\n搜索耗時:\n"+results[2]))
+    print(datetime.datetime.now(parameter.timezone).strftime("%H %M %S"))
+
 @parameter.handler.add(MessageEvent,message=TextMessage)
 def echo(event):
     message_event_debug(event,str(parameter.settings['user-id']))
@@ -34,7 +41,7 @@ def echo(event):
     elif re.match("!bot help",message):
         parameter.line_bot_api.reply_message(reply_token,TextSendMessage(text="Available Commands:\n"+str(parameter.bot['commands'])))
     elif re.match("!bot reload settings",message):
-        parameter.load_settings()
+        parameter.load_settings(job3)
         parameter.line_bot_api.reply_message(reply_token,TextSendMessage(text="reload settings"))
     elif re.match("!bot now bounded",message):
         parameter.line_bot_api.reply_message(reply_token,TextSendMessage(text=str(parameter.settings['user-id'])))
@@ -53,12 +60,3 @@ def echo(event):
 def f(event):
     message_event_debug(event)
     parameter.line_bot_api.reply_message(event.reply_token,StickerSendMessage(package_id=446,sticker_id=random.choice(list(range(2001,2027)))))
-
-
-def job3():
-    results=parameter.search()
-    tokens=parameter.settings['user-id']
-    for token in tokens:
-        parameter.line_bot_api.push_message(token,TextSendMessage(text=process_search_data(results)+"\n搜索耗時:\n"+results[2]))
-    print(datetime.datetime.now(parameter.timezone).strftime("%H %M %S"))
-    

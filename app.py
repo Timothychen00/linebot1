@@ -7,6 +7,7 @@ from ProjectPackage.routes import app_route
 from ProjectPackage.tools import process_search_data
 from ProjectPackage import parameter
 from linebot.models import TextSendMessage
+from ProjectPackage.linebot_control import job3
 
 app=Flask(__name__,static_folder='ProjectPackage/static/',template_folder='ProjectPackage/templates/')
 parameter.settings
@@ -16,15 +17,11 @@ app.config.from_object(Config())
 app.register_blueprint(app_route)#register blueprint
 # app.secret_key='123456789'
 
-parameter.load_settings()
 
-# def job3():
-#     results=parameter.search()
-#     tokens=parameter.settings['user-id']
-#     for token in tokens:
-#         parameter.line_bot_api.push_message(token,TextSendMessage(text=process_search_data(results)+"\n搜索耗時:\n"+results[2]))
-#     print(datetime.datetime.now(parameter.timezone).strftime("%H %M %S"))
+
+
     
+parameter.load_settings(job3)
 # if parameter.settings['notification-time']:
 #     parameter.scheduler.add_job(id='jobx', func=job3, trigger='cron', day='*',hour=parameter.settings['notification-time'].split(":")[0],minute=parameter.settings['notification-time'].split(":")[1])
 

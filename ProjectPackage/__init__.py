@@ -31,13 +31,14 @@ class Parameter:
         collection=self.db.settings
         print(self.settings)
         print(self.settings['user-id'])
-        self.scheduler.add_job(id='jobx', func=job3, trigger='cron', day='*',hour=parameter.settings['notification-time'].split(":")[0],minute=parameter.settings['notification-time'].split(":")[1])
         collection.update_one({'type':"settings"},{"$set":{key:self.settings[key]}})
 
-    def load_settings(self):
+    def load_settings(self,fuc):
         collection=parameter.db.settings
         result=collection.find_one()
         self.settings=result
+        if self.settings['notification-time']:
+            self.scheduler.add_job(id='jobx', func=fuc, trigger='cron', day='*',hour=parameter.settings['notification-time'].split(":")[0],minute=parameter.settings['notification-time'].split(":")[1])
         return "settings reloaded"
     
     def search(self):
@@ -72,4 +73,3 @@ class Parameter:
         return self.notification,self.task,str(duration),label
 
 parameter=Parameter()
-from ProjectPackage.linebot_control import job3
