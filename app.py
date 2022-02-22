@@ -9,7 +9,7 @@ from ProjectPackage import parameter
 from linebot.models import TextSendMessage
 
 app=Flask(__name__,static_folder='ProjectPackage/static/',template_folder='ProjectPackage/templates/')
-app.config.from_object(Config)
+app.config.from_object(Config())
 parameter.settings
 #scheduler
 scheduler = APScheduler(BackgroundScheduler(timezone="Asia/Shanghai"))
