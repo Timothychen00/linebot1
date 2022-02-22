@@ -5,7 +5,7 @@ from ProjectPackage.debug.json_formal_3 import json_formal_output
 import time,datetime
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask_apscheduler import APScheduler
-from ProjectPackage.linebot_control import job3
+
 from ProjectPackage.tools import process_search_data
 from linebot.models import TextSendMessage,MessageEvent,TextMessage,StickerMessage,StickerSendMessage
 
@@ -41,7 +41,8 @@ class Parameter:
         result=collection.find_one()
         self.settings=result
         if self.settings['notification-time']:
-            self.scheduler.remove_job(id="jobx")
+            if self.scheduler.get_job(id='jobx'):
+                self.scheduler.remove_job(id="jobx")
             self.scheduler.add_job(id='jobx', func=job3, trigger='cron', day='*',hour=parameter.settings['notification-time'].split(":")[0],minute=parameter.settings['notification-time'].split(":")[1])
         return "settings reloaded"
     
@@ -77,3 +78,4 @@ class Parameter:
         return self.notification,self.task,str(duration),label
 
 parameter=Parameter()
+from ProjectPackage.linebot_control import job3
