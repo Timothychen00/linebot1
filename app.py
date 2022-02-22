@@ -9,7 +9,7 @@ from ProjectPackage import parameter
 from linebot.models import TextSendMessage
 
 app=Flask(__name__,static_folder='ProjectPackage/static/',template_folder='ProjectPackage/templates/')
-
+app.config.from_object(Config())
 parameter.settings
 #scheduler
 scheduler = APScheduler(BackgroundScheduler(timezone="Asia/Shanghai"))
@@ -28,7 +28,6 @@ if parameter.settings['notification-time']:
     scheduler.add_job(id='jobx', func=job3, trigger='cron', day='*',hour=parameter.settings['notification-time'].split(":")[0],minute=parameter.settings['notification-time'].split(":")[1])
 
 if __name__=='__main__':
-    app.config.from_object(Config())
     scheduler.init_app(app)
     scheduler.start()
     app.run(use_reloader=False,debug=True,port=8080)
