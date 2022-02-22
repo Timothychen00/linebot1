@@ -3,6 +3,9 @@ from linebot import LineBotApi,WebhookHandler
 from dotenv import load_dotenv
 from ProjectPackage.debug.json_formal_3 import json_formal_output
 import time,datetime
+from apscheduler.schedulers.background import BackgroundScheduler
+from flask_apscheduler import APScheduler
+
 load_dotenv()
 class Parameter:
     def __init__(self):
@@ -22,10 +25,13 @@ class Parameter:
         self.bot['commands']=["!bot help","!bot bind","!bot unbind","!bot reload settings","!bot now bounded","!bot search","!bot settings"]
         self.timezone=datetime.timezone(datetime.timedelta(hours=+8))
         
+        self.scheduler=APScheduler(BackgroundScheduler(timezone="Asia/Shanghai"))
+        
     def update_settings(self,key):
         collection=self.db.settings
         print(self.settings)
         print(self.settings['user-id'])
+        self.scheduler.add_job(id='jobx', func=job3, trigger='cron', day='*',hour=parameter.settings['notification-time'].split(":")[0],minute=parameter.settings['notification-time'].split(":")[1])
         collection.update_one({'type':"settings"},{"$set":{key:self.settings[key]}})
 
     def load_settings(self):
@@ -66,3 +72,4 @@ class Parameter:
         return self.notification,self.task,str(duration),label
 
 parameter=Parameter()
+from ProjectPackage.linebot_control import job3
