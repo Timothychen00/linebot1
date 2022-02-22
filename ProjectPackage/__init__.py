@@ -5,7 +5,7 @@ from ProjectPackage.debug.json_formal_3 import json_formal_output
 import time,datetime
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask_apscheduler import APScheduler
-# from ProjectPackage.linebot_control import job3
+from ProjectPackage.linebot_control import job3
 from ProjectPackage.tools import process_search_data
 from linebot.models import TextSendMessage,MessageEvent,TextMessage,StickerMessage,StickerSendMessage
 
@@ -77,9 +77,3 @@ class Parameter:
         return self.notification,self.task,str(duration),label
 
 parameter=Parameter()
-def job3():
-    results=parameter.search()
-    tokens=parameter.settings['user-id']
-    for token in tokens:
-        parameter.line_bot_api.push_message(token,TextSendMessage(text=process_search_data(results)+"\n搜索耗時:\n"+results[2]))
-    print(datetime.datetime.now(parameter.timezone).strftime("%H %M %S"))
