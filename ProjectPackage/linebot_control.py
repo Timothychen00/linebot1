@@ -4,13 +4,6 @@ from ProjectPackage.debug.debug_tool import message_event_debug
 from ProjectPackage.tools import process_search_data
 import random,re,datetime
 
-def job3():
-    results=parameter.search()
-    tokens=parameter.settings['user-id']
-    for token in tokens:
-        parameter.line_bot_api.push_message(token,TextSendMessage(text=process_search_data(results)+"\n搜索耗時:\n"+results[2]))
-    print(datetime.datetime.now(parameter.timezone).strftime("%H %M %S"))
-
 @parameter.handler.add(MessageEvent,message=TextMessage)
 def echo(event):
     message_event_debug(event,str(parameter.settings['user-id']))
