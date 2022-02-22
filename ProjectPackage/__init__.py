@@ -41,6 +41,7 @@ class Parameter:
         result=collection.find_one()
         self.settings=result
         if self.settings['notification-time']:
+            self.scheduler.remove_job(id="jobx")
             self.scheduler.add_job(id='jobx', func=job3, trigger='cron', day='*',hour=parameter.settings['notification-time'].split(":")[0],minute=parameter.settings['notification-time'].split(":")[1])
         return "settings reloaded"
     
