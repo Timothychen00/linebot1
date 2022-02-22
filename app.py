@@ -7,7 +7,7 @@ from ProjectPackage.routes import app_route
 from ProjectPackage.tools import process_search_data
 from ProjectPackage import parameter
 from linebot.models import TextSendMessage
-from ProjectPackage.linebot_control import job3
+# from ProjectPackage.linebot_control import job3
 
 app=Flask(__name__,static_folder='ProjectPackage/static/',template_folder='ProjectPackage/templates/')
 parameter.settings
