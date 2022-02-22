@@ -9,12 +9,12 @@ from ProjectPackage import parameter
 from linebot.models import TextSendMessage
 
 app=Flask(__name__,static_folder='ProjectPackage/static/',template_folder='ProjectPackage/templates/')
-app.config.from_object(Config())
+app.config.from_object(Config)
 parameter.settings
 #scheduler
 scheduler = APScheduler(BackgroundScheduler(timezone="Asia/Shanghai"))
 app.register_blueprint(app_route)#register blueprint
-app.secret_key='123456789'
+# app.secret_key='123456789'
 
 parameter.load_settings()
 
