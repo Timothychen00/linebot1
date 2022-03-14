@@ -1,13 +1,20 @@
 from flask_wtf import FlaskForm
 from wtforms.fields import SelectField,TextField,SubmitField,DecimalField
 from wtforms.validators import InputRequired
+from ProjectPackage import parameter
 
 class FinishForm(FlaskForm):
-    submit=SubmitField('Submit')
+    name=SelectField('客戶名稱',choices=['Timothychen',"B"],validators=[InputRequired()])
+    component=SelectField("部件名稱",choices=[],validators=[InputRequired()])
+    submit=SubmitField('送出')
 class DelayForm(FlaskForm):
-    submit=SubmitField('Submit')
-class UserForm(FlaskForm):
-    submit=SubmitField("Submit")
+    name=SelectField("客戶名稱",choices=['Timothychen',"B"],validators=[InputRequired()])
+    component=SelectField("部件名稱",choices=[],validators=[InputRequired()])
+    days=TextField("延遲天數",validators=[InputRequired()])
+    submit=SubmitField('送出')
+class AddUserForm(FlaskForm):
+    
+    submit=SubmitField("送出")
     
 # ,NumberInput(min=1,max=999)    
 class SettingsForm(FlaskForm):

@@ -4,6 +4,7 @@ from ProjectPackage.debug.debug_tool import message_event_debug
 from ProjectPackage.tools import process_search_data
 import random,re,datetime
 def job3():
+    print("mission")
     results=parameter.search()
     tokens=parameter.settings['user-id']
     for token in tokens:

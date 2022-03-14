@@ -6,10 +6,9 @@ import time,datetime
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask_apscheduler import APScheduler
 
-from ProjectPackage.tools import process_search_data
-from linebot.models import TextSendMessage,MessageEvent,TextMessage,StickerMessage,StickerSendMessage
-
 load_dotenv()
+def job2():
+    print(1)
 class Parameter:
     def __init__(self):
         # linebot
@@ -20,16 +19,26 @@ class Parameter:
         self.db=self.client.Flask
         # settings
         self.settings={}
+        # search variable
         self.notification_predict={}
         self.task_predict={}
         self.notification=[]
         self.task=[]
+        #bot commands
         self.bot={}
         self.bot['commands']=["!bot help","!bot bind","!bot unbind","!bot reload settings","!bot now bounded","!bot search","!bot settings"]
         self.timezone=datetime.timezone(datetime.timedelta(hours=+8))
         
         self.scheduler=APScheduler(BackgroundScheduler(timezone="Asia/Shanghai"))
+
+        # self.scheduler.add_job(id='jobc', func=job2, trigger='interval',seconds=10ß)
         
+    def get_data(self,name):
+        collection=self.db.customers
+        results=collection.find_one({"name":name})
+        if results:
+            return list(results['component'])
+
     def update_settings(self,key):
         collection=self.db.settings
         print(self.settings)
@@ -40,10 +49,11 @@ class Parameter:
         collection=parameter.db.settings
         result=collection.find_one()
         self.settings=result
+
         if self.settings['notification-time']:
             if self.scheduler.get_job(id='jobx'):
                 self.scheduler.remove_job(id="jobx")
-            self.scheduler.add_job(id='jobx', func=job3, trigger='cron', day='*',hour=parameter.settings['notification-time'].split(":")[0],minute=parameter.settings['notification-time'].split(":")[1])
+            self.scheduler.add_job(id='jobx', func=job2, trigger='cron', day='*',hour=parameter.settings['notification-time'].split(":")[0],minute=parameter.settings['notification-time'].split(":")[1])
         return "settings reloaded"
     
     def search(self):

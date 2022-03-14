@@ -1,0 +1,531 @@
+ * {
+     padding: 0;
+     margin: 0;
+     box-sizing: border-box;
+ }
+ li{
+     color: white!important;
+ }
+ main {
+     z-index: 0;
+     min-height: 100vh;
+     background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     position: absolute;
+     top: 0;
+     width:100vw;
+ }
+ 
+ .box {
+     padding: 2px;
+     border: 3px solid #406882;
+     border-radius: 0.4rem;
+     /* font-size:2.5rem; */
+ }
+ 
+ .select {
+     max-width: 90%;
+ }
+ 
+ .setting-select {
+     position: absolute;
+     right: 2%;
+     max-width: 50%;
+ }
+ .gif-box {
+    height: 100vh!important;
+    width: 100vw!important;
+}
+ @media screen and (min-width:576px) {
+     .title {
+         max-height: 90vh;
+         width: 10%;
+         display: flex;
+         position: absolute;
+         top: 1% !important;
+         position: absolute;
+         left: 1% !important;
+         text-align: center;
+         justify-content: center;
+         vertical-align: middle;
+     }
+     .middle {
+         background: white;
+         min-height: 85vh;
+         width: 75%;
+         background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+         border-radius: 2rem;
+         display: flex;
+         position: relative
+     }
+     .home {
+         max-height: 20vh;
+         width: 12%;
+         background: white;
+         border-radius: 2rem;
+         display: flex;
+         position: absolute;
+         bottom: 1% !important;
+         position: absolute;
+         left: 0% !important;
+         text-align: center;
+         justify-content: center;
+         vertical-align: middle;
+     }
+     .left-board {
+         min-height: 85vh;
+         width: 35%;
+         background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+         border-radius: 2rem;
+         position: relative
+     }
+     .left-down-board,
+     .sfd-left-down-board {
+         min-height: 60vh;
+         max-height: 65vh;
+         overflow: scroll;
+         width: 88%;
+         background: linear-gradient(to right bottom, #406882, #5584AC);
+         border-radius: 2rem;
+         position: absolute;
+         bottom: 4%;
+         position: absolute;
+         left: 6%;
+         position: absolute;
+         right: 6%;
+     }
+     .menu-button1 {
+         position: absolute;
+         top: 8%;
+     }
+     .menu-button2 {
+         position: absolute;
+         top: 38%;
+     }
+     .menu-button3 {
+         position: absolute;
+         bottom: 8%;
+     }
+     .setting-button1 {
+         position: absolute;
+         top: 8%;
+     }
+     .setting-button2 {
+         position: absolute;
+         top: 20%;
+     }
+     .setting-button3 {
+         position: absolute;
+         bottom: 60%;
+     }
+     .setting-button4 {
+         position: absolute;
+         bottom: 48%;
+     }
+     .setting-button5 {
+         position: absolute;
+         bottom: 37%;
+     }
+     .setting-button6 {
+         position: absolute;
+         bottom: 26%;
+     }
+     .setting-button7 {
+         position: absolute;
+         bottom: 15%;
+     }
+     .fd-button1 {
+         position: absolute;
+         top: 8%;
+     }
+     .fd-button2 {
+         position: absolute;
+         top: 20%;
+     }
+     .fd-button3 {
+         position: absolute;
+         bottom: 60%;
+     }
+     .menu-button-box {
+         display: flex;
+         min-height: 20vh;
+         width: 55%;
+         background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+         position: absolute;
+         right: 6%;
+         border-radius: 2rem;
+         justify-content: center;
+         align-items: center;
+     }
+     .setting-button-box {
+         display: flex;
+         min-height: 7vh;
+         width: 50%;
+         background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+         position: absolute;
+         right: 6%;
+         border-radius: 2rem;
+         justify-content: center;
+         align-items: center;
+     }
+     .setting-button-box-1 {
+         display: flex;
+         min-height: 7vh;
+         width: 50%;
+         color: white;
+         background: rgba(9, 119, 245, 0.897);
+         position: absolute;
+         right: 6%;
+         border-radius: 2rem;
+         justify-content: center;
+         align-items: center;
+     }
+     .fd-button-box {
+         display: flex;
+         min-height: 7vh;
+         width: 50%;
+         background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+         position: absolute;
+         right: 6%;
+         border-radius: 2rem;
+         justify-content: center;
+         align-items: center;
+     }
+     .setting-user-button {
+         position: absolute;
+         top: 90%;
+         right: 35%;
+         border-radius: 2rem;
+         color: aliceblue;
+         background: linear-gradient(to right bottom, #406882, #5584AC);
+         background-color: #406882;
+         min-width: 13%;
+         align-items: center;
+         text-align: center;
+     }
+     .setting-ok-button {
+         position: absolute;
+         top: 90%;
+         right: 10%;
+         border-radius: 2rem;
+         color: aliceblue;
+         background: linear-gradient(to right bottom, #406882, #5584AC);
+         background-color: #406882;
+         min-width: 13%;
+         align-items: center;
+         text-align: center;
+     }
+     .delay-ok-button {
+         position: absolute;
+         top: 45%;
+         right: 25%;
+         border-radius: 2rem;
+         color: aliceblue;
+         background: linear-gradient(to right bottom, #406882, #5584AC);
+         background-color: #406882;
+         min-width: 13%;
+         align-items: center;
+         text-align: center;
+     }
+     .finish-ok-button {
+         position: absolute;
+         top: 30%;
+         right: 25%;
+         border-radius: 2rem;
+         color: aliceblue;
+         background: linear-gradient(to right bottom, #406882, #5584AC);
+         background-color: #406882;
+         min-width: 13%;
+         align-items: center;
+         text-align: center;
+     }
+     .setting-text {
+         font-size: 20px;
+         position: absolute;
+         left: 4%;
+     }
+     .setting-user-table {
+         display: flex;
+         min-height: 85vh;
+         max-height: 85vh;
+         overflow: scroll;
+         min-width: 50vh;
+         background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+         position: absolute;
+         right: 20%;
+         border-radius: 2rem;
+         justify-content: center;
+         align-items: center;
+     }
+     .table {
+         position: absolute;
+         top: 0%
+     }
+     .add-button {
+         position: absolute;
+         right: 1%;
+         bottom: 2%;
+         max-height: 10vh;
+         max-width: 20vh;
+     }
+ }
+ 
+ @media screen and (max-width:576px) {
+     .title {
+         max-height: 50vh;
+         width: 5%;
+         display: flex;
+         position: absolute;
+         top: 0% !important;
+         position: absolute;
+         left: 50% !important;
+         text-align: center;
+         justify-content: center;
+     }
+     .home {
+         max-height: 6vh;
+         width: 30%;
+         background: white;
+         border-radius: 2rem;
+         display: flex;
+         position: absolute;
+         bottom: -15% !important;
+         /*手機測試畫面正常 */
+         position: absolute;
+         left: 32% !important;
+         text-align: center;
+         justify-content: center;
+         vertical-align: middle;
+     }
+     .middle {
+         background: white;
+         min-height: 85vh;
+         width: 85%;
+         background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+         border-radius: 2rem;
+         display: flex;
+         position: relative
+     }
+     .left-board {
+         max-height: 15vh;
+         width: 80%;
+         background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+         border-radius: 2rem;
+         position: absolute;
+         left: 10%;
+         position: absolute;
+         top: 5%;
+         position: relative
+     }
+     .sfd-left-down-board {
+         min-height: 25vh;
+         max-height: 25vh;
+         overflow: scroll;
+         width: 100%;
+         background: linear-gradient(to right bottom, #406882, #5584AC);
+         border-radius: 2rem;
+         position: absolute;
+         bottom: -175%;
+     }
+     .left-down-board {
+         min-height: 25vh;
+         max-height: 28vh;
+         overflow: scroll;
+         width: 100%;
+         background: linear-gradient(to right bottom, #406882, #5584AC);
+         border-radius: 2rem;
+         position: absolute;
+         bottom: -190%;
+     }
+     .menu-button1 {
+         position: absolute;
+         bottom: 20%;
+     }
+     .menu-button2 {
+         position: absolute;
+         bottom: 34%;
+     }
+     .menu-button3 {
+         position: absolute;
+         bottom: 6%;
+     }
+     .setting-button1 {
+         position: absolute;
+         left: 2%;
+         bottom: 39%;
+     }
+     .setting-button2 {
+         position: absolute;
+         right: 2%;
+         bottom: 39%;
+     }
+     .setting-button3 {
+         position: absolute;
+         left: 2%;
+         bottom: 26%;
+     }
+     .setting-button4 {
+         position: absolute;
+         right: 2%;
+         bottom: 26%;
+     }
+     .setting-button5 {
+         position: absolute;
+         left: 2%;
+         bottom: 13%;
+     }
+     .setting-button6 {
+         position: absolute;
+         right: 2%;
+         bottom: 13%;
+     }
+     .setting-button7 {
+         position: absolute;
+         left: 2%;
+         bottom: 0%;
+     }
+     .fd-button1 {
+         position: absolute;
+         bottom: 38%;
+     }
+     .fd-button2 {
+         position: absolute;
+         bottom: 25%;
+     }
+     .fd-button3 {
+         position: absolute;
+         bottom: 12%;
+     }
+     .setting-button-box {
+         display: flex;
+         min-height: 10vh;
+         width: 48%;
+         background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+         position: absolute;
+         border-radius: 2rem;
+         justify-content: center;
+         align-items: center;
+     }
+     .setting-button-box-1 {
+         display: flex;
+         min-height: 10vh;
+         width: 48%;
+         color: white;
+         background: rgba(9, 119, 245, 0.897);
+         position: absolute;
+         border-radius: 2rem;
+         justify-content: center;
+         align-items: center;
+     }
+     .fd-button-box {
+         display: flex;
+         min-height: 10vh;
+         width: 55%;
+         background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+         position: absolute;
+         right: 25%;
+         border-radius: 2rem;
+         justify-content: center;
+         align-items: center;
+     }
+     .menu-button-box {
+         display: flex;
+         min-height: 10vh;
+         width: 70%;
+         background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+         position: absolute;
+         right: 15%;
+         border-radius: 2rem;
+         justify-content: center;
+         align-items: center;
+     }
+     .setting-ok-button {
+         position: absolute;
+         bottom: 6%;
+         right: 11%;
+         border-radius: 2rem;
+         color: aliceblue;
+         background: linear-gradient(to right bottom, #406882, #5584AC);
+         background-color: #406882;
+         min-width: 30%;
+         text-align: center;
+         justify-content: center;
+         vertical-align: middle;
+     }
+     .setting-user-button {
+         position: absolute;
+         bottom: 0%;
+         right: 11%;
+         border-radius: 2rem;
+         color: aliceblue;
+         background: linear-gradient(to right bottom, #406882, #5584AC);
+         background-color: #406882;
+         min-width: 30%;
+         text-align: center;
+         justify-content: center;
+         vertical-align: middle;
+     }
+     .delay-ok-button {
+         position: absolute;
+         bottom: 4%;
+         right: 35%;
+         border-radius: 2rem;
+         color: aliceblue;
+         background: linear-gradient(to right bottom, #406882, #5584AC);
+         background-color: #406882;
+         min-width: 30%;
+         text-align: center;
+         justify-content: center;
+         vertical-align: middle;
+     }
+     .finish-ok-button {
+         position: absolute;
+         bottom: 15%;
+         right: 35%;
+         border-radius: 2rem;
+         color: aliceblue;
+         background: linear-gradient(to right bottom, #406882, #5584AC);
+         background-color: #406882;
+         min-width: 30%;
+         text-align: center;
+         justify-content: center;
+         vertical-align: middle;
+     }
+     .setting-text {
+         font-size: 12px;
+         position: absolute;
+         left: 4%;
+     }
+     .setting-user-table {
+         display: flex;
+         min-height: 40%;
+         max-height: 40%;
+         overflow: scroll;
+         min-width: 80%;
+         max-width: 80%;
+         background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+         position: absolute;
+         right: 9%;
+         bottom: 9%;
+         border-radius: 2rem;
+         justify-content: center;
+         align-items: center;
+     }
+     .table {
+         position: absolute;
+         top: 0%
+     }
+     .add-button {
+         position: absolute;
+         right: 40%;
+         bottom: 2%;
+         max-height: 10vh;
+         max-width: 20vh;
+     }
+ }
+ 
+ .start {
+     width: 90%;
+ }
