@@ -8,10 +8,11 @@ class DB_Model():
     def __init__(self):
         self.client=pymongo.MongoClient("mongodb+srv://"+os.environ['DB_USER']+":"+os.environ['DB_PASSWORD']+"@cluster0.mgwi6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
         self.db=self.client.Flask
-        self.collection=self.db.customers
+        self.customers=self.db.customers
+        self.users=self.db.users
     
     def create(self,form):
-        id=self.collection.find().sort("_id",pymongo.DESCENDING).limit(1)[0]['_id']+1
+        id=self.customers.find().sort("_id",pymongo.DESCENDING).limit(1)[0]['_id']+1
         data={
             "_id":id,
             "name":form.name.data,
@@ -22,11 +23,11 @@ class DB_Model():
             "remark":form.remark.data,
             "logs":{}
         }
-        self.collection.insert_one(data)
+        self.customers.insert_one(data)
     
     def delete(self,id):
         if id:
-            self.collection.delete_one({"_id":id})
+            self.customers.delete_one({"_id":id})
     
     def change_data(self,form):
         pass
@@ -36,24 +37,32 @@ class DB_Model():
 
     def search(self,key,value):
         if key:
-            results=self.collection.find({key:value})
+            results=self.customers.find({key:value})
         else:
-            results=self.collection.find()
+            results=self.customers.find()
         return results
 
 db_model=DB_Model()
     
 class User():
-    def start_session():
+    def start_session(self):
         pass
     
-    def login():
-        pass
-    
+    def login(self,username,password):
+        result=db_model.users.find_one({'username':username})
+        if result:
+            if check_password_hash(result['password'],password):
+                self.start_session()
+            else:
+                return {"password":"密碼錯誤"}
+        else:
+            return {'username':"帳號不存在"}
+
     def logout():
         pass
     
-    def register():#only for back-end change
+    def register(self,username,password):#only for back-end change
+        db_model.users.insert_one({'username':username,'password':generate_password_hash(password)})
         pass
     
 for each in db_model.search("_id",1):
@@ -61,3 +70,4 @@ for each in db_model.search("_id",1):
     print()
 
 db_model.delete('1')
+# User().register('timothychen','123123123')

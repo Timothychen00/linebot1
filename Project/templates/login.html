@@ -1,0 +1,39 @@
+{%extends 'base.html' %}
+{% block main_content %}
+<div class="container-fluid" style='height:100vh!important;'>
+    <form action="/" method="post" class="row row-cols-3 justify-content-center align-content-center" style='height:100vh!important;'>
+        {{form.csrf_token()}}
+        <div class="col-3">
+            {{form.username.label}}
+            {{form.username}}
+            {% if form.username.errors %}
+            <ul>
+                {% for err in form.username.errors %}
+                    <li style='color:#FF0000!important'>{{err}}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="col-3">
+            {{form.password.label}}
+            {{form.password}}
+            {% if form.password.errors %}
+            <ul>
+                {% for err in form.password.errors %}
+                    <li style='color:#FF0000!important'>{{err}}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="col-3">
+            {{form.submit}}
+        </div>
+    </form>
+</div>
+
+
+
+{% endblock main_content %}
+
+{% block js_extend %}
+{% endblock js_extend %}

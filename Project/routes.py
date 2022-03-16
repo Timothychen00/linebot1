@@ -1,10 +1,28 @@
-from flask import Blueprint
-app_route=Blueprint("app_route")
+from flask import Blueprint, redirect,render_template,url_for
+from Project.forms import LoginForm
+from Project.models import User
+
+app_route=Blueprint("app_route",__name__,static_folder='static',template_folder='templates')
 
 
 @app_route.route("/",methods=['GET','POST'])#login
 def login():
-    return '1'
+    form=LoginForm()
+    if form.validate_on_submit():
+        username=form.username.data
+        password=form.password.data
+        print(username)
+        print(password)
+        result=User().login(username,password)
+        if result:
+            if 'username' in result.keys():
+                form.username.errors.append(result['username'])
+            if 'password' in result.keys():
+                form.password.errors.append(result['password'])
+        else:
+            print('sec')
+            return redirect("home")
+    return render_template("login.html",form=form)
 
 #Home page
 @app_route.route("/finish/",methods=['GET','POST'])
@@ -17,7 +35,7 @@ def delay():
 
 @app_route.route("/home")
 def home():
-    return "1"
+    return render_template('base.html')
 
 @app_route.route("/customers/")
 def customers_manage():
