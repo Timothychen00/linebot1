@@ -25,6 +25,10 @@
             </ul>
             {% endif %}
         </div>
+        <div class='col-3'>
+            {{form.rememberme.label}}
+            {{form.rememberme(value='0')}}
+        </div>
         <div class="col-3">
             {{form.submit}}
         </div>

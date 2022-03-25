@@ -1,9 +1,9 @@
 import pymongo,os
 from dotenv import load_dotenv
 from flask import flash,request,session
+from sympy import true
 from werkzeug.security import generate_password_hash,check_password_hash
 load_dotenv()
-
 class DB_Model():
     def __init__(self):
         self.client=pymongo.MongoClient("mongodb+srv://"+os.environ['DB_USER']+":"+os.environ['DB_PASSWORD']+"@cluster0.mgwi6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
@@ -26,6 +26,7 @@ class DB_Model():
         self.customers.insert_one(data)
     
     def delete(self,id):
+        print('delete')
         if id:
             self.customers.delete_one({"_id":id})
     
@@ -35,8 +36,10 @@ class DB_Model():
     def add_log():
         pass
 
-    def search(self,key,value):
-        if key:
+    def search(self,key=None,value=None):
+        if key and value:
+            if key=='_id':
+                value=int(value)
             results=self.customers.find({key:value})
         else:
             results=self.customers.find()
@@ -45,29 +48,25 @@ class DB_Model():
 db_model=DB_Model()
     
 class User():
-    def start_session(self):
-        pass
+    def start_session(self,username):
+        session['logged_in']=True
+        session['username']=username
     
     def login(self,username,password):
         result=db_model.users.find_one({'username':username})
         if result:
             if check_password_hash(result['password'],password):
-                self.start_session()
+                self.start_session(username)
             else:
                 return {"password":"密碼錯誤"}
         else:
             return {'username':"帳號不存在"}
 
-    def logout():
-        pass
+    def logout(self):
+        if 'logged_in' in session:
+            del session['logged_in']
+        if 'username' in session:
+            del session['username']
     
     def register(self,username,password):#only for back-end change
         db_model.users.insert_one({'username':username,'password':generate_password_hash(password)})
-        pass
-    
-for each in db_model.search("_id",1):
-    print(each)
-    print()
-
-db_model.delete('1')
-# User().register('timothychen','123123123')

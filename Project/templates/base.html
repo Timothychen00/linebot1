@@ -33,7 +33,7 @@
                 </div>
             </div>
 
-            <div style="cursor: pointer; " onclick="location.href='/settings'" class="menu-button1 menu-button-box ">
+            <div style="cursor: pointer; " onclick="location.href='/customers/'" class="menu-button1 menu-button-box ">
                 <img src="/static/images/settings.png " width="20% " alt="Setting button ">
                 <h1>Settings設定</h1>
             </div>
@@ -50,7 +50,18 @@
         </section>
 
     </main>
+
     {% endblock main_content %}
+
+    <script>
+        {% with messages=get_flashed_messages() %}
+            {%if messages%}
+                {%for msg in messages%}
+                    alert('{{msg}}');
+                {%endfor%}
+            {%endif%}
+        {%endwith%}
+    </script>
 
     {% block js_extend %}
         <script>

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+<button onclick='location.href="/customers/"' class='btn btn-primary'>返回</button>
+<table class="table mt-5">
+    <thead>
+        <tr>
+        </tr>
+    </thead>
+    <tbody>
+  
+        <tr>
+            <td>用戶ID:{{result['_id']}}</td>
+        </tr>
+        <tr>
+            <td>用戶姓名:{{result['name']}}</td>
+        </tr>
+        <tr>
+            <td>手機號碼：{{result['phone']}}</td>
+        </tr>
+        <tr>
+            <td>手機號碼2：{{result['telephone']}}</td>
+        </tr>
+        <tr>
+            <td>地址:{{result['address']}}</td>
+        </tr>
+        <tr>
+            <td>下次維護時間:{{result['next-time']}}</td>
+        </tr>
+        <tr>
+            <td>機器型號:{{result['machine']}}</td>
+        </tr>
+        <tr>
+            <td>備註:{{result['note']}}</td>
+        </tr>
+        
+    </tbody>
+</table>
+{% endblock %}
