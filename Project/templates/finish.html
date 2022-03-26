@@ -31,11 +31,11 @@
                 {{form.csrf_token()}}
                 <div>
                     {{form.key_type.label(class_='h3')}}
-                    {{form.key_type(class_='form-input')}}
+                    {{form.key_type(class_='form-input',default='_id')}}
                 </div>
                 <div>
                     {{form.key.label(class_='h3')}}
-                    {{form.key(class_='form-input')}}
+                    {{form.key(class_='form-input',default='22')}}
                 </div>
                 <div>
                     {{form.state.label(class_='h3 ')}}
@@ -52,6 +52,10 @@
                 <div>
                     {{form.next_time.label(class_='h3')}}
                     {{form.next_time(class_='form-input')}}
+                </div>
+                <div>
+                    {{form.fee.label(class_='h3')}}
+                    {{form.fee(class_='form-input')}}
                 </div>
                 <div>
                     {{form.note.label(class_='h3')}}

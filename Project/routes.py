@@ -50,7 +50,16 @@ def finish():
         print('finish',form.finish_time.data)
         print('next',form.next_time.data)
         print('note',form.note.data)
-        return 'sent'
+        state=form.state.data
+        key=form.key_type.data
+        value=int(form.key.data)
+        if state=='True':
+            print(1)
+            data=['完成',form.component.data,form.note.data,form.fee.data]
+            db_model.add_log(key,value,update_data=data)
+            return 'sent'
+        else:
+            form.state.errors.append("請選擇正確的用戶")
     return render_template('finish.html',form=form)
 
 @app_route.route("/delay/",methods=['GET','POST'])
@@ -58,9 +67,17 @@ def finish():
 def delay():
     form=DelayForm()
     if form.validate_on_submit():
-        for i in form:
-            print(i,i.data)
-        return 'sent'
+        state=form.state.data
+        key=form.key_type.data
+        value=int(form.key.data)
+        
+        if state=='True':
+            print(1)
+            data=['延期','',"下一次更換時間:"+str(form.next_time.data)+'\n'+form.note.data,'']
+            db_model.add_log(key,value,data)
+            return 'sent'
+        else:
+            form.state.errors.append("請選擇正確的用戶")
     return render_template('delay.html',form=form)
 
 @app_route.route("/home")

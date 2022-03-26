@@ -64,14 +64,7 @@
     </script>
 
     {% block js_extend %}
-        <script>
-            setTimeout(function() { document.getElementById("main").style.display = "none" }, 0)
-            setTimeout(function() { document.getElementById("main").style.display = "" }, 1700)
-            setTimeout(function() { 
-                document.getElementById("logo-box").style.display = "none" ;
-                document.getElementById("logo").style.display = "none";
-            }, 1700)
-        </script>
+
     {% endblock js_extend %}
 
     <script src='/static/js/timer.js'></script>

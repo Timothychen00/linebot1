@@ -6,20 +6,21 @@ from wtforms.widgets.html5 import MonthInput
 from wtforms.validators import InputRequired
 
 class FinishForm(FlaskForm):#used to finish the
-    key_type=SelectField("搜索類型",choices=['name','phone','telephone','id'])
+    key_type=SelectField("搜索類型",choices=['name','phone','telephone','_id'])
     key=TextField("搜索內容")
     state=TextField("搜索結果",validators=[InputRequired()])
     component=SelectMultipleField("部件",choices=[("1",'A'),("2",'B'),("3",'C')],validators=[InputRequired()])
     finish_time=DateField('完成日期',validators=[InputRequired("請輸入完成日期")])
     next_time=TextField('下次保養日期',validators=[InputRequired()])
     note=TextAreaField("備註")
+    fee=TextField("費用")
     submit=SubmitField('完成')
 
 class DelayForm(FlaskForm):#used to delay the mission
-    key_type=SelectField("搜索類型",choices=['name','phone','telephone','id'])
+    key_type=SelectField("搜索類型",choices=['name','phone','telephone','_id'])
     key=TextField("搜索內容")
     state=TextField("搜索結果",validators=[InputRequired('請先選擇用戶')])
-    next_time=TextField('下次保養日期',validators=[MonthInput()])
+    next_time=TextField('下次保養日期',validators=[InputRequired()])
     note=TextAreaField('備註')
     submit=SubmitField('完成')
 

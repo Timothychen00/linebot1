@@ -1,8 +1,9 @@
-import pymongo,os
+import pymongo,os,datetime
 from dotenv import load_dotenv
 from flask import flash,request,session
 from sympy import true
 from werkzeug.security import generate_password_hash,check_password_hash
+
 load_dotenv()
 class DB_Model():
     def __init__(self):
@@ -10,6 +11,7 @@ class DB_Model():
         self.db=self.client.Flask
         self.customers=self.db.customers
         self.users=self.db.users
+        self.tz=datetime.timezone(datetime.timedelta(hours=+8))
     
     def create(self,form):
         id=self.customers.find().sort("_id",pymongo.DESCENDING).limit(1)[0]['_id']+1
@@ -24,17 +26,29 @@ class DB_Model():
             "logs":{}
         }
         self.customers.insert_one(data)
-    
+
     def delete(self,id):
         print('delete')
         if id:
             self.customers.delete_one({"_id":id})
-    
+
     def change_data(self,form):
         pass
-    
-    def add_log():
-        pass
+
+    def add_log(self,key,value,update_data,date=None):
+        result=self.search(key,value)[0]
+        print(result)
+        result=result['logs']
+        if not date:
+            date=datetime.datetime.now(self.tz).strftime("%Y-%m-%d")
+        if result:
+            result[date]=update_data
+            print(result)
+            print(self.customers.update_one({key:value},{"$set":{"logs":result}}))
+            print("update success")
+        else:
+            print('not existed')
+
 
     def search(self,key=None,value=None):
         if key and value:
@@ -70,3 +84,13 @@ class User():
     
     def register(self,username,password):#only for back-end change
         db_model.users.insert_one({'username':username,'password':generate_password_hash(password)})
+
+class Server_Logger:
+    def __init__(self):
+        pass
+    
+    def write_log(self):
+        pass
+    
+    def change_path(self):
+        pass
