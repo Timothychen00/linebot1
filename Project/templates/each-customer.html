@@ -2,6 +2,7 @@
 {% block main_content %}
 
 <button onclick='location.href="/customers/"' class='btn btn-primary'>返回</button>
+<button onclick='location.href="/customers/{{result['_id']}}/edit/"' class='btn btn-primary'>編輯</button>
 <table class="table mt-5">
     <thead>
         <tr>
@@ -33,6 +34,22 @@
         <tr>
             <td>備註:{{result['note']}}</td>
         </tr>
+        <tr>
+            <td>日期</td>
+            <td>類型</td>
+            <td>部件</td>
+            <td>備註</td>
+            <td>金額</td>
+        </tr>
+        {% for log in result['logs'] %}
+        <tr>
+            <td>{{log}}</td>
+            <td>{{result['logs'][log][0]}}</td>
+            <td>{{result['logs'][log][1]}}</td>
+            <td>{{result['logs'][log][2]}}</td>
+            <td>{{result['logs'][log][3]}}</td>
+        </tr>
+        {% endfor %}
         
     </tbody>
 </table>

@@ -4,6 +4,7 @@ from Project.forms import LoginForm,FinishForm,DelayForm,CustomerForm
 from Project.models import User,db_model
 import datetime
 from Project.decorators import login_required
+from dateutil.relativedelta import relativedelta
 app_route=Blueprint("app_route",__name__,static_folder='static',template_folder='templates')
 
 @app_route.route("/",methods=['GET','POST'])#login
@@ -56,7 +57,7 @@ def finish():
         if state=='True':
             print(1)
             data=['完成',form.component.data,form.note.data,form.fee.data]
-            db_model.add_log(key,value,update_data=data)
+            db_model.add_log(key,value,update_data=data,next_time=form.next_time.data)
             return 'sent'
         else:
             form.state.errors.append("請選擇正確的用戶")
@@ -74,7 +75,7 @@ def delay():
         if state=='True':
             print(1)
             data=['延期','',"下一次更換時間:"+str(form.next_time.data)+'\n'+form.note.data,'']
-            db_model.add_log(key,value,data)
+            db_model.add_log(key,value,data,next_time=form.next_time.data)
             return 'sent'
         else:
             form.state.errors.append("請選擇正確的用戶")
@@ -85,33 +86,51 @@ def delay():
 def home():
     return render_template('base.html')
 
-@app_route.route("/customers/")
+@app_route.route("/customers/",methods=['GET',"POST"])
 @login_required
 def customers_manage():
-    key=request.args.get('key',None)
-    value=request.args.get('value',None)
-    print(key,value)
-    results=db_model.search(key,value)
-    return render_template('user-manage.html',results=list(results))
+    form=CustomerForm()
+
+    if request.method=='GET':
+        key=request.args.get('key',None)
+        value=request.args.get('value',None)
+        print(key,value)
+        results=db_model.search(key,value)
+    elif request.method=='POST':
+        print(form.validate_on_submit())
+        if form.validate_on_submit():
+            flash('新增成功')
+            db_model.create(form)
+        else:
+            flash('新增失敗')
+        return redirect('/customers/')
+    return render_template('user-manage.html',results=results,form=form)
 
 #Customers Page
 @app_route.route("/customers/this_month/")
 @login_required
 def this_month():
-    pass
+    this_month=datetime.datetime.now(db_model.tz).strftime('%Y-%m')
+    print("this_month:",this_month)
+    results=db_model.search('next-time',this_month)
+    print(results)
+    return render_template('user-manage.html',results=results)
 
 @app_route.route("/customers/next_month/")
 @login_required
 def next_month():
-    pass
+    time_obj=datetime.datetime.now(db_model.tz)+relativedelta(months=1)
+    next_month=time_obj.strftime("%Y-%m")
+    results=db_model.search('next-time',next_month)
+    return render_template('user-manage.html',results=results)
 
 @app_route.route("/customers/<int:id>/")
 @login_required
 def each_customer(id):
     print(id)
-    results=list(db_model.search('_id',id))[0]
-    print(results)
-    return render_template('each-customer.html',result=results)
+    result=db_model.search('_id',id)[0]
+    print(result)
+    return render_template('each-customer.html',result=result)
 
 @app_route.route("/customers/<int:id>/delete/")
 @login_required
@@ -120,11 +139,13 @@ def delete_customer(id):
     flash('刪除成功')
     return redirect('/customers/')
     
-
-@app_route.route("/customers/create/",methods=['GET','POST'])
+@app_route.route("/customers/<int:id>/edit/",methods=['GET','POST'])
 @login_required
-def create_customer():
+def change_customer(id):
     form=CustomerForm()
+    result=db_model.search('_id',id)[0]
     if form.validate_on_submit():
-        return form
-    return render_template('settings.html',form=form)
+        db_model.change_data('_id',id,form)
+        flash("修改成功")
+        return redirect("/customers/"+str(id)+'/')
+    return render_template('each-customer-edit.html',form=form,result=result)

@@ -20,22 +20,33 @@ class DB_Model():
             "name":form.name.data,
             "phone":form.phone.data,
             "telephone":form.telephone.data,
+            'machine':form.machine.data,
             "address":form.address.data,
             "next-time":form.next_time.data,
-            "remark":form.remark.data,
+            "note":form.note.data,
             "logs":{}
         }
         self.customers.insert_one(data)
+        print(id)
 
     def delete(self,id):
         print('delete')
         if id:
             self.customers.delete_one({"_id":id})
 
-    def change_data(self,form):
-        pass
+    def change_data(self,key,value,form):
+        data={
+            "name":form.name.data,
+            "phone":form.phone.data,
+            "telephone":form.telephone.data,
+            "address":form.address.data,
+            'machine':form.machine.data,
+            "next-time":form.next_time.data,
+            "remark":form.note.data,
+        }
+        self.customers.update_one({key:value},{'$set':data})
 
-    def add_log(self,key,value,update_data,date=None):
+    def add_log(self,key,value,update_data,next_time,date=None):
         result=self.search(key,value)[0]
         print(result)
         result=result['logs']
@@ -45,6 +56,7 @@ class DB_Model():
             result[date]=update_data
             print(result)
             print(self.customers.update_one({key:value},{"$set":{"logs":result}}))
+            self.customers.update_one({key:value},{"$set":{"next-time":next_time}})
             print("update success")
         else:
             print('not existed')
@@ -57,6 +69,9 @@ class DB_Model():
             results=self.customers.find({key:value})
         else:
             results=self.customers.find()
+        results=list(results)
+        # if len(results)==1:
+        #     results=results[0]
         return results
 
 db_model=DB_Model()

@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+<button onclick='location.href="/customers/"' class='btn btn-primary mb-5'>返回</button>
+<form action='/customers/{{result["_id"]}}/edit/' method='POST'>
+    {{form.csrf_token()}}
+    <table class="table mt-5">
+        <thead>
+            <tr>
+            </tr>
+        </thead>
+        <tbody>
+    
+            <tr>
+                <td>用戶ID:{{result['_id']}}</td>
+            </tr>
+            <tr>
+                <td>
+                    {{form.name.label(class_='h3')}}
+                    {{form.name(class_='form-input',value=result["name"])}}
+                {% if form.name.errors %}
+                    <ul>
+                        {% for error in form.name.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{form.phone.label(class_='h3')}}
+                    {{form.phone(class_='form-input',value=result["phone"])}}
+                {% if form.phone.errors %}
+                    <ul>
+                        {% for error in form.phone.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{form.telephone.label(class_='h3')}}
+                    {{form.telephone(class_='form-input',value=result["telephone"])}}
+                {% if form.telephone.errors %}
+                    <ul>
+                        {% for error in form.telephone.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{form.address.label(class_='h3')}}
+                    {{form.address(class_='form-input',value=result["address"])}}
+                {% if form.address.errors %}
+                    <ul>
+                        {% for error in form.address.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{form.next_time.label(class_='h3')}}
+                    {{form.next_time(class_='form-input',value=result["next-time"])}}
+                {% if form.next_time.errors %}
+                    <ul>
+                        {% for error in form.next_time.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{form.machine.label(class_='h3')}}
+                    {{form.machine(class_='form-input',value=result["machine"])}}
+                {% if form.machine.errors %}
+                    <ul>
+                        {% for error in form.machine.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{form.note.label(class_='h3')}}
+                    {{form.note(class_='form-input',value=result["note"])}}
+                {% if form.note.errors %}
+                    <ul>
+                        {% for error in form.note.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>類型</td>
+                <td>部件</td>
+                <td>備註</td>
+                <td>金額</td>
+            </tr>
+            {% for log in result['logs'] %}
+            <tr>
+                <td>{{result['logs'][log][0]}}</td>
+                <td>{{result['logs'][log][1]}}</td>
+                <td>{{result['logs'][log][2]}}</td>
+                <td>{{result['logs'][log][3]}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td>
+                    {{form.submit(class_='btn btn-primary')}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+{% endblock %}

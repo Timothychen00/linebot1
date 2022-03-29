@@ -33,34 +33,90 @@
                     {{form.key_type.label(class_='h3')}}
                     {{form.key_type(class_='form-input',default='_id')}}
                 </div>
+                {% if form.key_type.errors %}
+                    <ul>
+                        {% for error in form.key_type.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                 <div>
                     {{form.key.label(class_='h3')}}
                     {{form.key(class_='form-input',default='22')}}
                 </div>
+                {% if form.key.errors %}
+                    <ul>
+                        {% for error in form.key.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                 <div>
                     {{form.state.label(class_='h3 ')}}
                     {{form.state(class_='form-input')}}
                 </div>
+                {% if form.state.errors %}
+                    <ul>
+                        {% for error in form.state.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                 <div>
                     {{form.component.label(class_='h3')}}
                     {{form.component(class_='form-input',multiple='multiple')}}
                 </div>
+                {% if form.component.errors %}
+                    <ul>
+                        {% for error in form.component.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                 <div>
                     {{form.finish_time.label(class_='h3')}}
                     {{form.finish_time(class_='form-input')}}
                 </div>
+                {% if form.finish_time.errors %}
+                    <ul>
+                        {% for error in form.finish_time.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                 <div>
                     {{form.next_time.label(class_='h3')}}
                     {{form.next_time(class_='form-input')}}
                 </div>
+                {% if form.next_time.errors %}
+                    <ul>
+                        {% for error in form.next_time.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                 <div>
                     {{form.fee.label(class_='h3')}}
                     {{form.fee(class_='form-input')}}
                 </div>
+                {% if form.fee.errors %}
+                    <ul>
+                        {% for error in form.fee.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                 <div>
                     {{form.note.label(class_='h3')}}
                     {{form.note(class_='form-input')}}
                 </div>
+                {% if form.note.errors %}
+                    <ul>
+                        {% for error in form.note.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                 <div style="cursor: pointer; " class="setting-ok-button ">
                     {{form.submit(class_='h4',style='background-color:transparent;border:0;color:white')}}
                 </div>

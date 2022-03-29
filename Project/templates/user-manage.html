@@ -9,7 +9,8 @@
     <input type='text' id='value'></input>
     <button onclick='search()' class='btn btn-primary'>搜索</button>
     <button onclick='location.href="/home"' class='btn btn-primary'>返回主頁</button>
-
+    <button onclick='location.href="/customers/this_month/"' class='btn btn-primary'>本月</button>
+    <button onclick='location.href="/customers/next_month/"' class='btn btn-primary'>下月</button>
     <table class="table mt-5">
         <thead>
             <tr>
@@ -28,6 +29,108 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <!-- 新增彈窗 -->
+    {% if form %}
+    <button type="button" class="btn btn-warning"  data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" style="color:white;">新增</button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">新增客戶</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action='/customers/' method='post'>
+                        {{form.csrf_token()}}
+                        <div class="mb-3">
+                            {{form.name.label(class_='col-form-label')}}
+                            {{form.name(class_='form-input')}}
+                        </div>
+                        {% if form.name.errors %}
+                            <ul>
+                                {% for error in form.name.errors %}
+                                    <li style='color:#FF0000!important'>{{error}}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <div class="mb-3">
+                            {{form.address.label(class_='col-form-label')}}
+                            {{form.address(class_='form-input')}}
+                        </div>
+                        {% if form.address.errors %}
+                            <ul>
+                                {% for error in form.address.errors %}
+                                    <li style='color:#FF0000!important'>{{error}}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <div class="mb-3">
+                            {{form.phone.label(class_='col-form-label')}}
+                            {{form.phone(class_='form-input')}}
+                        </div>
+                        {% if form.phone.errors %}
+                            <ul>
+                                {% for error in form.phone.errors %}
+                                    <li style='color:#FF0000!important'>{{error}}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <div class="mb-3">
+                            {{form.telephone.label(class_='col-form-label')}}
+                            {{form.telephone(class_='form-input')}}
+                        </div>
+                        {% if form.telephone.errors %}
+                            <ul>
+                                {% for error in form.telephone.errors %}
+                                    <li style='color:#FF0000!important'>{{error}}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <div class="mb-3">
+                            {{form.machine.label(class_='col-form-label')}}
+                            {{form.machine(class_='form-input')}}
+                        </div>
+                        {% if form.machine.errors %}
+                            <ul>
+                                {% for error in form.machine.errors %}
+                                    <li style='color:#FF0000!important'>{{error}}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <div class="mb-3">
+                            {{form.next_time.label(class_='col-form-label')}}
+                            {{form.next_time(class_='form-input')}}
+                        </div>
+                        {% if form.next_time.errors %}
+                            <ul>
+                                {% for error in form.next_time.errors %}
+                                    <li style='color:#FF0000!important'>{{error}}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <div class="mb-3">
+                            {{form.note.label(class_='col-form-label')}}
+                            {{form.note(class_='form-input')}}
+                        </div>
+                        {% if form.note.errors %}
+                            <ul>
+                                {% for error in form.note.errors %}
+                                    <li style='color:#FF0000!important'>{{error}}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            {{form.submit(class_='btn btm-primary')}}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+        {%endif%}
 {% endblock main_content %}
 
 {% block js_extend %}
