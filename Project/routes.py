@@ -5,7 +5,7 @@ from Project.models import User,db_model
 import datetime
 from Project.decorators import login_required
 from dateutil.relativedelta import relativedelta
-app_route=Blueprint("app_route",__name__,static_folder='static',template_folder='templates')
+app_route=Blueprint("app_route",__name__,static_folder='Project/static',template_folder='Project/templates')
 
 @app_route.route("/",methods=['GET','POST'])#login
 def login():
