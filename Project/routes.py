@@ -144,6 +144,7 @@ def each_customer(id):
 def delete_customer(id):
     db_model.delete(id)
     flash('刪除成功')
+    print(id)
     return redirect('/customers/')
     
 @app_route.route("/customers/<int:id>/edit/",methods=['GET','POST'])

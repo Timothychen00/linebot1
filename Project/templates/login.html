@@ -1,43 +1,72 @@
-{%extends 'base.html' %}
+{% extends 'base.html' %}
 {% block main_content %}
-<div class="container-fluid" style='height:100vh!important;'>
-    <form action="/" method="post" class="row row-cols-3 justify-content-center align-content-center" style='height:100vh!important;'>
-        {{form.csrf_token()}}
-        <div class="col-3">
-            {{form.username.label}}
-            {{form.username}}
-            {% if form.username.errors %}
-            <ul>
-                {% for err in form.username.errors %}
-                    <li style='color:#FF0000!important'>{{err}}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
+    <div class="container " style="min-height:100vh">
+         <!-- 標題 -->
+        <div class="row row-md-col-1" style=" z-index:1">
+            <div class=" d-flex col-3 text-center ">
+                <img src="/static/images/login.png " style="padding:10px;height: 65px; " alt="logo "></span>
+                <a class='text h1'>登入</a>
+            </div>
         </div>
-        <div class="col-3">
-            {{form.password.label}}
-            {{form.password}}
-            {% if form.password.errors %}
-            <ul>
-                {% for err in form.password.errors %}
-                    <li style='color:#FF0000!important'>{{err}}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
+         <!-- 標題 -->
+        <div class="row  middle-board  align-content-center justify-content-center  mx-auto mt-md-5 m-3 "style="min-height:500px; max-width:800px">
+            <div class="col-md-4 col-10">
+                <h1 class="text-center pb-4">登 入</h1>
+                <form action="/" method="post">
+                    {{form.csrf_token()}}
+                    <div class="mb-3">
+                        {{form.username.label}}
+                        {{form.username}}
+                        {% if form.username.errors %}
+                        <ul>
+                            {% for err in form.username.errors %}
+                                <li style='color:#FF0000!important'>{{err}}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{form.password.label}}
+                        {{form.password}}
+                        {% if form.password.errors %}
+                        <ul>
+                            {% for err in form.password.errors %}
+                                <li style='color:#FF0000!important'>{{err}}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3 form-check">
+                        {{form.rememberme.label}}
+                        {{form.rememberme(value='0')}}
+                    </div>
+                    <!-- 按鈕列 -->
+                    <div class="row justify-content-center">
+                        <div class=" d-flex justify-content-center">
+                            <div style="cursor: pointer; " class="home p-1 m-2" onclick="document.getElementById('submit').click()" >
+                                <img src="static/images/login-1.png " height=45% width=45% alt="login button ">
+                                <input _class="home p-1 m-2" id="submit" name="submit" type="submit" value="登入" style="display:none;">
+                                <br>
+                                <label>登入</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class='col-3'>
-            {{form.rememberme.label}}
-            {{form.rememberme(value='0')}}
-        </div>
-        <div class="col-3">
-            {{form.submit}}
-        </div>
-    </form>
-</div>
-
-
-
+        <div class="row text-center"><a style="color: rgb(138, 132, 132);">Copyright © 2022 Iteration.</a></div>
+    </div>
 {% endblock main_content %}
+<script>
+{% with messages=get_flashed_messages() %}
+    {%if messages%}
+        {%for msg in messages%}
+            alert('{{msg}}');
+        {%endfor%}
+    {%endif%}
+{%endwith%}
+</script>
 
 {% block js_extend %}
+<script src='/static/js/ajax.js'></script>
 {% endblock js_extend %}

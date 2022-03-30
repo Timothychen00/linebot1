@@ -1,71 +1,63 @@
 {% extends 'base.html' %}
 {% block main_content %}
-    <main>
-        <div class=title>
-            <img src="/static/images/finish.png" width=50px height="60px" alt="Setting button ">
-            <h1>Finish<br>完成</h1>
+<form action="/finish" method="post" >
+{{form.csrf_token()}}
+<div class="container " style="min-height:100vh">
+    <!-- 標題 -->
+    <div class="row  mt-md-5 mt-1 justify-content-center" >
+        <div class=" d-flex col-3 justify-content-center text-center ">
+            <img src="/static/images/finish.png " style="height: 65px; " alt="logo "></span>
+            <a class='text h1'>完成</a>
         </div>
-        <div style="cursor: pointer; " onclick="window.location='/';" class='home'>
-            <img src="/static/images/home-2.png " height=25% width=25% alt="Setting button ">
-            <h3>home<br>主頁面</h3>
-        </div>
-        <section class="middle ">
-            <div class="left-board ">
-                <div style="text-align:center;padding:0em 0;padding-left:8%;padding-right:8% ">
-                    <div style="height:115px; " class='d-flex align-items-center text-center justify-content-around mt-4'>
-                        <h1 id='hour' class='box'></h1>
-                        <h1>:</h1>
-                        <h1 id='minutes' class='box'></h1>
-                        <h1>:</h1>
-                        <h1 id='sec' class='box'></h1>
-                    </div>
-                </div>
-                <div class="sfd-left-down-board ">
-                    <ul>
-                        <li>這是測試訊息</li>
-                    </ul>
-                </div>
-            </div>
-
-            <form action="/finish/" method="post">
-                {{form.csrf_token()}}
-                <div>
-                    {{form.key.label(class_='h3')}}
-                    {{form.key(class_='form-input',id='key')}}
-                </div>
-                {% if form.key.errors %}
+    </div>
+    <!-- 中央顯示區域 -->
+    <div class="row  middle-board justify-content-center pt-md-0 pt-4  mx-auto  m-3 "style="min-height:600px;max-width:850px;" >
+        <!-- 搜尋列 -->
+        <div class="row mt-md-4 mt-1  justify-content-center" style="max-height: 90px;">
+            <div class="col-3 " style="max-height:38px;">
+                <div class="input-group mb-3">
+                    {{form.key(class_='form-select',id='key')}}
+                    {% if form.key.errors %}
                     <ul>
                         {% for error in form.key.errors %}
                             <li style='color:#FF0000!important'>{{error}}</li>
                         {% endfor %}
                     </ul>
-                {% endif %}
-                <div>
-                    {{form.value.label(class_='h3')}}
-                    {{form.value(class_='form-input',id='value')}}
+                    {% endif %}
                 </div>
+            </div>
+            <div class="col-5 " style="max-height:38px">
+                {{form.value(class_='form-control',id='value')}}      
                 {% if form.value.errors %}
-                    <ul>
-                        {% for error in form.value.errors %}
-                            <li style='color:#FF0000!important'>{{error}}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-                <div>
-                    {{form.state.label(class_='h3 ')}}
-                    {{form.state(class_='form-input',id='state')}}
-                </div>
+                <ul>
+                    {% for error in form.value.errors %}
+                        <li style='color:#FF0000!important'>{{error}}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}      
+            </div>
+            <div class="col-2 " style="max-height:38px">
+                <button class="btn btn-primary" type="button">搜尋</button>
+            </div>
+
+
+        <div class="row justify-content-center mt-md-4" style="max-height: 150px;" >
+            <div class="col-md-6 col-12">
+                {{form.state.label(class_='col-form-label')}}
+                {{form.state(class_='text-area text-center',id='state')}}
                 {% if form.state.errors %}
-                    <ul>
-                        {% for error in form.state.errors %}
-                            <li style='color:#FF0000!important'>{{error}}</li>
-                        {% endfor %}
-                    </ul>
+                <ul>
+                    {% for error in form.state.errors %}
+                        <li style='color:#FF0000!important'>{{error}}</li>
+                    {% endfor %}
+                </ul>
                 {% endif %}
-                <div>
-                    {{form.component.label(class_='h3')}}
-                    {{form.component(class_='form-input',multiple='multiple')}}
-                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-12">
+                {{form.component.label(class_='form-check-label')}}
+                {{form.component(class_='form-select',multiple='multiple')}}
                 {% if form.component.errors %}
                     <ul>
                         {% for error in form.component.errors %}
@@ -73,10 +65,17 @@
                         {% endfor %}
                     </ul>
                 {% endif %}
+            </div>
+        </div>
+
+
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-12">
                 <div>
-                    {{form.finish_time.label(class_='h3')}}
+                    {{form.finish_time.label(class_='col-form-label')}}
                     {{form.finish_time(class_='form-input')}}
                 </div>
+                <br>
                 {% if form.finish_time.errors %}
                     <ul>
                         {% for error in form.finish_time.errors %}
@@ -84,9 +83,14 @@
                         {% endfor %}
                     </ul>
                 {% endif %}
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-12">
                 <div>
-                    {{form.next_time.label(class_='h3')}}
-                    {{form.next_time(class_='form-input')}}
+                    {{form.next_time.label(class_='col-form-label')}}
+                    {{form.next_time(class_='form-control',placeholder='YYYY-mm')}}
                 </div>
                 {% if form.next_time.errors %}
                     <ul>
@@ -95,9 +99,14 @@
                         {% endfor %}
                     </ul>
                 {% endif %}
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-12">
                 <div>
-                    {{form.fee.label(class_='h3')}}
-                    {{form.fee(class_='form-input')}}
+                    {{form.fee.label(class_='col-form-label')}}
+                    {{form.fee(class_='form-control')}}
                 </div>
                 {% if form.fee.errors %}
                     <ul>
@@ -106,9 +115,14 @@
                         {% endfor %}
                     </ul>
                 {% endif %}
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-12">
                 <div>
-                    {{form.note.label(class_='h3')}}
-                    {{form.note(class_='form-input')}}
+                    {{form.note.label(class_='col-form-label')}}
+                    {{form.note(class_='form-control')}}
                 </div>
                 {% if form.note.errors %}
                     <ul>
@@ -117,14 +131,37 @@
                         {% endfor %}
                     </ul>
                 {% endif %}
-                <div style="cursor: pointer; " class="setting-ok-button ">
-                    {{form.submit(class_='h4',style='background-color:transparent;border:0;color:white')}}
-                </div>
-            </form> 
+            </div>
+        </div>
 
-        </section>
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-2 col-3">
+                {{form.submit(class_='btn btn-success')}}
+            </div>
+        </div>  
+    </div>
+</div>
+        
+<!-- 按鈕 -->
+    <div class="row  justify-content-center mt-5">
+        <div class="col-md-1 col-4    ">
+            <div style="cursor: pointer;  " onclick="window.location='/home'" class="home p-1" >
+                <img src="/static/images/home.png " height=45% width=35% >
+                <h4>回首頁</h4>
+            </div>
+        </div>
+        <div class="col-md-1 col-4 ms-md-5">
+            <div style="cursor: pointer; " onclick="window.location='/logout'" class="home p-1" >
+                <img src="/static/images/logout.png " height=45% width=40%>
+                <h4>登出</h4>
+            </div>
+        </div>
 
-    </main>
+
+    <div class="row  mt-3 text-center"><a style="color: rgb(138, 132, 132);">Copyright © 2022 Iteration.</a></div>
+    </div>
+
+</form> 
     <script>
         document.getElementById('state').disabled=true;
     </script>
