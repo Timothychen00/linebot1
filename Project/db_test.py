@@ -1,6 +1,5 @@
-import pymongo,os,random
+import pymongo,os,random,time
 from dotenv import load_dotenv
-import time
 test_size=4000
 st_time=time.time()
 load_dotenv()

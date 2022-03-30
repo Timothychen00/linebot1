@@ -30,19 +30,8 @@
             <form action="/delay/" method="post">
                 {{form.csrf_token()}}
                 <div>
-                    {{form.key_type.label(class_='h3 ')}}
-                    {{form.key_type(class_='form-input')}}
-                </div>
-                {% if form.key_type.errors %}
-                    <ul>
-                        {% for error in form.key_type.errors %}
-                            <li style='color:#FF0000!important'>{{error}}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-                <div>
                     {{form.key.label(class_='h3 ')}}
-                    {{form.key(class_='form-input ')}}
+                    {{form.key(class_='form-input',id='key')}}
                 </div>
                 {% if form.key.errors %}
                     <ul>
@@ -52,8 +41,19 @@
                     </ul>
                 {% endif %}
                 <div>
-                    {{form.state.label(class_='h3')}}
-                    {{form.state(class_='form-input')}}
+                    {{form.value.label(class_='h3 ')}}
+                    {{form.value(class_='form-input ',id='value')}}
+                </div>
+                {% if form.value.errors %}
+                    <ul>
+                        {% for error in form.value.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <div>
+                    {{form.state.label(class_='h3 disable')}}
+                    {{form.state(class_='form-input',id='state')}}
                 </div>
                 {% if form.state.errors %}
                     <ul>
@@ -91,30 +91,8 @@
         </section>
 
     </main>
-{% endblock main_content %}
-{% block js_extend %}
     <script>
-        function change_options(){
-            ele=document.getElementById('name').value;
-            console.log(ele);
-            xhr=new XMLHttpRequest();
-            xhr.onload = function(e) {
-                alert(xhr.response); // not responseText
-            }
-            xhr.open('GET','/data/'+ele,true);
-            xhr.send()
-
-            component.options[0]='Fuck';
-            component.options[1]='Fuck';
-            component.options[2]='Fuck';
-            component.options[3]='Fuck';
-            component.options[4]='Fuck';
-
-        }
-
-        username=document.getElementById("name");
-        component=document.getElementById("component");
-        username.addEventListener("change",change_options);
-
+        document.getElementById('state').disabled=true;
     </script>
-{% endblock js_extend %}
+{% endblock main_content %}
+

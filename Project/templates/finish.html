@@ -30,19 +30,8 @@
             <form action="/finish/" method="post">
                 {{form.csrf_token()}}
                 <div>
-                    {{form.key_type.label(class_='h3')}}
-                    {{form.key_type(class_='form-input',default='_id')}}
-                </div>
-                {% if form.key_type.errors %}
-                    <ul>
-                        {% for error in form.key_type.errors %}
-                            <li style='color:#FF0000!important'>{{error}}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-                <div>
                     {{form.key.label(class_='h3')}}
-                    {{form.key(class_='form-input',default='22')}}
+                    {{form.key(class_='form-input',id='key')}}
                 </div>
                 {% if form.key.errors %}
                     <ul>
@@ -52,8 +41,19 @@
                     </ul>
                 {% endif %}
                 <div>
+                    {{form.value.label(class_='h3')}}
+                    {{form.value(class_='form-input',id='value')}}
+                </div>
+                {% if form.value.errors %}
+                    <ul>
+                        {% for error in form.value.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <div>
                     {{form.state.label(class_='h3 ')}}
-                    {{form.state(class_='form-input')}}
+                    {{form.state(class_='form-input',id='state')}}
                 </div>
                 {% if form.state.errors %}
                     <ul>
@@ -125,4 +125,7 @@
         </section>
 
     </main>
+    <script>
+        document.getElementById('state').disabled=true;
+    </script>
 {% endblock main_content %}

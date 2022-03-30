@@ -1,11 +1,10 @@
 from flask import Blueprint, redirect,render_template,url_for,flash,session,request
-from sympy import false
 from Project.forms import LoginForm,FinishForm,DelayForm,CustomerForm
 from Project.models import User,db_model
 import datetime
 from Project.decorators import login_required
 from dateutil.relativedelta import relativedelta
-app_route=Blueprint("app_route",__name__,static_folder='Project/static',template_folder='Project/templates')
+app_route=Blueprint("app_route",__name__,static_folder='static',template_folder='templates')
 
 @app_route.route("/",methods=['GET','POST'])#login
 def login():
@@ -94,8 +93,16 @@ def customers_manage():
     if request.method=='GET':
         key=request.args.get('key',None)
         value=request.args.get('value',None)
+        type=request.args.get('type',None)
         print(key,value)
         results=db_model.search(key,value)
+        if type=='json':
+            if results and len(results)==1:
+                return "found"
+            elif results:
+                return "too many"
+            else:
+                return "not found"
     elif request.method=='POST':
         print(form.validate_on_submit())
         if form.validate_on_submit():

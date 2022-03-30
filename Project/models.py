@@ -1,7 +1,6 @@
 import pymongo,os,datetime
 from dotenv import load_dotenv
 from flask import flash,request,session
-from sympy import true
 from werkzeug.security import generate_password_hash,check_password_hash
 
 load_dotenv()
