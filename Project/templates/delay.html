@@ -38,10 +38,9 @@
                 {% endif %}
 
                 <div class="row justify-content-center mt-md-4" style="max-height: 150px;" >
-                    <div class="col-md-6 col-12">
-                        {{form.state.label(class_='col-form-label')}}
-                        {{form.state(class_='text-area text-center',id='state')}}
-                    </div>
+                    <div class="col-12 col-md-6">
+                    {{form.state.label(class_='col-form-label')}}
+                    <input class="text-area text-center form-control" id="state" name="state" required="" type="text" value="" readonly>
                     {% if form.state.errors %}
                     <ul>
                         {% for error in form.state.errors %}
@@ -49,6 +48,7 @@
                         {% endfor %}
                     </ul>
                     {% endif %}
+                    </div>
                 </div>
 
                 <div class="row justify-content-center mt-4 " style="max-height: 150px;" >
@@ -110,5 +110,6 @@
 
     <div class="row  mt-3 text-center"><a style="color: rgb(138, 132, 132);">Copyright © 2022 Iteration.</a></div>
     </div>
-{% endblock main_content %}
 
+
+{% endblock main_content %}

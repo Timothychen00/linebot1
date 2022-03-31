@@ -42,24 +42,21 @@ def logout():
 @login_required
 def finish():
     form=FinishForm()
+    print('type',form.key.data)
+    print('key',form.value.data)
+    print('state',form.state.data)
+    print('component',form.component.data)
+    print('finish',form.finish_time.data)
+    print('next',form.next_time.data)
+    print('note',form.note.data)
     if form.validate_on_submit():
-        print('type',form.key_type.data)
-        print('key',form.key.data)
-        print('state',form.state.data)
-        print('component',form.component.data)
-        print('finish',form.finish_time.data)
-        print('next',form.next_time.data)
-        print('note',form.note.data)
         state=form.state.data
-        key=form.key_type.data
-        value=int(form.key.data)
-        if state=='True':
-            print(1)
-            data=['完成',form.component.data,form.note.data,form.fee.data]
-            db_model.add_log(key,value,update_data=data,next_time=form.next_time.data)
-            return 'sent'
-        else:
-            form.state.errors.append("請選擇正確的用戶")
+        key=form.key.data
+        value=int(form.value.data)
+        print(1)
+        data=['完成',form.component.data,form.note.data,form.fee.data]
+        db_model.add_log(key,value,update_data=data,next_time=form.next_time.data)
+        return 'sent'
     return render_template('finish.html',form=form)
 
 @app_route.route("/delay/",methods=['GET','POST'])
@@ -68,16 +65,12 @@ def delay():
     form=DelayForm()
     if form.validate_on_submit():
         state=form.state.data
-        key=form.key_type.data
-        value=int(form.key.data)
-        
-        if state=='True':
-            print(1)
-            data=['延期','',"下一次更換時間:"+str(form.next_time.data)+'\n'+form.note.data,'']
-            db_model.add_log(key,value,data,next_time=form.next_time.data)
-            return 'sent'
-        else:
-            form.state.errors.append("請選擇正確的用戶")
+        key=form.key.data
+        value=int(form.value.data)
+        print(1)
+        data=['延期','',"下一次更換時間:"+str(form.next_time.data)+'\n'+form.note.data,'']
+        db_model.add_log(key,value,data,next_time=form.next_time.data)
+        return 'sent'
     return render_template('delay.html',form=form)
 
 @app_route.route("/home")
