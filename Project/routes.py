@@ -52,7 +52,7 @@ def finish():
     if form.validate_on_submit():
         state=form.state.data
         key=form.key.data
-        value=int(form.value.data)
+        value=form.value.data
         print(1)
         data=['完成',form.component.data,form.note.data,form.fee.data]
         db_model.add_log(key,value,update_data=data,next_time=form.next_time.data)
@@ -66,7 +66,7 @@ def delay():
     if form.validate_on_submit():
         state=form.state.data
         key=form.key.data
-        value=int(form.value.data)
+        value=form.value.data
         print(1)
         data=['延期','',"下一次更換時間:"+str(form.next_time.data)+'\n'+form.note.data,'']
         db_model.add_log(key,value,data,next_time=form.next_time.data)
