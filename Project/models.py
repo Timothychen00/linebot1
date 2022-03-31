@@ -63,14 +63,10 @@ class DB_Model():
 
     def search(self,key=None,value=None):
         if key and value:
-            if key=='_id':
-                value=int(value)
             results=self.customers.find({key:value})
         else:
             results=self.customers.find()
         results=list(results)
-        # if len(results)==1:
-        #     results=results[0]
         return results
 
 db_model=DB_Model()

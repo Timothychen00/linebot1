@@ -53,7 +53,8 @@ def finish():
         state=form.state.data
         key=form.key.data
         value=form.value.data
-        print(1)
+        if key=='_id':
+            value=int(value)
         data=['完成',form.component.data,form.note.data,form.fee.data]
         db_model.add_log(key,value,update_data=data,next_time=form.next_time.data)
         return redirect('/home')
@@ -67,7 +68,8 @@ def delay():
         state=form.state.data
         key=form.key.data
         value=form.value.data
-        print(1)
+        if key=='_id':
+            value=int(value)
         data=['延期','',"下一次更換時間:"+str(form.next_time.data)+'\n'+form.note.data,'']
         db_model.add_log(key,value,data,next_time=form.next_time.data)
         return redirect('/home')
