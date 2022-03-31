@@ -41,7 +41,7 @@ class DB_Model():
             "address":form.address.data,
             'machine':form.machine.data,
             "next-time":form.next_time.data,
-            "remark":form.note.data,
+            "note":form.note.data,
         }
         self.customers.update_one({key:value},{'$set':data})
 
