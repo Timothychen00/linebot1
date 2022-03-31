@@ -102,7 +102,7 @@
                   <tr>
                     <th scope="row">備註</th>
                     <td>
-                        {{form.note(class_='form-control',value=result["note"])}}
+                        <textarea class="form-control" id="note" name="note" >{{result['note']}}</textarea>
                         {% if form.note.errors %}
                             <ul>
                                 {% for error in form.note.errors %}
