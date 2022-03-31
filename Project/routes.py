@@ -56,7 +56,7 @@ def finish():
         print(1)
         data=['完成',form.component.data,form.note.data,form.fee.data]
         db_model.add_log(key,value,update_data=data,next_time=form.next_time.data)
-        return 'sent'
+        return redirect('/home')
     return render_template('finish.html',form=form)
 
 @app_route.route("/delay/",methods=['GET','POST'])
@@ -70,7 +70,7 @@ def delay():
         print(1)
         data=['延期','',"下一次更換時間:"+str(form.next_time.data)+'\n'+form.note.data,'']
         db_model.add_log(key,value,data,next_time=form.next_time.data)
-        return 'sent'
+        return redirect('/home')
     return render_template('delay.html',form=form)
 
 @app_route.route("/home")

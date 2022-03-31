@@ -25,7 +25,7 @@ data={
 all=[]
 for i in range(1,test_size+1):
     data['_id']=i
-    data['logs']['2022-01-30']=["完成","A,B,C","不好用","3500NT"]
+    data['logs']['2022-01-30']=["完成","A,B,C","3500NT","不好用"]
     
     collection.insert_one(data)
 #output answers
