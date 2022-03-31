@@ -48,10 +48,10 @@ class DB_Model():
     def add_log(self,key,value,update_data,next_time,date=None):
         result=self.search(key,value)[0]
         print(result)
-        result=result['logs']
         if not date:
             date=datetime.datetime.now(self.tz).strftime("%Y-%m-%d")
         if result:
+            result=result['logs']
             result[date]=update_data
             print(result)
             print(self.customers.update_one({key:value},{"$set":{"logs":result}}))

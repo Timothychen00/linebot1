@@ -42,7 +42,7 @@ def logout():
 @login_required
 def finish():
     form=FinishForm()
-    print('type',form.key.data)
+    print('-'*20,'type',form.key.data)
     print('key',form.value.data)
     print('state',form.state.data)
     print('component',form.component.data)
@@ -53,10 +53,13 @@ def finish():
         state=form.state.data
         key=form.key.data
         value=form.value.data
+        date=form.finish_time.data
+        date=date.strftime("%Y-%m-%d")
         if key=='_id':
             value=int(value)
         data=['完成',form.component.data,form.note.data,form.fee.data]
-        db_model.add_log(key,value,update_data=data,next_time=form.next_time.data)
+        db_model.add_log(key,value,update_data=data,next_time=form.next_time.data,date=date)
+        print('-'*20)
         return redirect('/home')
     return render_template('finish.html',form=form)
 
@@ -89,6 +92,8 @@ def customers_manage():
         key=request.args.get('key',None)
         value=request.args.get('value',None)
         type=request.args.get('type',None)
+        if key=='_id':
+            value=int(value)
         print(key,value)
         results=db_model.search(key,value)
         if type=='json':
