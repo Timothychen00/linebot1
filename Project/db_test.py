@@ -10,24 +10,25 @@ collection.delete_many({})#clear documents in customers
 date=["2022-01-26","2022-01-29","2022-01-27","2022-01-30","2022-04-26","2022-07-16","2022-06-06","2022-09-23"]
 ans_notify=random.choices(list(range(1,test_size+1)),k=5)
 ans_task=random.choices(list(range(1,test_size+1)),k=5)
-data={
-    '_id':'1',
-    'name':"Timothychen",
-    'phone':"0902115275",
-    'telephone':"28053457",
-    'address':"新北市",
-    'next-time':"2021/7",
-    'note':"caocaocaooca",
-    'logs':
-    {
-    }
-}
 all=[]
 for i in range(1,test_size+1):
-    data['_id']=i
-    data['logs']['2022-01-30']=["完成","A,B,C","3500NT","不好用"]
+    data={
+        '_id':i,
+        'name':"陳澤榮",
+        'phone':"0902115275",
+        'telephone':"28053457",
+        'address':"台北市 中正區 濟南路",
+        'next-time':"2022-04",
+        'note':"我要當立法委員",
+        'logs':
+        {
+            '2022-01-30':["完成","A,B,C","3500NT","不好用"],
+        }
+    }
     
-    collection.insert_one(data)
+    all.append(data)
+print(all)
+collection.insert_many(all)
 #output answers
 with open('./test_ans.txt','w') as f1:
     f1.write("ans_notify="+str(ans_notify))

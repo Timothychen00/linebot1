@@ -1,6 +1,7 @@
 from flask import flash, redirect,session
 from functools import wraps
 import datetime
+import time
 
 def login_required(a):
     @wraps(a)
@@ -12,10 +13,11 @@ def login_required(a):
             return redirect('/')
     return wrap
 
-# def log_out(a):
-#     def wrap(*args,**kwargs):
-#         time=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=+8))).strftime("%Y-%m-%d %H:%M:%S")
-#         print('[',time,']')
-#         a(*args,**kwargs)
-    
-#     return wrap
+def time_it(a):
+    def wrap(*args,**kwargs):
+        ts=time.time()
+        result=a(*args,**kwargs)
+        te=time.time()
+        print("執行時間：",te-ts)
+        return result
+    return wrap

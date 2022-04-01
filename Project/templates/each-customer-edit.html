@@ -37,7 +37,7 @@
                   <tr>
                     <th scope="row">地址</th>
                     <td>
-                        {{form.address(class_='form-control',value=result["name"])}}
+                        {{form.address(class_='form-control',value=result["address"])}}
                         {% if form.address.errors %}
                             <ul>
                                 {% for error in form.address.errors %}

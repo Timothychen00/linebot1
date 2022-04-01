@@ -1,7 +1,8 @@
-import pymongo,os,datetime
+import pymongo,os,datetime,pandas
 from dotenv import load_dotenv
 from flask import flash,request,session
 from werkzeug.security import generate_password_hash,check_password_hash
+from Project.decorators import time_it
 
 load_dotenv()
 class DB_Model():
@@ -15,7 +16,7 @@ class DB_Model():
     def create(self,form):
         id=self.customers.find().sort("_id",pymongo.DESCENDING).limit(1)[0]['_id']+1
         data={
-            "_id":id,
+            '_id':id,
             "name":form.name.data,
             "phone":form.phone.data,
             "telephone":form.telephone.data,
@@ -60,14 +61,48 @@ class DB_Model():
         else:
             print('not existed')
 
-
+    @time_it
     def search(self,key=None,value=None):
+        info_dict={'_id':1,"name":1}
         if key and value:
-            results=self.customers.find({key:value})
+            if key in ['縣','市','區']:
+                results=self.customers.find({"address":{"$regex" : ".*"+value+".*"}},info_dict)
+            else:
+                results=self.customers.find({key:value})
         else:
-            results=self.customers.find()
+            results=self.customers.find({},info_dict)
         results=list(results)
+        # print(results)
         return results
+    
+    @time_it
+    def import_data(self,filename,mode,delete=0):
+        cols=['name','phone1','phone2','machine','next-time','address','note']
+        type_dict={'name':str,'phone1':str,'phone2':str,'machine':str,'next-time':str,'address':str,'note':str}
+        if mode=='csv':
+            dataframe=pandas.read_csv('./'+filename+'.csv',usecols=cols,dtype=type_dict)
+        elif mode=='excel':
+            dataframe=pandas.read_excel('./'+filename+'.xlsx',usecols=cols)
+
+        if delete==1:
+            db_model.customers.delete_many({})
+
+        length=len(dataframe)
+        data=[]
+        print(self.customers.count())
+        if self.customers.count():
+            id=self.customers.find().sort("_id",pymongo.DESCENDING).limit(1)[0]['_id']+1
+        else:
+            id=1
+        print(id)
+        for index in range(length):
+            dictionary=dataframe.loc[index].to_dict()
+            dictionary['_id']=id
+            data.append(dictionary)
+            id+=1
+        db_model.customers.insert_many(data)
+        print('讀取模式：',mode)
+        
 
 db_model=DB_Model()
     
@@ -94,13 +129,3 @@ class User():
     
     def register(self,username,password):#only for back-end change
         db_model.users.insert_one({'username':username,'password':generate_password_hash(password)})
-
-class Server_Logger:
-    def __init__(self):
-        pass
-    
-    def write_log(self):
-        pass
-    
-    def change_path(self):
-        pass

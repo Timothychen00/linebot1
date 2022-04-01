@@ -166,3 +166,8 @@ def change_customer(id):
         flash("修改成功")
         return redirect("/customers/"+str(id)+'/')
     return render_template('each-customer-edit.html',form=form,result=result)
+
+@app_route.route('/import')
+def import_dd():
+    db_model.import_data('test','csv',1)
+    return '1'
