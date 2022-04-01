@@ -55,8 +55,11 @@ def finish():
         value=form.value.data
         date=form.finish_time.data
         date=date.strftime("%Y-%m-%d")
-        if key=='_id':
-            value=int(value)
+        try:
+            if key=='_id':
+                value=int(value)
+        except:
+            pass
         data=['完成',form.component.data,form.note.data,form.fee.data]
         db_model.add_log(key,value,update_data=data,next_time=form.next_time.data,date=date)
         print('-'*20)
@@ -71,8 +74,11 @@ def delay():
         state=form.state.data
         key=form.key.data
         value=form.value.data
-        if key=='_id':
-            value=int(value)
+        try:
+            if key=='_id':
+                value=int(value)
+        except:
+            pass
         data=['延期','',"下一次更換時間:"+str(form.next_time.data)+'\n'+form.note.data,'']
         db_model.add_log(key,value,data,next_time=form.next_time.data)
         return redirect('/home')
@@ -92,8 +98,11 @@ def customers_manage():
         key=request.args.get('key',None)
         value=request.args.get('value',None)
         type=request.args.get('type',None)
-        if key=='_id':
-            value=int(value)
+        try:
+            if key=='_id':
+                value=int(value)
+        except:
+            pass
         print(key,value)
         results=db_model.search(key,value)
         if type=='json':
