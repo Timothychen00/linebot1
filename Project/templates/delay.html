@@ -13,9 +13,9 @@
         <div class="row  middle-board justify-content-center pt-md-0 pt-4  mx-auto  m-3 "style="min-height:600px;max-width:800px;" >
             <form action="/delay/" method="post" class="row mt-md-4 mt-1  justify-content-center" style="max-height: 90px;">
                 {{form.csrf_token()}}
-                <div class="col-3 " style="max-height:38px;">
-                    <div class="input-group mb-3">
-                        {{form.key(class_='form-select',id='key')}}
+                <div class="col-3 ps-4" style="max-height:38px;min-width:100px">
+                    <div class="input-group mb-3 p-0">
+                        {{form.key(class_='form-select',id='key',style='min-width:100px')}}
                         {% if form.key.errors %}
                         <ul>
                             {% for error in form.key.errors %}
@@ -26,7 +26,7 @@
                     </div>
                 </div>
 
-                <div class="col-5 " style="max-height:38px">
+                <div class="col col-md-3 ps-4 pe-4" style="max-height:38px">
                     {{form.value(class_='form-control ',id='value',placeholder='輸入框')}}
                 </div>
                 {% if form.value.errors %}
