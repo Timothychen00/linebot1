@@ -1,1 +1,1 @@
-gunicorn --bind=0.0.0.0 --timeout 600 --preload  app:app
+gunicorn --bind=0.0.0.0 --timeout 600 --preload  app:app -debugAdapter ptvsd -debugPort 49494
