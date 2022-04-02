@@ -66,6 +66,9 @@ class DB_Model():
         info_dict={'_id':1,"name":1}
         if key and value:
             if key in ['縣','市','區']:
+                if value[-1] in ['縣','市','區']:
+                    value=value[:-1];
+                value+=key;
                 results=self.customers.find({"address":{"$regex" : ".*"+value+".*"}},info_dict)
             else:
                 results=self.customers.find({key:value})
