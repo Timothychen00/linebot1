@@ -1,8 +1,8 @@
-from flask import Blueprint, redirect,render_template,url_for,flash,session,request
+from flask import Blueprint, jsonify, redirect,render_template,url_for,flash,session,request
 from Project.forms import LoginForm,FinishForm,DelayForm,CustomerForm
 from Project.models import User,db_model
 import datetime
-from Project.decorators import login_required
+from Project.decorators import login_required,time_it
 from dateutil.relativedelta import relativedelta
 app_route=Blueprint("app_route",__name__,static_folder='static',template_folder='templates')
 
@@ -91,6 +91,7 @@ def home():
 
 @app_route.route("/customers/",methods=['GET',"POST"])
 @login_required
+@time_it
 def customers_manage():
     form=CustomerForm()
 
@@ -105,13 +106,18 @@ def customers_manage():
             pass
         print(key,value)
         results=db_model.search(key,value)
-        if type=='json':
+        if type=='str':
             if results and len(results)==1:
                 return "found"
             elif results:
                 return "too many"
             else:
                 return "not found"
+        elif type=='json':
+            length=len(results)
+            for i in range(length):
+                results[i]=list(results[i].items())
+            return jsonify(results)
     elif request.method=='POST':
         print(form.validate_on_submit())
         if form.validate_on_submit():

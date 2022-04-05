@@ -31,7 +31,7 @@
             </div>
 
             <div class="col-2 " style="max-height:38px">
-                <button class="btn btn-primary" type="button" onclick="search();">搜尋</button>
+                <button class="btn btn-primary" type="button" onclick="find();">搜尋</button>
             </div>
 
             <div class="col-2 " style="max-height:38px">
@@ -154,16 +154,16 @@
                                 <th scope="col">刪除鈕</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {% for result in results%}
+                        <tbody id='place'>
+
                             <tr>
-                                <td>{{result['_id']}}</td>
-                                <td><a href='/customers/{{result['_id']}}/'>{{result['name']}}</a></td>
+                                <td></td>
+                                <td><a>3</a></td>
                                 <td>
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{result['_id']}}">刪除</button>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal3">刪除</button>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal{{result['_id']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -175,14 +175,14 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                                                    <button type="button" class="btn btn-danger" onclick="location.href='/customers/{{result['_id']}}/delete/'">確認刪除</button>
+                                                    <button type="button" class="btn btn-danger" >確認刪除</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                            {% endfor %}
+                            
                         </tbody>
                     </table>
                 </div>
@@ -218,13 +218,63 @@
 
 {% block js_extend %}
     <script>
-        function search(){
+        /*function search(){
             type=document.getElementById('type').value;
             value=document.getElementById('value').value;
             console.log(type);
             console.log(value);
             location.href='/customers/?key='+type+'&value='+value;
+        }*/
+
+
+        function find(){
+            alert(1);
+            key_v=document.getElementById('type').value
+            value_v=document.getElementById('value').value;
+            console.log(value);
+            xhr=new XMLHttpRequest();
+            xhr.onload = function(e) {
+                var place=document.getElementById('place');
+                //place.innerHTML=a[0]
+                a=JSON.parse(xhr.response);
+                alert(a);
+                alert(a[0]);
+                alert(a[0][0]);
+                alert(a[0][0][0]);
+                alert(a.length);
+                length=a.length;
+                for (let i=0;i<length;i++){
+                place.innerHTML+="\
+                    <tr>\
+                        <td>"+a[i][0][1]+"</td>\
+                        <td><a href=\'/customers/"+a[i][0][1]+"/\'>"+a[i][1][1]+"</a></td>\
+                        <td>\
+                            <button type=\"button\" class=\"btn btn-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal"+a[i][0][1]+"\">刪除</button>\
+                            <div class=\"modal fade\" id=\"exampleModal"+a[i][0][1]+"\" tabindex=\"-1\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\
+                                <div class=\"modal-dialog\">\
+                                    <div class=\"modal-content\">\
+                                        <div class=\"modal-header\">\
+                                            <h5 class=\"modal-title\" id=\"exampleModalLabel\">確認刪除？</h5>\
+                                            <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\
+                                        </div>\
+                                        <div class=\"modal-body\">\
+                                            <p class=\"fw-bold\">請注意！刪除後將無法復原！</p>\
+                                        </div>\
+                                        <div class=\"modal-footer\">\
+                                            <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">取消</button>\
+                                            <button type=\"button\" class=\"btn btn-danger\" onclick=\"location.href=\'/customers/"+a[i][0][1]+"/delete/ \'\" >確認刪除</button>\
+                                        </div>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </td>\
+                    </tr>"
+                }
+            }
+            xhr.open('GET','/customers/?key='+key_v+'&value='+value_v+"&type=json",true);
+            xhr.send()
         }
+
     </script>
 {% endblock js_extend %}
 
