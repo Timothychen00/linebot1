@@ -1,6 +1,6 @@
 import pymongo,os,random,time
 from dotenv import load_dotenv
-test_size=4000
+test_size=2000
 st_time=time.time()
 load_dotenv()
 client = pymongo.MongoClient("mongodb+srv://"+os.environ['DB_USER']+":"+os.environ['DB_PASSWORD']+"@cluster0.mgwi6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")

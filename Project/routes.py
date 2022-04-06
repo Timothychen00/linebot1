@@ -150,7 +150,7 @@ def each_customer(id):
     related=[]
     length=len(related_results)
     for i in range(length):
-        related.append(request.host_url+'customers/'+str(related_results[i]['_id'])+'/')
+        related.append(str(related_results[i]['_id']))
     return render_template('each-customer.html',result=result,related=related)
 
 @app_route.route("/customers/<int:id>/delete/")
@@ -166,11 +166,16 @@ def delete_customer(id):
 def change_customer(id):
     form=CustomerForm()
     result=db_model.search('_id',id)[0]
+    related_results=db_model.search('name',result['name'])
+    related=[]
+    length=len(related_results)
+    for i in range(length):
+        related.append(str(related_results[i]['_id']))
     if form.validate_on_submit():
         db_model.change_data('_id',id,form)
         flash("修改成功")
         return redirect("/customers/"+str(id)+'/')
-    return render_template('each-customer-edit.html',form=form,result=result)
+    return render_template('each-customer-edit.html',form=form,result=result,related=related)
 
 @app_route.route('/import')
 def import_dd():
