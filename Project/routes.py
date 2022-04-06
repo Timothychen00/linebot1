@@ -105,7 +105,7 @@ def customers_manage():
             pass
         print(key,value)
         results=db_model.search(key,value,'last-time')
-        if type=='json':
+        if type=='str':
             if results and len(results)==1:
                 return "found"
             elif results:
