@@ -108,7 +108,17 @@
                                         {% endfor %}
                                     </ul>
                                     {% endif %}
-
+                                    <div class="mb-3">
+                                        {{form.last_time.label(class_='col-form-label')}}
+                                        {{form.last_time(class_='form-control',placeholder='YYYY-mm')}}
+                                    </div>
+                                    {% if form.last_time.errors %}
+                                    <ul>
+                                        {% for error in form.last_time.errors %}
+                                            <li style='color:#FF0000!important'>{{error}}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
                                     <div class="mb-3">
                                         {{form.next_time.label(class_='col-form-label')}}
                                         {{form.next_time(class_='form-control',placeholder='YYYY-mm')}}

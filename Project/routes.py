@@ -104,7 +104,7 @@ def customers_manage():
         except:
             pass
         print(key,value)
-        results=db_model.search(key,value)
+        results=db_model.search(key,value,'last-time')
         if type=='json':
             if results and len(results)==1:
                 return "found"
@@ -146,7 +146,12 @@ def each_customer(id):
     print(id)
     result=db_model.search('_id',id)[0]
     print(result)
-    return render_template('each-customer.html',result=result)
+    related_results=db_model.search('name',result['name'])
+    related=[]
+    length=len(related_results)
+    for i in range(length):
+        related.append(request.host_url+'customers/'+str(related_results[i]['_id'])+'/')
+    return render_template('each-customer.html',result=result,related=related)
 
 @app_route.route("/customers/<int:id>/delete/")
 @login_required

@@ -31,6 +31,8 @@ class CustomerForm(FlaskForm):#used to create a new customer
     telephone=TextField("手機2")
     machine=TextField("機器型號",validators=[InputRequired()])
     note=TextAreaField('備註')
+    last_time=TextField('下次保養日期',validators=[InputRequired(),Regexp("\d\d\d\d-\d\d",message="請輸入 YYYY-mm 格式的月份")])
+    submit=SubmitField("儲存")
     next_time=TextField('下次保養日期',validators=[InputRequired(),Regexp("\d\d\d\d-\d\d",message="請輸入 YYYY-mm 格式的月份")])
     submit=SubmitField("儲存")
 

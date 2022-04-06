@@ -87,6 +87,19 @@
                     </td>
                   </tr>
                   <tr>
+                    <th scope="row">上次時間</th>
+                    <td>
+                        {{form.last_time(class_='form-control',value=result["last-time"])}}
+                        {% if form.last_time.errors %}
+                            <ul>
+                                {% for error in form.last_time.errors %}
+                                    <li style='color:#FF0000!important'>{{error}}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </td>
+                  </tr>
+                  <tr>
                     <th scope="row">下次時間</th>
                     <td>
                         {{form.next_time(class_='form-control',value=result["next-time"])}}

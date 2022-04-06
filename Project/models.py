@@ -22,6 +22,7 @@ class DB_Model():
             "telephone":form.telephone.data,
             'machine':form.machine.data,
             "address":form.address.data,
+            'last-time':form.last_time.data,
             "next-time":form.next_time.data,
             "note":form.note.data,
             "logs":{}
@@ -41,6 +42,7 @@ class DB_Model():
             "telephone":form.telephone.data,
             "address":form.address.data,
             'machine':form.machine.data,
+            'last-time':form.last_time.data,
             "next-time":form.next_time.data,
             "note":form.note.data,
         }
@@ -52,17 +54,20 @@ class DB_Model():
         if not date:
             date=datetime.datetime.now(self.tz).strftime("%Y-%m-%d")
         if result:
+            last=result['last-time']
             result=result['logs']
             result[date]=update_data
             print(result)
-            print(self.customers.update_one({key:value},{"$set":{"logs":result}}))
+            if update_data[0]=='完成':
+                self.customers.update_one({key:value},{"$set":{"last-time":last}})
+            self.customers.update_one({key:value},{"$set":{"logs":result}})
             self.customers.update_one({key:value},{"$set":{"next-time":next_time}})
             print("update success")
         else:
             print('not existed')
 
     @time_it
-    def search(self,key=None,value=None):
+    def search(self,key=None,value=None,sort=None):
         info_dict={'_id':1,"name":1}
         if key and value:
             if key in ['縣','市','區']:
@@ -74,6 +79,8 @@ class DB_Model():
                 results=self.customers.find({key:value})
         else:
             results=self.customers.find({},info_dict)
+        if sort:
+            results=results.sort(sort,pymongo.ASCENDING)
         results=list(results)
         # print(results)
         return results
