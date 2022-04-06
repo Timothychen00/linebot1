@@ -49,7 +49,7 @@ class DB_Model():
         self.customers.update_one({key:value},{'$set':data})
 
     def add_log(self,key,value,update_data,next_time,date=None):
-        result=self.search(key,value)[0]
+        result=self.search(key,value,False)[0]
         print(result)
         if not date:
             date=datetime.datetime.now(self.tz).strftime("%Y-%m-%d")
@@ -67,14 +67,17 @@ class DB_Model():
             print('not existed')
 
     @time_it
-    def search(self,key=None,value=None,sort=None):
+    def search(self,key=None,value=None,short=True,sort=None):
         info_dict={'_id':1,"name":1}
         if key and value:
             if key in ['縣','市','區']:
                 if value[-1] in ['縣','市','區']:
                     value=value[:-1];
                 value+=key;
-                results=self.customers.find({"address":{"$regex" : ".*"+value+".*"}},info_dict)
+                if short:
+                    results=self.customers.find({"address":{"$regex" : ".*"+value+".*"}},info_dict)
+                else:
+                    results=self.customers.find({"address":{"$regex" : ".*"+value+".*"}})
             else:
                 results=self.customers.find({key:value})
         else:
