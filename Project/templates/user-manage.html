@@ -31,7 +31,7 @@
             </div>
 
             <div class="col-2 " style="max-height:38px">
-                <button class="btn btn-primary" type="button" onclick="find();">搜尋</button>
+                <button class="btn btn-primary" type="button" onclick="find('1');">搜尋</button>
             </div>
 
             <div class="col-2 " style="max-height:38px">
@@ -266,7 +266,7 @@
         }
 
 
-        function find(){
+        function find(type='dynamic'){
             key_v=document.getElementById('type').value
             value_v=document.getElementById('value').value;
             console.log(value);
@@ -284,8 +284,11 @@
                 //place.innerHTML=a[0]
                 a=JSON.parse(xhr.response);
 
-                length=10;
+                length=20;
+                if (type!='dynamic')
+                    place.innerHTML='';
                 for (let i=0;i<length;i++){
+            
                 place.innerHTML+="\
                     <tr>\
                         <td>"+a[i][0][1]+"</td>\
@@ -313,7 +316,10 @@
                     </tr>"
                 }
             }
-            xhr.open('GET','/customers/?key='+key_v+'&value='+value_v+"&type=json&start="+start+"&length=10",true);
+            if (type=='dynamic')
+                xhr.open('GET','/customers/?key='+key_v+'&value='+value_v+"&type=json&start="+start+"&length=20",true);
+            else
+                xhr.open('GET','/customers/?key='+key_v+'&value='+value_v+"&type=json",true);
             xhr.send()
         }
         var dashboard=document.getElementById('dashboard');

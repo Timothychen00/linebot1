@@ -113,6 +113,7 @@ def customers_manage():
         print(key,value,type,start,data_length)
 
         results=db_model.search(key,value,True,'last-time')
+        print(len(results))
         if type=='str':
             if results and len(results)==1:
                 return "found"
@@ -123,7 +124,8 @@ def customers_manage():
         elif type=='json':
             if not data_length:
                 data_length=len(results)
-            print(start,start+data_length)
+            if not start:
+                start=0
             processed_results=[]
             for i in range(start,data_length+start):
                 processed_results.append(list(results[i].items()))
