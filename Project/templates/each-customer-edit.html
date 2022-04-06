@@ -116,13 +116,6 @@
                     <th scope="row">備註</th>
                     <td>
                         <textarea class="form-control" id="note" name="note" >{{result['note']}}
-                            {% if related %}
-                                <br>
-                                關聯機器：
-                                {%for i in related%}
-                                <br><a href="https://linbot1.azurewebsites.net/customers/{{i}}/">編號{{i}}</a>
-                                {%endfor%}
-                            {%endif%}
                         </textarea>
                         {% if form.note.errors %}
                             <ul>
