@@ -5,7 +5,7 @@
     <div class="row  mt-md-5 mt-2 justify-content-center" >
         <div class=" d-flex col-3 justify-content-center text-center ">
             <img src="/static/images/setting.png " style="height: 65px; " alt="logo "></span>
-            <a class='text h1'>管理</a>
+            <a class='text h1' id='q'>管理</a>
         </div>
     </div>
     <!-- 中央顯示區域 -->
@@ -165,7 +165,7 @@
                             </tr>
                         </thead>
                         <tbody id='place'>
-                             {% for result in results[:20]%}
+                             {% for result in results[:35]%}
                             <tr>
                                 <td>{{result['_id']}}</td>
                                 <td><a href='/customers/{{result['_id']}}/'>{{result['name']}}</a></td>
@@ -284,7 +284,7 @@
                 //place.innerHTML=a[0]
                 a=JSON.parse(xhr.response);
 
-                length=25;
+                length=10;
                 for (let i=0;i<length;i++){
                 place.innerHTML+="\
                     <tr>\
@@ -313,13 +313,13 @@
                     </tr>"
                 }
             }
-            xhr.open('GET','/customers/?key='+key_v+'&value='+value_v+"&type=json&start="+start+"&length=25",true);
+            xhr.open('GET','/customers/?key='+key_v+'&value='+value_v+"&type=json&start="+start+"&length=10",true);
             xhr.send()
         }
         var dashboard=document.getElementById('dashboard');
         dashboard.onscroll = function(){
             console.log(getScrollTop(),getWindowHeight(),getScrollHeight(),dashboard.offsetHeight);
-            if(getScrollTop()  == getScrollHeight()-dashboard.offsetHeight){
+            if(Math.abs(getScrollTop() - getScrollHeight()+dashboard.offsetHeight)<2){
                 find()
             }
         };
