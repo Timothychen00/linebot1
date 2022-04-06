@@ -31,7 +31,7 @@
             </div>
 
             <div class="col-2 " style="max-height:38px">
-                <button class="btn btn-primary" type="button" onclick="find();">搜尋</button>
+                <button class="btn btn-primary" type="button" onclick="search();">搜尋</button>
             </div>
 
             <div class="col-2 " style="max-height:38px">
@@ -154,7 +154,7 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="col overflow mt-md-0 mt-4" style="height: 500px;" id='dashboard'>
+            <div class="col overflow mt-md-0 mt-4" style="height: 500px;">
                 <div class="setting-user-table" >
                     <table class="table align-content-center">
                         <thead>
@@ -164,8 +164,8 @@
                                 <th scope="col">刪除鈕</th>
                             </tr>
                         </thead>
-                        <tbody id='place'>
-                             {% for result in results[:20]%}
+                        <tbody>
+                            {% for result in results%}
                             <tr>
                                 <td>{{result['_id']}}</td>
                                 <td><a href='/customers/{{result['_id']}}/'>{{result['name']}}</a></td>
@@ -226,105 +226,13 @@
 
 {% block js_extend %}
     <script>
-
-        function getScrollTop()
-        {
-            var dashboard=document.getElementById('dashboard');
-            var scrollTop = 0, bodyScrollTop = 0, documentScrollTop = 0;
-            if(dashboard){
-                bodyScrollTop = dashboard.scrollTop;
-            }
-            if(document.documentElement){
-                documentScrollTop = document.documentElement.scrollTop;
-            }
-        scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop;
-        return scrollTop;
-        }
-
-        function getScrollHeight(){
-                var dashboard=document.getElementById('dashboard');
-            　　var scrollHeight = 0, bodyScrollHeight = 0, documentScrollHeight = 0;
-            　　if(dashboard){
-            　　　　bSH = dashboard.scrollHeight;
-            　　}
-            　　if(document.documentElement){
-            　　　　dSH = document.documentElement.scrollHeight;
-            　　}
-            scrollHeight = (bSH - dSH > 0) ? bSH : dSH ;
-            　　return scrollHeight;
-            }
-
-        function getWindowHeight(){
-            var dashboard=document.getElementById('dashboard');
-            var windowHeight = 0;
-            if(document.compatMode == "CSS1Compat"){
-                windowHeight = document.documentElement.clientHeight;
-            }else{
-                windowHeight = dashboard.clientHeight;
-            }
-            return windowHeight;
-        }
-
-
-        function find(){
-            key_v=document.getElementById('type').value
-            value_v=document.getElementById('value').value;
+        function search(){
+            type=document.getElementById('type').value;
+            value=document.getElementById('value').value;
+            console.log(type);
             console.log(value);
-            xhr=new XMLHttpRequest();
-
-            var start=1;
-            table=document.querySelector("#place tr:last-child td");
-            if (table){
-                console.log(table.textContent);
-                start=table.textContent;
-            }
-
-            xhr.onload = function(e) {
-                var place=document.getElementById('place');
-                //place.innerHTML=a[0]
-                a=JSON.parse(xhr.response);
-
-                length=25;
-                for (let i=0;i<length;i++){
-                place.innerHTML+="\
-                    <tr>\
-                        <td>"+a[i][0][1]+"</td>\
-                        <td><a href=\'/customers/"+a[i][0][1]+"/\'>"+a[i][1][1]+"</a></td>\
-                        <td>\
-                            <button type=\"button\" class=\"btn btn-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal"+a[i][0][1]+"\">刪除</button>\
-                            <div class=\"modal fade\" id=\"exampleModal"+a[i][0][1]+"\" tabindex=\"-1\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\
-                                <div class=\"modal-dialog\">\
-                                    <div class=\"modal-content\">\
-                                        <div class=\"modal-header\">\
-                                            <h5 class=\"modal-title\" id=\"exampleModalLabel\">確認刪除？</h5>\
-                                            <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>\
-                                        </div>\
-                                        <div class=\"modal-body\">\
-                                            <p class=\"fw-bold\">請注意！刪除後將無法復原！</p>\
-                                        </div>\
-                                        <div class=\"modal-footer\">\
-                                            <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">取消</button>\
-                                            <button type=\"button\" class=\"btn btn-danger\" onclick=\"location.href=\'/customers/"+a[i][0][1]+"/delete/ \'\" >確認刪除</button>\
-                                        </div>\
-                                    </div>\
-                                </div>\
-                            </div>\
-                        </td>\
-                    </tr>"
-                }
-            }
-            xhr.open('GET','/customers/?key='+key_v+'&value='+value_v+"&type=json&start="+start+"&length=25",true);
-            xhr.send()
+            location.href='/customers/?key='+type+'&value='+value;
         }
-        var dashboard=document.getElementById('dashboard');
-        dashboard.onscroll = function(){
-            console.log(getScrollTop(),getWindowHeight(),getScrollHeight(),dashboard.offsetHeight);
-            if(getScrollTop()  == getScrollHeight()-dashboard.offsetHeight){
-                find()
-            }
-        };
-
-        //dashboard.onload=find();
     </script>
 {% endblock js_extend %}
 

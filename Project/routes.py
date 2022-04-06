@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect,render_template,url_for,flash,session,request,jsonify
+from flask import Blueprint, redirect,render_template,url_for,flash,session,request
 from Project.forms import LoginForm,FinishForm,DelayForm,CustomerForm
 from Project.models import User,db_model
 import datetime
@@ -98,38 +98,20 @@ def customers_manage():
         key=request.args.get('key',None)
         value=request.args.get('value',None)
         type=request.args.get('type',None)
-        start=request.args.get('start',None)
-        data_length=request.args.get('length',None)
         try:
             if key=='_id':
                 value=int(value)
         except:
             pass
-        try:
-            data_length=int(data_length)
-            start=int(start)
-        except:
-            pass
-        print(key,value,type,start,data_length)
-
-        results=db_model.search(key,value,True,'last-time')
-        if type=='str':
+        print(key,value)
+        results=db_model.search(key,value,'last-time')
+        if type=='json':
             if results and len(results)==1:
                 return "found"
             elif results:
                 return "too many"
             else:
                 return "not found"
-        elif type=='json':
-            if not data_length:
-                data_length=len(results)
-            print(start,start+data_length)
-            processed_results=[]
-            for i in range(start,data_length+start):
-                processed_results.append(list(results[i].items()))
-            # print(results)
-            return jsonify(processed_results)
-    
     elif request.method=='POST':
         print(form.validate_on_submit())
         if form.validate_on_submit():

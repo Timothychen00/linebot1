@@ -7,7 +7,7 @@ function change_options(){
     xhr.onload = function(e) {
         document.getElementById('state').value=xhr.response;
     }
-    xhr.open('GET','/customers/?key='+key_v+'&value='+value_v+'&type=str',true);
+    xhr.open('GET','/customers/?key='+key_v+'&value='+value_v+'&type=json',true);
     xhr.send()
 }
 value=document.getElementById("value");
