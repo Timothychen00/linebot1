@@ -70,18 +70,7 @@ class DB_Model():
     def search(self,key=None,value=None,month=None,sort=None):
         info_dict={'_id':1,"name":1}
         filter={}
-        # if key and value:
-        #     if key in ['縣','市','區']:
-        #         if value[-1] in ['縣','市','區']:
-        #             value=value[:-1];
-        #         value+=key;
-        #         #只有個人頁面不用short
-        #         if short:
-        #             filter['address']={"$regex" : ".*"+value+".*"}
-        #             results=self.customers.find({"address":{"$regex" : ".*"+value+".*"},'next-time':'2022-06'},info_dict)
-        #     else:
-        #         results=self.customers.find({key:value})
-        # else:
+        #一般情況
         if key and value:
             if key in ['縣','市','區']:
                 if value[-1] in ['縣','市','區']:
@@ -91,7 +80,7 @@ class DB_Model():
                 filter['address']={"$regex" : ".*"+value+".*"}
             else:
                 filter[key]=value
-        if month:
+        if month:#有月份就要排序、雙重搜索
             if month=='this_month':
                 month=datetime.datetime.now(db_model.tz).strftime('%Y-%m')
             else:
@@ -99,11 +88,11 @@ class DB_Model():
                 month=time_obj.strftime("%Y-%m")
             filter['next-time']=month
             sort='last-time'
+        #搜索結果是否需要縮減
         if key=='_id':
             results=self.customers.find(filter)
         else:
             results=self.customers.find(filter,info_dict)
-            
             
         if sort:
             results=results.sort(sort,pymongo.ASCENDING)
