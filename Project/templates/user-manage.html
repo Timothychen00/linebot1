@@ -165,7 +165,7 @@
                             </tr>
                         </thead>
                         <tbody id='place'>
-                             {% for result in results[:35]%}
+                             {% for result in results[:25]%}
                             <tr>
                                 <td>{{result['_id']}}</td>
                                 <td><a href='/customers/{{result['_id']}}/'>{{result['name']}}</a></td>
