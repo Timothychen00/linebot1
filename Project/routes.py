@@ -98,8 +98,6 @@ def customers_manage():
         key=request.args.get('key',None)
         value=request.args.get('value',None)
         type=request.args.get('type',None)
-        start=request.args.get('start',None)
-        data_length=request.args.get('length',None)
         try:
             if key=='_id':
                 value=int(value)
