@@ -154,7 +154,7 @@
                 </div>
                 {% endif %}
             </div>
-            <div class="col overflow mt-md-0 mt-4" style="height: 500px;">
+            <div class="col overflow mt-md-0 mt-4" style="height: 500px;" id='dashboard'>
                 <div class="setting-user-table" >
                     <table class="table align-content-center">
                         <thead>
@@ -278,15 +278,12 @@
                 console.log(table.textContent);
                 start=table.textContent;
             }
-
             xhr.onload = function(e) {
                 var place=document.getElementById('place');
                 //place.innerHTML=a[0]
                 a=JSON.parse(xhr.response);
 
                 length=20;
-                if (type!='dynamic')
-                    place.innerHTML='';
                 for (let i=0;i<length;i++){
             
                 place.innerHTML+="\
@@ -316,10 +313,14 @@
                     </tr>"
                 }
             }
+            var place=document.getElementById('place');
             if (type=='dynamic')
+            {
                 xhr.open('GET','/customers/?key='+key_v+'&value='+value_v+"&type=json&start="+start+"&length=20",true);
-            else
+            }else{
+                place.innerHTML='';
                 xhr.open('GET','/customers/?key='+key_v+'&value='+value_v+"&type=json",true);
+            }
             xhr.send()
         }
         var dashboard=document.getElementById('dashboard');

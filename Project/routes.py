@@ -90,7 +90,7 @@ def home():
     return render_template('base.html')
 
 @app_route.route("/customers/",methods=['GET',"POST"])
-# @login_required
+@login_required
 def customers_manage():
     form=CustomerForm()
 
