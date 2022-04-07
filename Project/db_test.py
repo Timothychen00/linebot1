@@ -11,13 +11,15 @@ date=["2022-01-26","2022-01-29","2022-01-27","2022-01-30","2022-04-26","2022-07-
 ans_notify=random.choices(list(range(1,test_size+1)),k=5)
 ans_task=random.choices(list(range(1,test_size+1)),k=5)
 all=[]
+city=['台北市','新北市','台中市','基隆市']
+area=['淡水區','中正區','信義區','仁愛區']
 for i in range(1,test_size+1):
     data={
         '_id':i,
         'name':"陳澤榮",
-        'phone':"0902115275",
-        'telephone':"28053457",
-        'address':"台北市 中正區 濟南路",
+        'phone':'09'+''.join(random.sample("1234567890",8)),
+        'telephone':''.join(random.sample("1234567890",8)),
+        'address':random.sample(city,1)[0]+random.sample(area,1)[0],
         'last-time':'2021-03',
         'next-time':"2022-04",
         'note':"我要當立法委員",
