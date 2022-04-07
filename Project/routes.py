@@ -143,23 +143,23 @@ def customers_manage():
         return redirect('/customers/')
     return render_template('user-manage.html',results=results,form=form)
 
-#Customers Page
-@app_route.route("/customers/this_month/")
-@login_required
-def this_month():
-    this_month=datetime.datetime.now(db_model.tz).strftime('%Y-%m')
-    print("this_month:",this_month)
-    results=db_model.search('next-time',this_month,sort='last-time')
-    # print(results)
-    return render_template('user-manage.html',results=results,month='this_month')
+# #Customers Page
+# @app_route.route("/customers/this_month/")
+# @login_required
+# def this_month():
+#     this_month=datetime.datetime.now(db_model.tz).strftime('%Y-%m')
+#     print("this_month:",this_month)
+#     results=db_model.search('next-time',this_month,sort='last-time')
+#     # print(results)
+#     return render_template('user-manage.html',results=results,month='this_month')
 
-@app_route.route("/customers/next_month/")
-@login_required
-def next_month():
-    time_obj=datetime.datetime.now(db_model.tz)+relativedelta(months=1)
-    next_month=time_obj.strftime("%Y-%m")
-    results=db_model.search('next-time',next_month,sort='last-time')
-    return render_template('user-manage.html',results=results,month='next_month')
+# @app_route.route("/customers/next_month/")
+# @login_required
+# def next_month():
+#     time_obj=datetime.datetime.now(db_model.tz)+relativedelta(months=1)
+#     next_month=time_obj.strftime("%Y-%m")
+#     results=db_model.search('next-time',next_month,sort='last-time')
+#     return render_template('user-manage.html',results=results,month='next_month')
 
 @app_route.route("/customers/<int:id>/")
 @login_required

@@ -38,9 +38,12 @@ function getWindowHeight(){
 }
 
 
-function find(type='dynamic',month=null){
-    key_v=document.getElementById('type').value
-    value_v=document.getElementById('value').value;
+function find(type='dynamic',month=null,key_v=null,value_v=null){
+    if (key_v==null)
+    {
+        key_v=document.getElementById('type').value
+        value_v=document.getElementById('value').value;
+    }
     console.log(value);
     xhr=new XMLHttpRequest();
 
