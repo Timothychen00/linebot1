@@ -149,7 +149,7 @@ def this_month():
     this_month=datetime.datetime.now(db_model.tz).strftime('%Y-%m')
     print("this_month:",this_month)
     results=db_model.search('next-time',this_month)
-    print(results)
+    # print(results)
     return render_template('user-manage.html',results=results)
 
 @app_route.route("/customers/next_month/")
@@ -165,7 +165,7 @@ def next_month():
 def each_customer(id):
     print(id)
     result=db_model.search('_id',id)[0]
-    print(result)
+    # print(result)
     related_results=db_model.search('name',result['name'])
     related=[]
     length=len(related_results)
