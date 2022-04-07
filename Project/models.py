@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from flask import flash,request,session
 from werkzeug.security import generate_password_hash,check_password_hash
 from Project.decorators import time_it
-
+from dateutil.relativedelta import relativedelta
 load_dotenv()
 class DB_Model():
     def __init__(self):
@@ -67,23 +67,47 @@ class DB_Model():
             print('not existed')
 
     @time_it
-    def search(self,key=None,value=None,short=True,sort=None):
+    def search(self,key=None,value=None,month=None,sort=None):
         info_dict={'_id':1,"name":1}
+        filter={}
+        # if key and value:
+        #     if key in ['縣','市','區']:
+        #         if value[-1] in ['縣','市','區']:
+        #             value=value[:-1];
+        #         value+=key;
+        #         #只有個人頁面不用short
+        #         if short:
+        #             filter['address']={"$regex" : ".*"+value+".*"}
+        #             results=self.customers.find({"address":{"$regex" : ".*"+value+".*"},'next-time':'2022-06'},info_dict)
+        #     else:
+        #         results=self.customers.find({key:value})
+        # else:
         if key and value:
             if key in ['縣','市','區']:
                 if value[-1] in ['縣','市','區']:
-                    value=value[:-1];
+                    value=value[:-1]
                 value+=key;
-                if short:
-                    results=self.customers.find({"address":{"$regex" : ".*"+value+".*"}},info_dict)
-                else:
-                    results=self.customers.find({"address":{"$regex" : ".*"+value+".*"}})
+                #只有個人頁面不用short
+                filter['address']={"$regex" : ".*"+value+".*"}
             else:
-                results=self.customers.find({key:value})
+                filter[key]=value
+        if month:
+            if month=='this_month':
+                month=datetime.datetime.now(db_model.tz).strftime('%Y-%m')
+            else:
+                time_obj=datetime.datetime.now(db_model.tz)+relativedelta(months=1)
+                month=time_obj.strftime("%Y-%m")
+            filter['next-time']=month
+            sort='last-time'
+        if key=='_id':
+            results=self.customers.find(filter)
         else:
-            results=self.customers.find({},info_dict)
+            results=self.customers.find(filter,info_dict)
+            
+            
         if sort:
             results=results.sort(sort,pymongo.ASCENDING)
+        print(results)
         results=list(results)
         # print(results)
         return results

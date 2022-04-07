@@ -38,7 +38,7 @@ function getWindowHeight(){
 }
 
 
-function find(type='dynamic'){
+function find(type='dynamic',month=null){
     key_v=document.getElementById('type').value
     value_v=document.getElementById('value').value;
     console.log(value);
@@ -85,13 +85,15 @@ function find(type='dynamic'){
             </tr>"
         }
     }
+    if  (month==null)
+        month='';
     var place=document.getElementById('place');
     if (type=='dynamic')
     {
-        xhr.open('GET','/customers/?key='+key_v+'&value='+value_v+"&type=json&start="+start+"&length=20",true);
+        xhr.open('GET','/customers/?key='+key_v+'&value='+value_v+"&type=json&start="+start+"&length=20&month="+month,true);
     }else{
         place.innerHTML='';
-        xhr.open('GET','/customers/?key='+key_v+'&value='+value_v+"&type=json",true);
+        xhr.open('GET','/customers/?key='+key_v+'&value='+value_v+"&type=json&month="+month,true);
     }
     xhr.send()
 }

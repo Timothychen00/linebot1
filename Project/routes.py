@@ -95,11 +95,12 @@ def customers_manage():
     form=CustomerForm()
 
     if request.method=='GET':
-        key=request.args.get('key',None)
-        value=request.args.get('value',None)
-        type=request.args.get('type',None)
-        start=request.args.get('start',None)
-        data_length=request.args.get('length',None)
+        key=request.args.get('key')
+        value=request.args.get('value')
+        type=request.args.get('type')
+        month=request.args.get('month')
+        start=request.args.get('start')
+        data_length=request.args.get('length')
         try:
             if key=='_id':
                 value=int(value)
@@ -110,9 +111,9 @@ def customers_manage():
             start=int(start)
         except:
             pass
-        print(key,value,type,start,data_length)
+        print(key,value,type,start,data_length,month)
 
-        results=db_model.search(key,value,True,'last-time')
+        results=db_model.search(key,value,month)
         print(len(results))
         if type=='str':
             if results and len(results)==1:
@@ -148,24 +149,24 @@ def customers_manage():
 def this_month():
     this_month=datetime.datetime.now(db_model.tz).strftime('%Y-%m')
     print("this_month:",this_month)
-    results=db_model.search('next-time',this_month)
+    results=db_model.search('next-time',this_month,sort='last-time')
     # print(results)
-    return render_template('user-manage.html',results=results)
+    return render_template('user-manage.html',results=results,month='this_month')
 
 @app_route.route("/customers/next_month/")
 @login_required
 def next_month():
     time_obj=datetime.datetime.now(db_model.tz)+relativedelta(months=1)
     next_month=time_obj.strftime("%Y-%m")
-    results=db_model.search('next-time',next_month)
-    return render_template('user-manage.html',results=results)
+    results=db_model.search('next-time',next_month,sort='last-time')
+    return render_template('user-manage.html',results=results,month='next_month')
 
 @app_route.route("/customers/<int:id>/")
 @login_required
 def each_customer(id):
     print(id)
     result=db_model.search('_id',id)[0]
-    # print(result)
+    print(result)
     related_results=db_model.search('name',result['name'])
     related=[]
     length=len(related_results)
