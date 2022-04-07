@@ -142,7 +142,12 @@
                   <tr>
                     <th scope="col">時間</th>
                     <th scope="col">類型</th>
-                    <th scope="col">部件</th>
+                    <th scope="col">1</th>
+                    <th scope="col">2</th>
+                    <th scope="col">3</th>
+                    <th scope="col">4</th>
+                    <th scope="col">5</th>
+                    <th scope="col">6</th>
                     <th scope="col">價錢</th>
                     <th scope="col">備註</th>
                   </tr>
@@ -150,13 +155,22 @@
                 <tbody>
                     {% for log in result['logs'] %}
                     <tr>
+                        <td>{{log}}</td>
                         <td>{{result['logs'][log][0]}}</td>
-                        <td>{{result['logs'][log][1]}}</td>
+                        {%for i in ['A','B',"C","D","E","F"]%}
+                        <td>
+                          <div style="width:10px!important;">
+                          {%if i in result['logs'][log][1] %}
+                          &#10003;
+                          {%endif%}
+                          </div>
+                        </td>
+                        {%endfor%}
                         <td>{{result['logs'][log][3]}}</td>
                         <td>{{result['logs'][log][2]}}</td>
                     </tr>
                     {% endfor %}
-                </tbody>
+                  </tbody>
               </table>
             </div>
 
@@ -167,13 +181,13 @@
         <div class="row  justify-content-center">
             <div class="col-md-1 col-4    ">
                 <div style="cursor: pointer;  " onclick="window.location='/home'" class="home p-1" >
-                    <img src="static/images/home.png " height=45% width=35% alt="logout button ">
+                    <img src="/static/images/home.png " height=45% width=35% alt="logout button ">
                     <h4>回首頁</h4>
                 </div>
             </div>
             <div class="col-md-1 col-4 ms-md-5">
                 <div style="cursor: pointer; " onclick="window.location='/logout'" class="home p-1" >
-                    <img src="static/images/logout.png " height=45% width=40% alt="logout button ">
+                    <img src="/static/images/logout.png " height=45% width=40% alt="logout button ">
                     <h4>登出</h4>
                 </div>
             </div>
