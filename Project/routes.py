@@ -79,7 +79,7 @@ def delay():
                 value=int(value)
         except:
             pass
-        data=['延期','',"延期至:"+str(form.next_time.data)+'\n'+form.note.data,'']
+        data=['延期','',"延期至:"+str(form.next_time.data)+'      '+form.note.data,'']
         db_model.add_log(key,value,data,next_time=form.next_time.data)
         return redirect('/home')
     return render_template('delay.html',form=form)
