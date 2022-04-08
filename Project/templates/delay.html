@@ -39,7 +39,7 @@
 
                 <div class="row justify-content-center mt-md-4" style="max-height: 150px;" >
                     <div class="col-12 col-md-6">
-                    {{form.state.label(class_='col-form-label')}}
+                    {{form.state.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
                     <input class="text-area text-center form-control" id="state" name="state" required="" type="text" value="" readonly>
                     {% if form.state.errors %}
                     <ul>
@@ -54,7 +54,7 @@
                 <div class="row justify-content-center mt-4 " style="max-height: 150px;" >
                 <div class="col-md-6 col-12">
                     <div>
-                        {{form.next_time.label(class_='col-form-label')}}
+                        {{form.next_time.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
                         {{form.next_time(class_='form-control',placeholer='YYYY-mm')}}
                     </div>
                     {% if form.next_time.errors %}

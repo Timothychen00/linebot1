@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="col col-md-3 ps-4 pe-4" style="max-height:38px">
-                {{form.value(class_='form-control',id='value')}}      
+                {{form.value(class_='form-control',id='value')}}
                 {% if form.value.errors %}
                 <ul>
                     {% for error in form.value.errors %}
@@ -39,7 +39,7 @@
 
         <div class="row justify-content-center mt-md-4" style="max-height: 150px;" >
             <div class="col-md-6 col-12">
-                {{form.state.label(class_='col-form-label')}}
+                {{form.state.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
                 <input class="text-area text-center form-control" id="state" name="state" required="" type="text" value="" readonly>
                 {% if form.state.errors %}
                 <ul>
@@ -52,7 +52,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-md-6 col-12">
-                {{form.component.label(class_='form-check-label')}}
+                {{form.component.label(class_='form-check-label')}}<span style='color:#FF0000!important'>*</span>
                 {{form.component(class_='form-select',multiple='multiple')}}
                 {% if form.component.errors %}
                     <ul>
@@ -68,7 +68,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6 col-12">
                 <div>
-                    {{form.finish_time.label(class_='col-form-label')}}
+                    {{form.finish_time.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
                     {{form.finish_time(class_='form-input')}}
                 </div>
                 <br>
@@ -85,7 +85,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6 col-12">
                 <div>
-                    {{form.next_time.label(class_='col-form-label')}}
+                    {{form.next_time.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
                     {{form.next_time(class_='form-control',placeholder='YYYY-mm')}}
                 </div>
                 {% if form.next_time.errors %}
@@ -101,7 +101,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6 col-12">
                 <div>
-                    {{form.fee.label(class_='col-form-label')}}
+                    {{form.fee.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
                     {{form.fee(class_='form-control')}}
                 </div>
                 {% if form.fee.errors %}
