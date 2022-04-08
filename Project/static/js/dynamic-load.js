@@ -37,8 +37,11 @@ function getWindowHeight(){
     return windowHeight;
 }
 
-
-function find(type='dynamic',month=null,key_v=null,value_v=null){
+var month='';
+function find(type='dynamic',t_month=null,key_v=null,value_v=null){
+   
+    if (t_month)
+        month=t_month
     if (key_v==null)
     {
         key_v=document.getElementById('type').value
@@ -48,16 +51,17 @@ function find(type='dynamic',month=null,key_v=null,value_v=null){
     xhr=new XMLHttpRequest();
 
     var start=1;
-    table=document.querySelector("#place tr:last-child td");
+    table=document.querySelector("#place");
     if (table){
-        console.log(table.textContent);
-        start=table.textContent;
+        console.log(table.childElementCount);//因爲每一個tr的編號不一定是間隔1，所以要接續之前結果要用childElementCount
+        start=table.childElementCount;
     }
     xhr.onload = function(e) {
         var place=document.getElementById('place');
         //place.innerHTML=a[0]
         a=JSON.parse(xhr.response);
-
+        var month=a[0];
+        a.shift();
         length=20;
         for (let i=0;i<length;i++){
     
@@ -88,16 +92,24 @@ function find(type='dynamic',month=null,key_v=null,value_v=null){
             </tr>"
         }
     }
-    if  (month==null)
-        month='';
+    // alert(month);
     var place=document.getElementById('place');
+    url='';
     if (type=='dynamic')
     {
-        xhr.open('GET','/customers/?key='+key_v+'&value='+value_v+"&type=json&start="+start+"&length=20&month="+month,true);
+        if (month==null)
+            url='/customers/?key='+key_v+'&value='+value_v+"&type=json&start="+start+"&length=20";
+        else
+            url='/customers/?key='+key_v+'&value='+value_v+"&type=json&start="+start+"&length=20&month="+month;
     }else{
         place.innerHTML='';
-        xhr.open('GET','/customers/?key='+key_v+'&value='+value_v+"&type=json&month="+month,true);
+        if (month==null)
+        {
+            url='/customers/?key='+key_v+'&value='+value_v+"&type=json";
+        }else
+            url='/customers/?key='+key_v+'&value='+value_v+"&type=json&month="+month;
     }
+    xhr.open('GET',url,true)
     xhr.send()
 }
 var dashboard=document.getElementById('dashboard');

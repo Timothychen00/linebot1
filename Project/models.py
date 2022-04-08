@@ -68,6 +68,7 @@ class DB_Model():
 
     @time_it
     def search(self,key=None,value=None,month=None,sort=None):
+        print('month:',type(month))
         info_dict={'_id':1,"name":1}
         filter={}
         #一般情況
@@ -75,12 +76,13 @@ class DB_Model():
             if key in ['縣','市','區']:
                 if value[-1] in ['縣','市','區']:
                     value=value[:-1]
-                value+=key;
+                value+=key
                 #只有個人頁面不用short
                 filter['address']={"$regex" : ".*"+value+".*"}
             else:
                 filter[key]=value
         if month:#有月份就要排序、雙重搜索
+            print(2)
             if month=='this_month':
                 month=datetime.datetime.now(db_model.tz).strftime('%Y-%m')
             else:

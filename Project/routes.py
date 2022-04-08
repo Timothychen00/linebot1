@@ -131,6 +131,7 @@ def customers_manage():
             for i in range(start,data_length+start):
                 processed_results.append(list(results[i].items()))
             # print(results)
+            processed_results.insert(0,month)
             return jsonify(processed_results)
     
     elif request.method=='POST':
