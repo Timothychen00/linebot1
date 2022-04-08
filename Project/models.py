@@ -50,6 +50,7 @@ class DB_Model():
 
     def add_log(self,key,value,update_data,next_time,date=None):
         result=self.search(key,value,False)[0]
+        result=self.search('_id',result['_id'],False)[0]
         print(result)
         if not date:
             date=datetime.datetime.now(self.tz).strftime("%Y-%m-%d")
