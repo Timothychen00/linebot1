@@ -93,7 +93,7 @@ def home():
 @login_required
 def customers_manage():
     form=CustomerForm()
-
+    print('--'*20,'\n',request.url)
     if request.method=='GET':
         key=request.args.get('key')
         value=request.args.get('value')

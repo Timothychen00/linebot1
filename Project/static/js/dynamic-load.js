@@ -97,13 +97,13 @@ function find(type='dynamic',t_month=null,key_v=null,value_v=null){
     url='';
     if (type=='dynamic')
     {
-        if (month==null)
+        if (month==null || month=='none')
             url='/customers/?key='+key_v+'&value='+value_v+"&type=json&start="+start+"&length=20";
         else
             url='/customers/?key='+key_v+'&value='+value_v+"&type=json&start="+start+"&length=20&month="+month;
     }else{
         place.innerHTML='';
-        if (month==null)
+        if (month==null || month=='none')
         {
             url='/customers/?key='+key_v+'&value='+value_v+"&type=json";
         }else
