@@ -55,7 +55,7 @@ class DB_Model():
         if not date:
             date=datetime.datetime.now(self.tz).strftime("%Y-%m-%d")
         if result:
-            last=result['last-time']
+            last=date
             result=result['logs']
             result[date]=update_data
             print(result)
