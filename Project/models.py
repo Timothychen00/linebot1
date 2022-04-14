@@ -92,7 +92,7 @@ class DB_Model():
             filter['next-time']=month
             sort='last-time'
         #搜索結果是否需要縮減
-        if key=='_id':
+        if key=='_id' and value:
             results=self.customers.find(filter)
         else:
             results=self.customers.find(filter,info_dict)
