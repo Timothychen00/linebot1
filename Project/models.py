@@ -109,7 +109,7 @@ class DB_Model():
     
     @time_it
     def import_data(self,filename,mode,delete=0):
-        cols=['name','phone','telephone,'machine','last-time','next-time','address','note']
+        cols=['name','phone','telephone','machine','last-time','next-time','address','note']
         type_dict={'name':str,'phone':str,'telephone':str,'machine':str,'last-time':str,'next-time':str,'address':str,'note':str}
         
         if mode=='csv':
