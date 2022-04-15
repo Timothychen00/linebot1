@@ -142,7 +142,7 @@ def customers_manage():
         else:
             flash('新增失敗')
         return redirect('/customers/')
-    return render_template('user-manage.html',results=results,form=form,month=month)
+    return render_template('user-manage.html',results=results,form=form,month=month,next_id=db_model.next_id())
 
 @app_route.route("/customers/<int:id>/")
 @login_required

@@ -137,6 +137,9 @@ class DB_Model():
         db_model.customers.insert_many(data)
         print('讀取模式：',mode)
         
+    def next_id(self):
+        return self.customers.find().sort("_id",pymongo.DESCENDING).limit(1)[0]['_id']+1
+        
 
 db_model=DB_Model()
     

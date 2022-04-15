@@ -22,9 +22,9 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <th scope="row">名稱</th>
+                    <th scope="row">名稱<span style='color:#FF0000!important'>*</span></th>
                     <td>
-                        {{form.name(class_='form-control',value=result["name"])}}<span style='color:#FF0000!important'>*</span>
+                        {{form.name(class_='form-control',value=result["name"])}}
                         {% if form.name.errors %}
                             <ul>
                                 {% for error in form.name.errors %}
@@ -35,9 +35,9 @@
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">地址</th>
+                    <th scope="row">地址<span style='color:#FF0000!important'>*</span></th>
                     <td>
-                        {{form.address(class_='form-control',value=result["address"])}}<span style='color:#FF0000!important'>*</span>
+                        {{form.address(class_='form-control',value=result["address"])}}
                         {% if form.address.errors %}
                             <ul>
                                 {% for error in form.address.errors %}
@@ -48,9 +48,9 @@
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">電話1</th>
+                    <th scope="row">電話1<span style='color:#FF0000!important'>*</span></th>
                     <td>
-                        {{form.phone(class_='form-control',value=result["phone"])}}<span style='color:#FF0000!important'>*</span>
+                        {{form.phone(class_='form-control',value=result["phone"])}}
                         {% if form.phone.errors %}
                             <ul>
                                 {% for error in form.phone.errors %}
@@ -74,9 +74,9 @@
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">機器型號</th>
+                    <th scope="row">機器型號<span style='color:#FF0000!important'>*</span></th>
                     <td>
-                        {{form.machine(class_='form-control',value=result["machine"])}}<span style='color:#FF0000!important'>*</span>
+                        {{form.machine(class_='form-control',value=result["machine"])}}
                         {% if form.machine.errors %}
                             <ul>
                                 {% for error in form.machine.errors %}
@@ -87,9 +87,9 @@
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">上次時間</th>
+                    <th scope="row">上次時間<span style='color:#FF0000!important'>*</span></th>
                     <td>
-                        {{form.last_time(class_='form-control',value=result["last-time"])}}<span style='color:#FF0000!important'>*</span>
+                        {{form.last_time(class_='form-control',value=result["last-time"])}}
                         {% if form.last_time.errors %}
                             <ul>
                                 {% for error in form.last_time.errors %}
@@ -100,9 +100,9 @@
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">下次時間</th>
+                    <th scope="row">下次時間<span style='color:#FF0000!important'>*</span></th>
                     <td>
-                        {{form.next_time(class_='form-control',value=result["next-time"])}}<span style='color:#FF0000!important'>*</span>
+                        {{form.next_time(class_='form-control',value=result["next-time"])}}
                         {% if form.next_time.errors %}
                             <ul>
                                 {% for error in form.next_time.errors %}
