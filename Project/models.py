@@ -128,6 +128,7 @@ class DB_Model():
         for index in range(length):
             dictionary=dataframe.loc[index].to_dict()
             dictionary['_id']=id
+            dictionary['logs']={}
             data.append(dictionary)
             id+=1
         db_model.customers.insert_many(data)
