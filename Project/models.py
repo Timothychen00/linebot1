@@ -51,7 +51,9 @@ class DB_Model():
     def add_log(self,key,value,update_data,next_time,date=None):
         result=self.search(key,value,False)[0]
         result=self.search('_id',result['_id'],False)[0]
-        print(result)
+        key='_id'
+        value=result['_id']
+        print(key,value,result)
         if not date:
             date=datetime.datetime.now(self.tz).strftime("%Y-%m-%d")
         if result:
@@ -64,6 +66,7 @@ class DB_Model():
             self.customers.update_one({key:value},{"$set":{"logs":result}})
             self.customers.update_one({key:value},{"$set":{"next-time":next_time}})
             print("update success")
+        
         else:
             print('not existed')
 
