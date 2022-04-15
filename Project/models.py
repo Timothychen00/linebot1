@@ -109,8 +109,8 @@ class DB_Model():
     
     @time_it
     def import_data(self,filename,mode,delete=0):
-        cols=['name','phone1','phone2','machine','last-time','next-time','address','note']
-        type_dict={'name':str,'phone1':str,'phone2':str,'machine':str,'last-time':str,'next-time':str,'address':str,'note':str}
+        cols=['name','phone','telephone','machine','last-time','next-time','address','note']
+        type_dict={'name':str,'phone':str,'telephone':str,'machine':str,'last-time':str,'next-time':str,'address':str,'note':str}
         
         if mode=='csv':
             dataframe=pandas.read_csv('./'+filename+'.csv',usecols=cols,dtype=type_dict)
