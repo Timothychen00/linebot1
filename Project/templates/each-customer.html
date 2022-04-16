@@ -83,6 +83,7 @@
                     <th scope="col">5</th>
                     <th scope="col">6</th>
                     <th scope="col">價錢</th>
+                    <th scope="col">人員</th>
                     <th scope="col">備註</th>
                   </tr>
                 </thead>
@@ -100,8 +101,9 @@
                         </div>
                       </td>
                       {%endfor%}
-                      <td>{{result['logs'][log][3]}}</td>
+                      <td>{{result['logs'][log][4]}}</td>
                       <td>{{result['logs'][log][2]}}</td>
+                      <td>{{result['logs'][log][3]}}</td>
                   </tr>
                   {% endfor %}
                 </tbody>

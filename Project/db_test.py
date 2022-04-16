@@ -1,6 +1,6 @@
 import pymongo,os,random,time
 from dotenv import load_dotenv
-test_size=8000
+test_size=4000
 st_time=time.time()
 load_dotenv()
 client = pymongo.MongoClient("mongodb+srv://"+os.environ['DB_USER']+":"+os.environ['DB_PASSWORD']+"@cluster0.mgwi6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
@@ -25,7 +25,7 @@ for i in range(1,test_size+1):
         'note':"我要當立法委員",
         'logs':
         {
-            '2022-01-30':["完成",['A','B','C'],"不好用","3500NT"],
+            '2022-01-30':["完成",['A','B','C'],'人員',"不好用","3500NT"],
         }
     }
     

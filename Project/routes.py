@@ -60,7 +60,7 @@ def finish():
                 value=int(value)
         except:
             pass
-        data=['完成',form.component.data,form.note.data,form.fee.data]
+        data=['完成',form.component.data,form.person.data,form.note.data,form.fee.data]
         db_model.add_log(key,value,update_data=data,next_time=form.next_time.data,date=date)
         print('-'*20)
         return redirect('/home')
@@ -79,7 +79,7 @@ def delay():
                 value=int(value)
         except:
             pass
-        data=['延期','',"延期至:"+str(form.next_time.data)+'      '+form.note.data,'']
+        data=['延期','',form.person.data,"延期至:"+str(form.next_time.data)+'      '+form.note.data,'']
         db_model.add_log(key,value,data,next_time=form.next_time.data)
         return redirect('/home')
     return render_template('delay.html',form=form)
@@ -185,3 +185,9 @@ def change_customer(id):
 def import_dd():
     db_model.import_data('test','csv',1)
     return '1'
+
+@app_route.route('/customers/output')
+def output_data():
+    month=request.args.get('month',None)
+    db_model.output_data(month)
+    return redirect('/static/output.xlsx')

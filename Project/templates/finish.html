@@ -117,6 +117,22 @@
         <div class="row justify-content-center">
             <div class="col-md-6 col-12">
                 <div>
+                    {{form.person.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
+                    {{form.person(class_='form-control')}}
+                </div>
+                {% if form.person.errors %}
+                    <ul>
+                        {% for error in form.person.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-12">
+                <div>
                     {{form.note.label(class_='col-form-label')}}
                     {{form.note(class_='form-control')}}
                 </div>

@@ -73,15 +73,12 @@ class DB_Model():
     @time_it
     def search(self,key=None,value=None,month=None,sort=None):
         print('month:',type(month))
-        info_dict={'_id':1,"name":1}
+        # print(sort)
+        info_dict={'_id':1,"name":1,"phone":1,"address":1}
         filter={}
         #一般情況
         if key and value:
-            if key in ['縣','市','區']:
-                if value[-1] in ['縣','市','區']:
-                    value=value[:-1]
-                value+=key
-                #只有個人頁面不用short
+            if key =='address':
                 filter['address']={"$regex" : ".*"+value+".*"}
             else:
                 filter[key]=value
@@ -99,10 +96,10 @@ class DB_Model():
             results=self.customers.find(filter)
         else:
             results=self.customers.find(filter,info_dict)
-            
         if sort:
+            print(sort)
             results=results.sort(sort,pymongo.ASCENDING)
-        print(results)
+        # print(results)
         results=list(results)
         # print(results)
         return results
@@ -118,7 +115,7 @@ class DB_Model():
             dataframe=pandas.read_excel('./'+filename+'.xlsx',usecols=cols)
 
         if delete==1:
-            db_model.customers.delete_many({})
+            self.customers.delete_many({})
 
         length=len(dataframe)
         data=[]
@@ -134,11 +131,21 @@ class DB_Model():
             dictionary['logs']={}
             data.append(dictionary)
             id+=1
-        db_model.customers.insert_many(data)
+        self.customers.insert_many(data)
         print('讀取模式：',mode)
-        
+    
     def next_id(self):
         return self.customers.find().sort("_id",pymongo.DESCENDING).limit(1)[0]['_id']+1
+    
+    def output_data(self,month):
+        results=self.search(key='_id',value='1',month='this_month',sort=None)
+        print(len(results))
+        df=pandas.DataFrame({},columns=['_id',"name",'phone','address'])
+        for i in results:
+            df.loc[len(df.index)]={"_id":i['_id'],"name":i['name'],"phone":i['phone'],"address":i['address']}
+        df.to_excel('Project/static/output.xlsx',encoding='utf-8',index=None)
+        
+
         
 
 db_model=DB_Model()
