@@ -175,3 +175,5 @@ class User():
     
     def register(self,username,password):#only for back-end change
         db_model.users.insert_one({'username':username,'password':generate_password_hash(password)})
+
+# User().register(username='sinyuan75',password='03240324')
