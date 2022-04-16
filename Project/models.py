@@ -71,10 +71,13 @@ class DB_Model():
             print('not existed')
 
     @time_it
-    def search(self,key=None,value=None,month=None,sort=None):
+    def search(self,key=None,value=None,month=None,sort=None,info=None):
         print('month:',month)
         # print(sort)
-        info_dict={'_id':1,"name":1,"phone":1,"address":1}
+        if not info:
+            info_dict={'_id':1,"name":1,"phone":1,"address":1}
+        else:
+            info_dict=info
         filter={}
         #一般情況
         if key and value:
@@ -139,9 +142,10 @@ class DB_Model():
         return self.customers.find().sort("_id",pymongo.DESCENDING).limit(1)[0]['_id']+1
     
     def output_data(self,month):
-        results=self.search(key='next-time',value='1',month=month,sort=None)
+        results=self.search(key='next-time',value='1',month=month,sort=None,info={'last-time':1,"name":1,"phone":1,"telephone":1,'address':1})
+        print(results[0])
         # print(results)
-        df=pandas.DataFrame({},columns=['_id',"name",'phone','address'])
+        df=pandas.DataFrame({},columns=['上次',"姓名",'電話','電話2','地址'])
         for i in results:
             df.loc[len(df.index)]={"上次":i['last-time'],"姓名":i['name'],"電話":i['phone'],"電話2":i['telephone'],"地址":i['address']}
         # print(df)
