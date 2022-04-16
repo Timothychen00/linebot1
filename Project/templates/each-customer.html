@@ -46,9 +46,8 @@
                   <tr>
                     <th scope="row">備註</th>
                     <td style="white-space:pre">{{result['note']}}
-                      <div class="overflow" style="width:100%;height:200px!important;">
+                      <div class="overflow" style="width:100%;height:200px!important;white-space:normal!important">
                       {% if related %}
-                        <br>
                         關聯機器：
                         {%for i in related%}
                           <br><a href="https://linbot2.azurewebsites.net/customers/{{i}}/">編號{{i}}</a>
