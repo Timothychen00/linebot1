@@ -27,6 +27,7 @@ class DelayForm(FlaskForm):#used to delay the mission
     submit=SubmitField('完成')
 
 class CustomerForm(FlaskForm):#used to create a new customer
+    id=TextField('id',validators=[InputRequired()])
     name=TextField("客戶名稱",validators=[InputRequired()])
     address=TextField("地址",validators=[InputRequired()])
     phone=TextField('手機',validators=[InputRequired()])

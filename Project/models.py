@@ -14,7 +14,10 @@ class DB_Model():
         self.tz=datetime.timezone(datetime.timedelta(hours=+8))
     
     def create(self,form):
-        id=self.customers.find().sort("_id",pymongo.DESCENDING).limit(1)[0]['_id']+1
+        if not form.id.data:
+            id=self.customers.find().sort("_id",pymongo.DESCENDING).limit(1)[0]['_id']+1
+        else:
+            id=int(form.id.data)
         data={
             '_id':id,
             "name":form.name.data,

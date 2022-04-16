@@ -47,10 +47,22 @@
                             <div class="modal-body">
                                 <form action="/customers/" method="post">
                                     {{form.csrf_token()}}
-                                    <div class="mb-3">
+                                    <!--<div class="mb-3">
                                         <label class='col-form-label'>id</label>
                                         <input class='form-control' value='{{next_id}}' readonly></input>
+                                    </div>-->
+                                    <div class="mb-3">
+                                        {{form.id.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
+                                        {{form.id(class_='form-control')}}
                                     </div>
+                                    {% if form.id.errors %}
+                                    <ul>
+                                        {% for error in form.id.errors %}
+                                            <li style='color:#FF0000!important'>{{error}}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+
                                     <div class="mb-3">
                                         {{form.name.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
                                         {{form.name(class_='form-control')}}
