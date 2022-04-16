@@ -72,7 +72,7 @@ class DB_Model():
 
     @time_it
     def search(self,key=None,value=None,month=None,sort=None):
-        print('month:',type(month))
+        print('month:',month)
         # print(sort)
         info_dict={'_id':1,"name":1,"phone":1,"address":1}
         filter={}
@@ -92,6 +92,7 @@ class DB_Model():
             filter['next-time']=month
             sort='last-time'
         #搜索結果是否需要縮減
+        print('filter',filter)
         if key=='_id' and value:
             results=self.customers.find(filter)
         else:
@@ -138,11 +139,12 @@ class DB_Model():
         return self.customers.find().sort("_id",pymongo.DESCENDING).limit(1)[0]['_id']+1
     
     def output_data(self,month):
-        results=self.search(key='_id',value='1',month='this_month',sort=None)
-        print(len(results))
+        results=self.search(key='next-time',value='1',month=month,sort=None)
+        # print(results)
         df=pandas.DataFrame({},columns=['_id',"name",'phone','address'])
         for i in results:
             df.loc[len(df.index)]={"_id":i['_id'],"name":i['name'],"phone":i['phone'],"address":i['address']}
+        # print(df)
         df.to_excel('Project/static/output.xlsx',encoding='utf-8',index=None)
         
 
