@@ -17,7 +17,18 @@
                     <thead>
                   <tr>
                     <th class="col-2">ID</th>
-                    <td>{{result['_id']}}</td>
+                    <!-- <td>{{result['_id']}}</td> -->
+                    <td>
+                        <!-- {{form.id(class_='form-control',value=result["_id"]),readonly}}
+                        {% if form.id.errors %}
+                            <ul>
+                                {% for error in form.id.errors %}
+                                    <li style='color:#FF0000!important'>{{error}}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %} -->
+                        <input type="text" value="{{result['_id']}}" name="id" readonly>
+                    </td>
                   </tr>
                 </thead>
                 <tbody>
@@ -48,7 +59,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">電話1<span style='color:#FF0000!important'>*</span></th>
+                    <th scope="row">電話<span style='color:#FF0000!important'>*</span></th>
                     <td>
                         {{form.phone(class_='form-control',value=result["phone"])}}
                         {% if form.phone.errors %}
@@ -60,7 +71,7 @@
                         {% endif %}
                     </td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <th scope="row">電話2</th>
                     <td>
                         {{form.telephone(class_='form-control',value=result["telephone"])}}
@@ -72,7 +83,7 @@
                             </ul>
                         {% endif %}
                     </td>
-                  </tr>
+                  </tr> -->
                   <tr>
                     <th scope="row">機器型號<span style='color:#FF0000!important'>*</span></th>
                     <td>

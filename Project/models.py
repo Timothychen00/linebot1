@@ -22,7 +22,6 @@ class DB_Model():
             '_id':id,
             "name":form.name.data,
             "phone":form.phone.data,
-            "telephone":form.telephone.data,
             'machine':form.machine.data,
             "address":form.address.data,
             'last-time':form.last_time.data,
@@ -42,7 +41,6 @@ class DB_Model():
         data={
             "name":form.name.data,
             "phone":form.phone.data,
-            "telephone":form.telephone.data,
             "address":form.address.data,
             'machine':form.machine.data,
             'last-time':form.last_time.data,
@@ -84,8 +82,8 @@ class DB_Model():
         filter={}
         #一般情況
         if key and value:
-            if key =='address':
-                filter['address']={"$regex" : ".*"+value+".*"}
+            if key =='address' or key=='phone':
+                filter[key]={"$regex" : ".*"+value+".*"}
             else:
                 filter[key]=value
         if month:#有月份就要排序、雙重搜索
@@ -113,8 +111,8 @@ class DB_Model():
     
     @time_it
     def import_data(self,filename,mode,delete=0):
-        cols=['name','phone','telephone','machine','last-time','next-time','address','note']
-        type_dict={'name':str,'phone':str,'telephone':str,'machine':str,'last-time':str,'next-time':str,'address':str,'note':str}
+        cols=['name','phone','machine','last-time','next-time','address','note']
+        type_dict={'name':str,'phone':str,'machine':str,'last-time':str,'next-time':str,'address':str,'note':str}
         
         if mode=='csv':
             dataframe=pandas.read_csv('./'+filename+'.csv',usecols=cols,dtype=type_dict)
@@ -145,12 +143,12 @@ class DB_Model():
         return self.customers.find().sort("_id",pymongo.DESCENDING).limit(1)[0]['_id']+1
     
     def output_data(self,month):
-        results=self.search(key='next-time',value='1',month=month,sort=None,info={'last-time':1,"name":1,"phone":1,"telephone":1,'address':1})
+        results=self.search(key='next-time',value='1',month=month,sort=None,info={'last-time':1,"name":1,"phone":1,'address':1})
         print(results[0])
         # print(results)
         df=pandas.DataFrame({},columns=['上次',"姓名",'電話','電話2','地址'])
         for i in results:
-            df.loc[len(df.index)]={"上次":i['last-time'],"姓名":i['name'],"電話":i['phone'],"電話2":i['telephone'],"地址":i['address']}
+            df.loc[len(df.index)]={"上次":i['last-time'],"姓名":i['name'],"電話":i['phone'],"地址":i['address']}
         # print(df)
         df.to_excel('Project/static/output.xlsx',encoding='utf-8',index=None)
         
