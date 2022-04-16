@@ -11,4 +11,4 @@ Flask-APScheduler==1.12.3
 Flask-WTF==0.15.1
 WTForms==2.3.3
 pandas==1.2.4
-pyopenssl==20.0.1
+openpyxl
