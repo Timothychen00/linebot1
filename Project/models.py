@@ -104,7 +104,7 @@ class DB_Model():
         if sort:
             print(sort)
             results=results.sort(sort,pymongo.ASCENDING)
-        # print(results)
+        print(results)
         results=list(results)
         # print(results)
         return results
