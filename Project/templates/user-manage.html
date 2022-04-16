@@ -98,17 +98,6 @@
                                     </ul>
                                     {% endif %}
 
-                                    <div class="mb-3">
-                                        {{form.telephone.label(class_='col-form-label')}}
-                                        {{form.telephone(class_='form-control',placeholder='電話2')}}
-                                    </div>
-                                    {% if form.telephone.errors %}
-                                    <ul>
-                                        {% for error in form.telephone.errors %}
-                                            <li style='color:#FF0000!important'>{{error}}</li>
-                                        {% endfor %}
-                                    </ul>
-                                    {% endif %}
 
                                     <div class="mb-3">
                                         {{form.machine.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
