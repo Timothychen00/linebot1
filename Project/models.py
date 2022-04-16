@@ -143,7 +143,7 @@ class DB_Model():
         # print(results)
         df=pandas.DataFrame({},columns=['_id',"name",'phone','address'])
         for i in results:
-            df.loc[len(df.index)]={"_id":i['_id'],"name":i['name'],"phone":i['phone'],"address":i['address']}
+            df.loc[len(df.index)]={"上次":i['last-time'],"姓名":i['name'],"電話":i['phone'],"電話2":i['telephone'],"地址":i['address']}
         # print(df)
         df.to_excel('Project/static/output.xlsx',encoding='utf-8',index=None)
         
