@@ -117,11 +117,11 @@ def customers_manage():
         print(len(results))
         if type=='str':
             if results and len(results)==1:
-                return "found"
+                return "找到一個結果"
             elif results:
-                return "too many"
+                return "有多個結果"
             else:
-                return "not found"
+                return "沒有找到"
         elif type=='json':
             if not data_length:
                 data_length=len(results)

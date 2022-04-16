@@ -86,7 +86,7 @@ class DB_Model():
                 filter[key]={"$regex" : ".*"+value+".*"}
             else:
                 filter[key]=value
-        if month:#有月份就要排序、雙重搜索
+        if month and month!='none':#有月份就要排序、雙重搜索
             print(2)
             if month=='this_month':
                 month=datetime.datetime.now(db_model.tz).strftime('%Y-%m')
@@ -95,6 +95,8 @@ class DB_Model():
                 month=time_obj.strftime("%Y-%m")
             filter['next-time']=month
             sort='last-time'
+        else:
+            sort='_id'
         #搜索結果是否需要縮減
         print('filter',filter)
         if key=='_id' and value:
