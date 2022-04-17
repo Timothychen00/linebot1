@@ -149,7 +149,7 @@ class DB_Model():
         results=self.search(key='next-time',value='1',month=month,sort=None,info={'last-time':1,"name":1,"phone":1,'address':1})
         print(results[0])
         # print(results)
-        df=pandas.DataFrame({},columns=['上次',"姓名",'電話','電話2','地址'])
+        df=pandas.DataFrame({},columns=['上次',"姓名",'電話','地址'])
         for i in results:
             df.loc[len(df.index)]={"上次":i['last-time'],"姓名":i['name'],"電話":i['phone'],"地址":i['address']}
         # print(df)

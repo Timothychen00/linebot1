@@ -130,7 +130,10 @@ def customers_manage():
             if not start:
                 start=0
             processed_results=[]
-            for i in range(start,data_length+start):
+            end=data_length+start
+            if data_length+start>len(results):
+                end=len(results)
+            for i in range(start,end):
                 processed_results.append(list(results[i].items()))
             # print(results)
             processed_results.insert(0,month)
