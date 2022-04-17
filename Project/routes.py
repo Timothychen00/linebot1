@@ -49,6 +49,8 @@ def finish():
     print('finish',form.finish_time.data)
     print('next',form.next_time.data)
     print('note',form.note.data)
+    if not form.next_time.data:
+        form.next_time.data='0000-00'
     if form.validate_on_submit():
         state=form.state.data
         key=form.key.data

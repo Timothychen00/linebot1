@@ -65,7 +65,8 @@ class DB_Model():
             if update_data[0]=='完成':
                 self.customers.update_one({key:value},{"$set":{"last-time":last}})
             self.customers.update_one({key:value},{"$set":{"logs":result}})
-            self.customers.update_one({key:value},{"$set":{"next-time":next_time}})
+            if next_time!='0000-00':
+                self.customers.update_one({key:value},{"$set":{"next-time":next_time}})
             print("update success")
         
         else:

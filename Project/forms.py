@@ -11,7 +11,7 @@ class FinishForm(FlaskForm):#used to finish the
     state=TextField("搜索結果",validators=[InputRequired(),AnyOf(['找到一個結果'],message='請先選擇正確的用戶')])
     component=SelectMultipleField("部件",choices=[("A",'第一道'),("B",'第二道'),("C",'第三道'),("D",'第四道'),("E",'第五道'),("F",'第六道')])
     finish_time=DateField('完成日期',validators=[InputRequired("請輸入完成日期")])
-    next_time=TextField('下次保養月份',validators=[InputRequired(),Regexp("\d\d\d\d-\d\d",message="請輸入 YYYY-mm 格式的月份")])
+    next_time=TextField('下次保養月份',validators=[Regexp("\d\d\d\d-\d\d",message="請輸入 YYYY-mm 格式的月份")])
     person=TextField('人員',validators=[InputRequired()])
     note=TextAreaField("備註")
     fee=TextField("費用")

@@ -52,7 +52,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-md-6 col-12">
-                {{form.component.label(class_='form-check-label')}}<span style='color:#FF0000!important'>*</span>
+                {{form.component.label(class_='form-check-label')}}
                 {{form.component(class_='form-select',multiple='multiple')}}
                 {% if form.component.errors %}
                     <ul>
@@ -85,7 +85,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6 col-12">
                 <div>
-                    {{form.next_time.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
+                    {{form.next_time.label(class_='col-form-label')}}(YYYY-MM)
                     {{form.next_time(class_='form-control',placeholder='YYYY-mm')}}
                 </div>
                 {% if form.next_time.errors %}
