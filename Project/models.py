@@ -71,7 +71,7 @@ class DB_Model():
         
         else:
             print('not existed')
-
+    
     @time_it
     def search(self,key=None,value=None,month=None,sort=None,info=None):
         print('month:',month)
