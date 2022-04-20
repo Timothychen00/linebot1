@@ -52,7 +52,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        {{form.name.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
+                                        {{form.name.label(class_='col-form-label')}}
                                         {{form.name(class_='form-control')}}
                                     </div>
                                     {% if form.name.errors %}
@@ -64,7 +64,7 @@
                                     {% endif %}
 
                                     <div class="mb-3">
-                                        {{form.address.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
+                                        {{form.address.label(class_='col-form-label')}}
                                         {{form.address(class_='form-control',placeholder='地址')}}
                                     </div>
                                     {% if form.address.errors %}
@@ -76,7 +76,7 @@
                                     {% endif %}
                                     
                                     <div class="mb-3">
-                                        {{form.phone.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
+                                        {{form.phone.label(class_='col-form-label')}}
                                         {{form.phone(class_='form-control',placeholder='電話')}}
                                     </div>
                                     {% if form.phone.errors %}
@@ -89,7 +89,7 @@
 
 
                                     <div class="mb-3">
-                                        {{form.machine.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
+                                        {{form.machine.label(class_='col-form-label')}}
                                         {{form.machine(class_='form-control')}}
                                     </div>
                                     {% if form.machine.errors %}
@@ -101,7 +101,7 @@
                                     {% endif %}
                                     <div class="mb-3">
                                         {{form.last_time.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
-                                        {{form.last_time(class_='form-control',placeholder='YYYY-mm')}}
+                                        {{form.last_time(class_='form-control',placeholder='YYYY-mm',value='0000-00')}}
                                     </div>
                                     {% if form.last_time.errors %}
                                     <ul>
@@ -112,7 +112,7 @@
                                     {% endif %}
                                     <div class="mb-3">
                                         {{form.next_time.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
-                                        {{form.next_time(class_='form-control',placeholder='YYYY-mm')}}
+                                        {{form.next_time(class_='form-control',placeholder='YYYY-mm',value='0000-00')}}
                                     </div>
                                     {% if form.next_time.errors %}
                                     <ul>

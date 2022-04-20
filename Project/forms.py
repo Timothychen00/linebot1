@@ -2,7 +2,6 @@ from flask import Flask
 from flask_wtf import FlaskForm
 from wtforms.fields import TextAreaField,TextField,SubmitField,SelectMultipleField,SelectField,PasswordField,BooleanField
 from wtforms.fields.html5 import DateField
-from wtforms.widgets.html5 import MonthInput
 from wtforms.validators import InputRequired,AnyOf,Regexp
 
 class FinishForm(FlaskForm):#used to finish the
@@ -28,10 +27,10 @@ class DelayForm(FlaskForm):#used to delay the mission
 
 class CustomerForm(FlaskForm):#used to create a new customer
     id=TextField('id')
-    name=TextField("客戶名稱",validators=[InputRequired()])
-    address=TextField("地址",validators=[InputRequired()])
-    phone=TextField('電話',validators=[InputRequired()])
-    machine=TextField("機器型號",validators=[InputRequired()])
+    name=TextField("客戶名稱")
+    address=TextField("地址")
+    phone=TextField('電話')
+    machine=TextField("機器型號")
     note=TextAreaField('備註')
     last_time=TextField('上次保養日期',validators=[InputRequired(),Regexp("\d\d\d\d-\d\d",message="請輸入 YYYY-mm 格式的月份")])
     submit=SubmitField("儲存")
