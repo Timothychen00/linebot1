@@ -60,8 +60,12 @@ class DB_Model():
         if result:
             last=date
             result=result['logs']
-            result[date]=update_data
+            if not date in result:
+                result[date]=[]
+            result[date].append(update_data)
             print(result)
+            
+            
             if update_data[0]=='完成':
                 self.customers.update_one({key:value},{"$set":{"last-time":last}})
             self.customers.update_one({key:value},{"$set":{"logs":result}})
@@ -72,6 +76,14 @@ class DB_Model():
         else:
             print('not existed')
     
+    def delete_log(self,id,date,log_id):
+        result=self.search('_id',id,False)[0]
+        # print(result['logs'])
+        logs=result['logs']
+        # print(logs[date][log_id])
+        del logs[date][log_id]
+        self.customers.update_one({'_id':id},{"$set":{"logs":logs}})
+        
     @time_it
     def search(self,key=None,value=None,month=None,sort=None,info=None):
         print('month:',month)

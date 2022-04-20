@@ -198,3 +198,19 @@ def output_data():
     month=request.args.get('month',None)
     db_model.output_data(month)
     return redirect('/static/output.xlsx')
+
+@app_route.route("/customers/<int:id>/delete_log")
+@login_required
+def delete_log(id):
+    log_id=request.args.get('log_id')
+    print(log_id)
+    log_id=int(log_id)
+    date=request.args.get('date')
+    print(id,log_id,date)
+    db_model.delete_log(id,date,log_id)
+    
+    return redirect('/customers/'+str(id)+"/#logs")
+
+@app_route.before_request
+def e():
+    print("-"*20)

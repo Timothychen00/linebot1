@@ -66,7 +66,7 @@
           </div>
           <div class="row  middle-board justify-content-center pt-md-2 pt-0  mx-auto  m-3 "style="min-height:600px;max-width:800px;" >
             <div class="col overflow mt-md-0 mt-4" style="height: 600px;">
-              <table class="table px-2 text-center">
+              <table class="table px-2 text-center" id='logs'>
                 <thead>
                   <tr>
                     <th scope="col">時間</th>
@@ -80,31 +80,54 @@
                     <th scope="col">價錢</th>
                     <th scope="col">人員</th>
                     <th scope="col">備註</th>
+                    <th scope='col'>刪除</th>
                   </tr>
                 </thead>
+
                 <tbody>
-                  {% for log in result['logs'] %}
-                  <tr>
-                      <td>{{log}}</td>
-                      <td>{{result['logs'][log][0]}}</td>
-                      {%for i in ['A','B',"C","D","E","F"]%}
-                      <td>
-                        <div style="width:10px!important;">
-                        {%if i in result['logs'][log][1] %}
-                        &#10003;
-                        {%endif%}
-                        </div>
-                      </td>
-                      {%endfor%}
-                      <td>{{result['logs'][log][4]}}</td>
-                      <td>{{result['logs'][log][2]}}</td>
-                      <td>{{result['logs'][log][3]}}</td>
-                  </tr>
-                  {% endfor %}
+                    {% for day in result['logs'] %}
+                        {%for index in range(result['logs'][day]|length) %}
+                            <tr>
+                                <td>{{day}}</td>
+                                <td>{{result['logs'][day][index][0]}}</td>
+                                {%for i in "ABCDEF" %}
+                                    <td>
+                                    <div style="width:10px!important;">
+                                    {%if i in result['logs'][day][index][1] %}
+                                        &#10003;
+                                    {%endif%}
+                                    </div>
+                                    </td>
+                                {%endfor%}
+                                <td>{{result['logs'][day][index][4]}}</td>
+                                <td>{{result['logs'][day][index][2]}}</td>
+                                <td>{{result['logs'][day][index][3]}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{index}}">刪除</button>
+                                    <div class="modal fade" id="exampleModal{{index}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">確認刪除？</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p class="fw-bold">請注意！刪除後將無法復原！</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                                                    <button type="button" class="btn btn-danger" onclick="location.href='/customers/{{result['_id']}}/delete_log?log_id={{index}}&date={{day}}'">確認刪除</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {%endfor%}
+                    {% endfor %}
                 </tbody>
               </table>
             </div>
-
           </div>
 
 
