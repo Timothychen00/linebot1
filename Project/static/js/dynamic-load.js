@@ -118,7 +118,7 @@ function find(type='dynamic',t_month=null,key_v=null,value_v=null){
 var dashboard=document.getElementById('dashboard');
 dashboard.onscroll = function(){
     console.log(getScrollTop(),getWindowHeight(),getScrollHeight(),dashboard.offsetHeight);
-    if(Math.abs(getScrollTop() - getScrollHeight()+dashboard.offsetHeight)==15){
+    if(Math.abs(getScrollTop() - getScrollHeight()+dashboard.offsetHeight)<17 && Math.abs(getScrollTop() - getScrollHeight()+dashboard.offsetHeight)>13){
         find()
     }
 };
