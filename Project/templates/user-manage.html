@@ -47,7 +47,7 @@
                                 <form action="/customers/" method="post">
                                     {{form.csrf_token()}}
                                     <div class="mb-3">
-                                        <label class='col-form-label'>id</label>
+                                        <label class='col-form-label'>id</label><span style='color:#FF0000!important'>*</span>
                                         <!--<input class='form-control' value='{{next_id}}' readonly></input>-->
                                         <input name='id' class='form-control' style='width:100%' type'text'>
                                     </div>
