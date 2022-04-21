@@ -117,9 +117,9 @@ function find(type='dynamic',t_month=null,key_v=null,value_v=null){
 }
 var dashboard=document.getElementById('dashboard');
 dashboard.onscroll = function(){
-    console.log(getScrollTop(),getWindowHeight(),getScrollHeight(),dashboard.offsetHeight);
     d=Math.abs(getScrollTop() - getScrollHeight()+dashboard.offsetHeight);
-    if((d<17 && d>13)||d<=6){
+    console.log(getScrollTop(),getWindowHeight(),getScrollHeight(),dashboard.offsetHeight,d);
+    if(d<17){
         find()
     }
 };
