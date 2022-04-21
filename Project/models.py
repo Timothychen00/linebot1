@@ -95,7 +95,7 @@ class DB_Model():
         filter={}
         #一般情況
         if key and value:
-            if key =='address' or key=='phone':
+            if key =='address' or key=='phone' or key=='name':
                 filter[key]={"$regex" : ".*"+value+".*"}
             else:
                 filter[key]=value
