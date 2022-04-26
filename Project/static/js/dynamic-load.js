@@ -73,7 +73,7 @@ function find(type='dynamic',t_month=null,key_v=null,value_v=null){
                 <td>"+a[i][2]+"</td>\
                 <td>"+a[i][3]+"</td>\
                 <td>\
-                    <button type=\"button\" class=\"btn btn-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal"+a[i][0][1]+"\">刪除</button>\
+                    <button type=\"button\" class=\"btn btn-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal"+a[i][0]+"\">刪除</button>\
                     <div class=\"modal fade\" id=\"exampleModal"+a[i][0]+"\" tabindex=\"-1\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\
                         <div class=\"modal-dialog\">\
                             <div class=\"modal-content\">\
@@ -86,7 +86,7 @@ function find(type='dynamic',t_month=null,key_v=null,value_v=null){
                                 </div>\
                                 <div class=\"modal-footer\">\
                                     <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">取消</button>\
-                                    <button type=\"button\" class=\"btn btn-danger\" onclick=\"location.href=\'/customers/"+a[i][0][1]+"/delete/ \'\" >確認刪除</button>\
+                                    <button type=\"button\" class=\"btn btn-danger\" onclick=\"location.href=\'/customers/"+a[i][0]+"/delete/ \'\" >確認刪除</button>\
                                 </div>\
                             </div>\
                         </div>\
