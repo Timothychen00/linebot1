@@ -138,7 +138,7 @@ def customers_manage():
             if data_length+start>len(results):
                 end=len(results)
             for i in range(start,end):
-                processed_results.append(list(results[i].items()))
+                processed_results.append([results[i]["_id"],results[i]["name"],results[i]["phone"],results[i]["address"]])
             # print(results)
             processed_results.insert(0,month)
             return jsonify(processed_results)
@@ -164,6 +164,8 @@ def each_customer(id):
     length=len(related_results)
     for i in range(length):
         related.append(str(related_results[i]['_id']))
+    result['logs']=sorted(result['logs'].items(), key=lambda x:x[0])
+    # print("logs:",sorted(result['logs'].items(), key=lambda x:x[0]))
     return render_template('each-customer.html',result=result,related=related)
 
 @app_route.route("/customers/<int:id>/delete/")

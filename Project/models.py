@@ -78,15 +78,14 @@ class DB_Model():
     
     def delete_log(self,id,date,log_id):
         result=self.search('_id',id,False)[0]
-        # print(result['logs'])
         logs=result['logs']
-        # print(logs[date][log_id])
         del logs[date][log_id]
         self.customers.update_one({'_id':id},{"$set":{"logs":logs}})
         
     @time_it
     def search(self,key=None,value=None,month=None,sort=None,info=None):
         print('month:',month)
+        print("key:",key,"value:",value)
         # print(sort)
         if not info:
             info_dict={'_id':1,"name":1,"phone":1,"address":1}

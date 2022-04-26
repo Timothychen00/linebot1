@@ -68,13 +68,13 @@ function find(type='dynamic',t_month=null,key_v=null,value_v=null){
     
         place.innerHTML+="\
             <tr>\
-                <td>"+a[i][0][1]+"</td>\
-                <td><a href=\'/customers/"+a[i][0][1]+"/\'>"+a[i][1][1]+"</a></td>\
-                <td>"+a[i][2][1]+"</td>\
-                <td>"+a[i][3][1]+"</td>\
+                <td>"+a[i][0]+"</td>\
+                <td><a href=\'/customers/"+a[i][0]+"/\'>"+a[i][1]+"</a></td>\
+                <td>"+a[i][2]+"</td>\
+                <td>"+a[i][3]+"</td>\
                 <td>\
                     <button type=\"button\" class=\"btn btn-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal"+a[i][0][1]+"\">刪除</button>\
-                    <div class=\"modal fade\" id=\"exampleModal"+a[i][0][1]+"\" tabindex=\"-1\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\
+                    <div class=\"modal fade\" id=\"exampleModal"+a[i][0]+"\" tabindex=\"-1\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\
                         <div class=\"modal-dialog\">\
                             <div class=\"modal-content\">\
                                 <div class=\"modal-header\">\

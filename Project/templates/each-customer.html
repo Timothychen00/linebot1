@@ -85,26 +85,28 @@
                 </thead>
 
                 <tbody>
-                    {% for day in result['logs'] %}
-                        {%for index in range(result['logs'][day]|length) %}
+
+                    {% for day_item in result['logs'] %}
+                      {%if day_item[1]%}
+                        {%for index in range(day_item[1]|length) %}
                             <tr>
-                                <td>{{day}}</td>
-                                <td>{{result['logs'][day][index][0]}}</td>
+                                <td>{{day_item[0]}}</td>
+                                <td>{{day_item[1][index][0]}}</td>
                                 {%for i in "ABCDEF" %}
                                     <td>
                                     <div style="width:10px!important;">
-                                    {%if i in result['logs'][day][index][1] %}
+                                    {%if i in day_item[1][index][1] %}
                                         &#10003;
                                     {%endif%}
                                     </div>
                                     </td>
                                 {%endfor%}
-                                <td>{{result['logs'][day][index][4]}}</td>
-                                <td>{{result['logs'][day][index][2]}}</td>
-                                <td>{{result['logs'][day][index][3]}}</td>
+                                <td>{{day_item[1][index][4]}}</td>
+                                <td>{{day_item[1][index][2]}}</td>
+                                <td>{{day_item[1][index][3]}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{index}}{{day}}">刪除</button>
-                                    <div class="modal fade" id="exampleModal{{index}}{{day}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{index}}{{day_item[0]}}">刪除</button>
+                                    <div class="modal fade" id="exampleModal{{index}}{{day_item[0]}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -116,7 +118,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                                                    <button type="button" class="btn btn-danger" onclick="location.href='/customers/{{result['_id']}}/delete_log?log_id={{index}}&date={{day}}'">確認刪除</button>
+                                                    <button type="button" class="btn btn-danger" onclick="location.href='/customers/{{result['_id']}}/delete_log?log_id={{index}}&date={{day_item[0]}}'">確認刪除</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -124,6 +126,7 @@
                                 </td>
                             </tr>
                         {%endfor%}
+                        {%endif%}
                     {% endfor %}
                 </tbody>
               </table>
