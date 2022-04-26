@@ -6,6 +6,10 @@ from Project.decorators import login_required
 from dateutil.relativedelta import relativedelta
 app_route=Blueprint("app_route",__name__,static_folder='static',template_folder='templates')
 
+@app_route.before_request
+def print_url():
+    print("url:",request.url)
+
 @app_route.route("/",methods=['GET','POST'])#login
 def login():
     form=LoginForm()
@@ -95,7 +99,7 @@ def home():
 @login_required
 def customers_manage():
     form=CustomerForm()
-    print('--'*20,'\n',request.url)
+    # print('--'*20,'\n',request.url)
     if request.method=='GET':
         key=request.args.get('key')
         value=request.args.get('value')
