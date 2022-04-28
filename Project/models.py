@@ -87,6 +87,15 @@ class DB_Model():
         print('month:',month)
         print("key:",key,"value:",value)
         # print(sort)
+        
+        not_allowed=['\'','\"']
+        #pre process
+        if key!='_id' and value:
+            for i in not_allowed:
+                value.replace(i,"")
+            value=value.split('(')[0]
+            value=value.split(')')[0]
+        
         if not info:
             info_dict={'_id':1,"name":1,"phone":1,"address":1}
         else:

@@ -158,14 +158,15 @@ def customers_manage():
 def each_customer(id):
     print(id)
     result=db_model.search('_id',id)[0]
-    print(result)
+    print("result:",result)
     related_results=db_model.search('name',result['name'])
+    print("related:",related_results)
     related=[]
     length=len(related_results)
     for i in range(length):
-        related.append(str(related_results[i]['_id']))
+        related.append([str(related_results[i]['_id']),str(related_results[i]['name'])])
     result['logs']=sorted(result['logs'].items(), key=lambda x:x[0])
-    # print("logs:",sorted(result['logs'].items(), key=lambda x:x[0]))
+    
     return render_template('each-customer.html',result=result,related=related)
 
 @app_route.route("/customers/<int:id>/delete/")

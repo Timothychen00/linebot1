@@ -50,7 +50,7 @@
                       {% if related %}
                         關聯機器：
                         {%for i in related%}
-                          <br><a href="https://linbot2.azurewebsites.net/customers/{{i}}/">編號{{i}}</a>
+                          <br><a href="{%if request.host!='127.0.0.1:8000'%}https://{{request.host}}{%endif%}/customers/{{i[0]}}/">{{i[1]}}</a>
                         {%endfor%}
                       {%endif%}
                       </div>
