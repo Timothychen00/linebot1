@@ -11,7 +11,7 @@
         </div>
         <!-- 中央顯示區域 -->
         <div class="row  middle-board justify-content-center pt-md-0 pt-4  mx-auto  m-3 "style="min-height:700px;max-width:800px;" >
-            <form action="{% if request.host!='127.0.0.1:8000' %}https://{{request.host}}{%endif%}/delay/" method="post" class="row mt-md-4 mt-1  justify-content-center" style="max-height: 90px;">
+            <form action="/delay/" method="post" class="row mt-md-4 mt-1  justify-content-center" style="max-height: 90px;">
                 {{form.csrf_token()}}
                 <div class="col-3 ps-4" style="max-height:38px;min-width:100px">
                     <div class="input-group mb-3 p-0">
