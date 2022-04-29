@@ -199,7 +199,7 @@ def import_dd():
     db_model.import_data('test','csv',1)
     return '1'
 
-@app_route.route('/customers/output')
+@app_route.route('/customers/output/')
 @login_required
 def output_data():
     month=request.args.get('month',None)
