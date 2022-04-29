@@ -7,7 +7,7 @@ name: Build and deploy Python app to Azure Web App - linbot1
 on:
   push:
     branches:
-      - main
+      - copy
   workflow_dispatch:
 
 jobs:
