@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block main_content %}
-<form action="/finish" method="post" >
+<form action="{% if request.host!='127.0.0.1:8000' %}https://{{request.host}}{%endif%}/finish" method="post" >
 {{form.csrf_token()}}
 <div class="container " style="min-height:100vh">
     <!-- 標題 -->

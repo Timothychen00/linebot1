@@ -44,7 +44,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="/customers/" method="post">
+                                <form action="{% if request.host!='127.0.0.1:8000' %}https://{{request.host}}{%endif%}/customers/" method="post">
                                     {{form.csrf_token()}}
                                     <div class="mb-3">
                                         <label class='col-form-label'>id</label><span style='color:#FF0000!important'>*</span>
