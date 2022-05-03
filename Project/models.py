@@ -175,9 +175,6 @@ class DB_Model():
         # print(df)
         df.to_excel('Project/static/output.xlsx',encoding='utf-8',index=None)
         
-
-        
-
 db_model=DB_Model()
     
 class User():
