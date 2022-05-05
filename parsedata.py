@@ -94,7 +94,7 @@ def process_data(id):
                     data_type=type(now_pairs)
                     
                     if data_type is tuple:#single possible
-                        if now_pairs[0] in dataframe.loc[2+j][i]:#not suit for the field
+                        if now_pairs[0] in str(dataframe.loc[2+j][i]):#not suit for the field
                             temp=dataframe.loc[2+j][i]#temp_data
                             if now_pairs[1] =='_id':
                                 temp=id
@@ -171,6 +171,9 @@ def process_data(id):
             #parse lasttime
             print('lasttime:',last_time)
             last_time=str(last_time).split('.')
+            last_time[1]=last_time[1].zfill(2)
+            if len(last_time)==3:
+                last_time[2]=last_time[2].zfill(2)
             last_time[0]=str(int(last_time[0])+1911)
             last_time=str(last_time[:])[1:-1].replace(',','-').replace(' ','').replace('\"','').replace('\'','')
             print('lasttime:',last_time)
@@ -190,9 +193,13 @@ def process_data(id):
         temp=''
         for i in range(2,8):
             arr=dataframe.loc[9][i].split("道")
-            arr[1]=arr[1].replace(':','').replace('\n','')
-            if arr[1]:
-                temp+=(arr[0]+"道:"+arr[1].replace(' ','')+'\n')
+            print(arr)
+            if len(arr)==2:
+                arr[1]=arr[1].replace(':','').replace('\n','')
+                if arr[1]:
+                    temp+=(arr[0]+"道:"+arr[1].replace(' ','')+'\n')
+            else:
+                err.append(['_id',id,'arr每一道'])
         if temp!='':
             data['note']+=('\n------------------------------------\n'+temp[:-1])
         print(temp)
@@ -245,14 +252,16 @@ def process_data(id):
         
         xls = pandas.ExcelFile('vip/A'+id_str+'.xlsx')
 
-# Now you can list all sheets in the file
+    # Now you can list all sheets in the file
         df = pandas.read_excel('vip/A'+id_str+'.xlsx', sheet_name=xls.sheet_names[1])
         if len(df)>1:
             multi.append(['_id',id])
     except:
         err.append(['_id',id,'報錯無法處理'])
         
-for k in range(1,200+1):
+        
+# test_list=[74,77,85,94,100,102,106,108,109,113,115,118,122,124,128,132,142,146,147,148,150,158,161,162,164,165,172,176,177,183,189]        
+for k in range(201,501):
     process_data(k)
     
 print('-'*20,'\nerrors:')
