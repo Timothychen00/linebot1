@@ -1,6 +1,8 @@
 from flask import Flask
 from Project.routes import app_route
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 app=Flask(__name__,static_folder='Project/static/',template_folder='Project/temlpates/')
 app.secret_key=os.environ['secret']#os.urandom(16).hex()

@@ -218,6 +218,13 @@ def delete_log(id):
     
     return redirect('/customers/'+str(id)+"/#logs")
 
+@app_route.route("/backup")
+@login_required
+def backup():
+    db_model.backup_data()
+    flash('備份完成')
+    return redirect('/home')
+
 @app_route.before_request
 def e():
     print("-"*20)

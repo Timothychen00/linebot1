@@ -8,9 +8,15 @@ load_dotenv()
 class DB_Model():
     def __init__(self):
         self.client=pymongo.MongoClient("mongodb+srv://"+os.environ['DB_USER']+":"+os.environ['DB_PASSWORD']+"@cluster0.mgwi6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+        self.client_backup=pymongo.MongoClient("mongodb+srv://"+os.environ['DB_USER']+":"+os.environ['DB_PASSWORD']+"@drinking-bk.soibl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",tlsAllowInvalidCertificates=True,tz_aware=True)
         self.db=self.client.Flask
         self.customers=self.db.customers
         self.users=self.db.users
+        
+        self.db_backup=self.client_backup.Flask
+        self.customers_backup=self.db_backup.customers
+        self.users_backup=self.db_backup.users
+        
         self.tz=datetime.timezone(datetime.timedelta(hours=+8))
     
     def create(self,form):
@@ -174,6 +180,14 @@ class DB_Model():
             df.loc[len(df.index)]={"上次":i['last-time'],"姓名":i['name'],"電話":i['phone'],"地址":i['address']}
         # print(df)
         df.to_excel('Project/static/output.xlsx',encoding='utf-8',index=None)
+        
+    def backup_data(self):
+        results=self.customers.find()
+        self.customers_backup.delete_many({})
+        if results:
+            self.customers_backup.insert_many(list(results))
+        print('done')
+        
         
 db_model=DB_Model()
     

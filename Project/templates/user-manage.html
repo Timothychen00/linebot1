@@ -212,6 +212,10 @@
                     <img src="/static/images/home.png " height=45% width=35% alt="logout button ">
                     <h4>回首頁</h4>
                 </div>
+                <div style="cursor: pointer;width:100px " onclick="window.location='/backup'" class="home p-1" >
+                    <img src="/static/images/backup.png " height=45% width=40% alt="logout button ">
+                    <h4>備份</h4>
+                </div>
                 <div style="cursor: pointer;width:100px " onclick="window.location='/logout'" class="home p-1" >
                     <img src="/static/images/logout.png " height=45% width=40% alt="logout button ">
                     <h4>登出</h4>
@@ -225,6 +229,7 @@
 
 {% block js_extend %}
 <script src='/static/js/dynamic-load.js'></script>
+
 {% endblock js_extend %}
 
 
