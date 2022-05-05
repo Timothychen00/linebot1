@@ -112,14 +112,14 @@ function find(type='dynamic',t_month=null,key_v=null,value_v=null){
         }else
             url='/customers/?key='+key_v+'&value='+value_v+"&type=json&month="+month;
     }
-    xhr.open('GET',url,true)
+    xhr.open('GET',url,false)
     xhr.send()
 }
 var dashboard=document.getElementById('dashboard');
 dashboard.onscroll = function(){
     d=Math.abs(getScrollTop() - getScrollHeight()+dashboard.offsetHeight);
     console.log(getScrollTop(),getWindowHeight(),getScrollHeight(),dashboard.offsetHeight,d);
-    if(d<17){
+    if(d<(getScrollTop()*0.35)){
         find()
     }
 };

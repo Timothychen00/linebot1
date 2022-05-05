@@ -1,4 +1,3 @@
-from flask import Flask
 from flask_wtf import FlaskForm
 from wtforms.fields import TextAreaField,TextField,SubmitField,SelectMultipleField,SelectField,PasswordField,BooleanField
 from wtforms.fields.html5 import DateField
