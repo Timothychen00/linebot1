@@ -203,8 +203,8 @@ def import_dd():
 @login_required
 def output_data():
     month=request.args.get('month',None)
-    db_model.output_data(month)
-    return redirect('https://'+request.host+'/static/output.xlsx')
+    db_model.output_data(month,filename=month)
+    return redirect('/static/'+month+'.xlsx')
 
 @app_route.route("/customers/<int:id>/delete_log")
 @login_required
