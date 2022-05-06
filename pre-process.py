@@ -1,6 +1,10 @@
-import pandas,os
+import pandas,os,sys
 
-tlist=[74,77,85,94,100,102,106,108,109,113,115,118,122,124,128,132,142,146,147,148,150,158,161,162,164,165,172,176,177,183,189]
+if len(sys.argv)>1 and '-id=' in sys.argv[1]:
+    sys.argv[1]=sys.argv[1].split('-id=')[-1]
+    tlist=[int(sys.argv[1])]
+else:
+    tlist=[201,203,204,205,208,211,213,214,227,229,230,232,234]
 
 def pre_process(id):
     id_str=str(id).zfill(3)
@@ -9,8 +13,6 @@ def pre_process(id):
     if os.path.exists('origin.xlsx'):
         os.remove('origin.xlsx')
     dataframe.to_excel('origin.xlsx')
-   
-   
    
     for i in range(2,8):
         dataframe.iat[i,0]=(str(dataframe.loc[i][0]).replace(' ','')+str(dataframe.loc[i][1]).replace(' ','')+str(dataframe.loc[i][2]).replace(' ','')).replace('nan','')
