@@ -133,6 +133,7 @@ def customers_manage():
                 data_length=len(results)
             if not start:
                 start=0
+            print("length:",data_length)
             processed_results=[]
             end=data_length+start
             if data_length+start>len(results):
@@ -204,6 +205,11 @@ def import_dd():
 def output_data():
     month=request.args.get('month',None)
     db_model.output_data(month,filename=month)
+    
+    host=request.host
+    if host!='127.0.0.1:8000':
+        host="https://"+host
+    
     return redirect('/static/'+month+'.xlsx')
 
 @app_route.route("/customers/<int:id>/delete_log")
@@ -216,7 +222,10 @@ def delete_log(id):
     print(id,log_id,date)
     db_model.delete_log(id,date,log_id)
     
-    return redirect('/customers/'+str(id)+"/#logs")
+    host=request.host
+    if host!='127.0.0.1:8000':
+        host="https://"+host
+    return redirect(host+'/customers/'+str(id)+"/#logs")
 
 @app_route.route("/backup")
 @login_required

@@ -4,7 +4,7 @@ if len(sys.argv)>1 and '-id=' in sys.argv[1]:
     sys.argv[1]=sys.argv[1].split('-id=')[-1]
     tlist=[int(sys.argv[1])]
 else:
-    tlist=[201,203,204,205,208,211,213,214,227,229,230,232,234]
+    tlist=[239,242,244,270,274,286,367,392,406,423,456,478,490,491]
 
 def pre_process(id):
     id_str=str(id).zfill(3)

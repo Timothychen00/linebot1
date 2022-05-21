@@ -13,5 +13,5 @@ def pre_pre_process(id):
                     os.system('python3 pre-process.py -id='+str(id))
                     print('有備註 右邊','id:',id,'|',i,'|',dataframe.loc[i][5],dataframe.loc[i][6])
     
-for i in range(1,501):
+for i in [239,242,244,270,274,286,367,392,406,423,456,478,490,491]:
     pre_pre_process(i)
