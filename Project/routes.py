@@ -210,7 +210,7 @@ def output_data():
     if host!='127.0.0.1:8000':
         host="https://"+host
     
-    return redirect('/static/'+month+'.xlsx')
+    return redirect(host+'/static/'+month+'.xlsx')
 
 @app_route.route("/customers/<int:id>/delete_log")
 @login_required
@@ -222,10 +222,7 @@ def delete_log(id):
     print(id,log_id,date)
     db_model.delete_log(id,date,log_id)
     
-    host=request.host
-    if host!='127.0.0.1:8000':
-        host="https://"+host
-    return redirect(host+'/customers/'+str(id)+"/#logs")
+    return redirect('/customers/'+str(id)+"/#logs")
 
 @app_route.route("/backup")
 @login_required
