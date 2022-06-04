@@ -4,10 +4,10 @@ if len(sys.argv)>1 and '-id=' in sys.argv[1]:
     sys.argv[1]=sys.argv[1].split('-id=')[-1]
     tlist=[int(sys.argv[1])]
 else:
-    tlist=[239,242,244,270,274,286,367,392,406,423,456,478,490,491]
-
+    tlist=[1014,1084,1087,1118,1205,1220,1227,1229,1244,1247,1248,1249,1250,1253,1259,1264,1283,1307,1310,1326,1349,1363,1373,1424,1437,1451,1457,1473,1513,1651,1654,1688,1760,1762,1787]
 def pre_process(id):
     id_str=str(id).zfill(3)
+    
     dataframe=pandas.read_excel('vip/A'+id_str+'.xlsx')
    
     if os.path.exists('origin.xlsx'):

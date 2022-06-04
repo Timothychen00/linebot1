@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% block main_content %}
     <div class="container " style="min-height:100vh">
+
+      <div class="col-md-1 col-4 ms-md-5">
+        <button onclick="location.href='/customers/{{result['_id']+1}}/'" class="btn btn-primary">下一個</button>
+      </div> 
         <!-- 標題 -->
         <div class="row  mt-md-5 mt-1 justify-content-center" >
             <div class=" d-flex col-3 justify-content-center text-center ">
@@ -64,6 +68,7 @@
               </div>
             </div>
           </div>
+
           <div class="row  middle-board justify-content-center pt-md-2 pt-0  mx-auto  m-3 "style="min-height:600px;max-width:800px;" >
             <div class="col overflow mt-md-0 mt-4" style="height: 600px;">
               <table class="table px-2 text-center" id='logs'>
@@ -148,7 +153,8 @@
                     <h4>登出</h4>
                 </div>
             </div>
-           
+
+         
         </div>
         <div class="row  mt-3 text-center"><a style="color: rgb(138, 132, 132);">Copyright © 2022 Iteration.</a>
         </div>

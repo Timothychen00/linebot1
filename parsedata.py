@@ -14,7 +14,7 @@ def output_sample(df):
     import os 
     if os.path.exists('a.xlsx'):
         os.remove('a.xlsx')
-    with pandas.ExcelWriter("a.xlsx", engine="openpyxl", mode="w", if_sheet_exists="replace") as writer:
+    with pandas.ExcelWriter("a.xlsx", engine="openpyxl", mode="w") as writer:
         df.to_excel(writer,'a')
 
 def process_data(id):
@@ -193,6 +193,7 @@ def process_data(id):
         #每一道的部件
         temp=''
         for i in range(2,8):
+            print(dataframe.loc[9])
             arr=dataframe.loc[9][i].split("道")
             print(arr)
             if len(arr)==2:
@@ -252,16 +253,19 @@ def process_data(id):
         collection.insert_one(data)
         print(data)
 
-        #check multi sheets
+            #check multi sheets
         if checked:
             xls = pandas.ExcelFile('vip/A'+id_str+'.xlsx')
-            df = pandas.read_excel('vip/A'+id_str+'.xlsx', sheet_name=xls.sheet_names[1])
-            if len(df)>1:
-                multi.append(['_id',id])
+            print(xls.sheet_names)
+            if len(xls.sheet_names)>1:
+                df = pandas.read_excel('vip/A'+id_str+'.xlsx', sheet_name=xls.sheet_names[1])
+                if len(df)>1:
+                    multi.append(['_id',id])
     except:
         err.append(['_id',id,'報錯無法處理'])
         
-test_list=[239,242,244,270,274,286,367,392,406,423,456,478,490,491]
+# test_list=[239,242,244,270,274,286,367,392,406,423,456,478,490,491]
+test_list=[1014,1084,1087,1118,1220,1227,1229,1244,1247,1248,1249,1250,1253,1259,1264,1283,1307,1310,1326,1349,1363,1373,1424,1437,1451,1457,1473,1513,1651,1654,1688,1760,1762,1787]
 
 for i in sys.argv:
     if 'uncheck' in i:
