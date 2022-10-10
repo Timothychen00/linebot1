@@ -13,6 +13,9 @@ def print_url():
 @app_route.route("/",methods=['GET','POST'])#login
 def login():
     form=LoginForm()
+    if 'logged_in' in session and session['logged_in']:
+        return redirect('/home')
+    
     if form.validate_on_submit():
         username=form.username.data
         password=form.password.data

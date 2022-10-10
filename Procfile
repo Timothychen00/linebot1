@@ -1,1 +1,0 @@
-web: gunicorn linebot/app:app --preload
