@@ -4,7 +4,7 @@ from wtforms.fields.html5 import DateField
 from wtforms.validators import InputRequired,AnyOf,Regexp
 
 class FinishForm(FlaskForm):#used to finish the
-    key=SelectField("搜索類型",choices=[("name",'姓名'),('phone','電話'),('_id',"_id"),('address','地址')])
+    key=SelectField("搜索類型",choices=[('_id',"_id"),("name",'姓名'),('phone','電話'),('address','地址')])
     value=TextField("搜索內容")
     state=TextField("搜索結果",validators=[InputRequired(),AnyOf(['找到一個結果'],message='請先選擇正確的用戶')])
     component=SelectMultipleField("部件",choices=[("A",'第一道'),("B",'第二道'),("C",'第三道'),("D",'第四道'),("E",'第五道'),("F",'第六道')])
@@ -16,7 +16,7 @@ class FinishForm(FlaskForm):#used to finish the
     submit=SubmitField('完成')
 
 class DelayForm(FlaskForm):#used to delay the mission
-    key=SelectField("搜索類型",choices=[("name",'姓名'),('phone','電話'),('_id',"_id"),('address','地址')])
+    key=SelectField("搜索類型",choices=[('_id',"_id"),("name",'姓名'),('phone','電話'),('address','地址')])
     value=TextField("搜索內容")
     state=TextField("搜索結果",validators=[InputRequired('請先選擇用戶')])
     next_time=TextField('下次保養日期',validators=[InputRequired(),Regexp("\d\d\d\d-\d\d",message="請輸入 YYYY-mm 格式的月份")])
