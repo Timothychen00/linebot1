@@ -2,98 +2,109 @@
 {% block main_content %}
 <div class="container-fluid p-0 p-md-3">
     <!-- modal start -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" style="user-select: auto; display: none;" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        style="user-select: auto; display: none;" aria-hidden="true">
         <div class="modal-dialog" style="user-select: auto;">
             <div class="modal-content" style="user-select: auto;">
                 <div class="modal-header" style="user-select: auto;">
                     <h5 class="modal-title" id="exampleModalLabel" style="user-select: auto;">新增客戶</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="user-select: auto;"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="user-select: auto;"></button>
                 </div>
                 <div class="modal-body" style="user-select: auto;">
                     <form action="/customers/" method="post" style="user-select: auto;">
                         {{form.csrf_token()}}
                         <div class="mb-3" style="user-select: auto;">
-                            <label class="col-form-label" style="user-select: auto;">id</label><span style="color: rgb(255, 0, 0) !important; user-select: auto;">*</span>
+                            <label class="col-form-label" style="user-select: auto;">id</label><span
+                                style="color: rgb(255, 0, 0) !important; user-select: auto;">*</span>
                             <!--<input class='form-control' value='3024' readonly></input>-->
                             <input name="id" class="form-control" style="width: 100%; user-select: auto;" type="text">
                         </div>
 
                         <div class="mb-3" style="user-select: auto;">
                             <label class="col-form-label" for="name" style="user-select: auto;">客戶名稱</label>
-                            <input class="form-control" id="name" name="name" type="text" value="" style="user-select: auto;">
+                            <input class="form-control" id="name" name="name" type="text" value=""
+                                style="user-select: auto;">
                             {% if form.name.errors %}
                             <ul>
                                 {% for error in form.name.errors %}
-                                    <li style='color:#FF0000!important'>{{error}}</li>
+                                <li style='color:#FF0000!important'>{{error}}</li>
                                 {% endfor %}
                             </ul>
                             {% endif %}
                         </div>
-                        
+
 
                         <div class="mb-3" style="user-select: auto;">
                             <label class="col-form-label" for="address" style="user-select: auto;">地址</label>
-                            <input class="form-control" id="address" name="address" placeholder="地址" type="text" value="" style="user-select: auto;">
+                            <input class="form-control" id="address" name="address" placeholder="地址" type="text"
+                                value="" style="user-select: auto;">
                             {% if form.address.errors %}
                             <ul>
                                 {% for error in form.address.errors %}
-                                    <li style='color:#FF0000!important'>{{error}}</li>
+                                <li style='color:#FF0000!important'>{{error}}</li>
                                 {% endfor %}
                             </ul>
                             {% endif %}
                         </div>
-                        
-                        
+
+
                         <div class="mb-3" style="user-select: auto;">
                             <label class="col-form-label" for="phone" style="user-select: auto;">電話</label>
-                            <input class="form-control" id="phone" name="phone" placeholder="電話" type="text" value="" style="user-select: auto;">
+                            <input class="form-control" id="phone" name="phone" placeholder="電話" type="text" value=""
+                                style="user-select: auto;">
                             {% if form.phone.errors %}
                             <ul>
                                 {% for error in form.phone.errors %}
-                                    <li style='color:#FF0000!important'>{{error}}</li>
+                                <li style='color:#FF0000!important'>{{error}}</li>
                                 {% endfor %}
                             </ul>
                             {% endif %}
                         </div>
-                        
+
 
 
                         <div class="mb-3" style="user-select: auto;">
                             <label class="col-form-label" for="machine" style="user-select: auto;">機器型號</label>
-                            <input class="form-control" id="machine" name="machine" type="text" value="" style="user-select: auto;">
+                            <input class="form-control" id="machine" name="machine" type="text" value=""
+                                style="user-select: auto;">
                             {% if form.machine.errors %}
                             <ul>
                                 {% for error in form.machine.errors %}
-                                    <li style='color:#FF0000!important'>{{error}}</li>
+                                <li style='color:#FF0000!important'>{{error}}</li>
                                 {% endfor %}
                             </ul>
                             {% endif %}
                         </div>
-                        
+
                         <div class="mb-3" style="user-select: auto;">
-                            <label class="col-form-label" for="last_time" style="user-select: auto;">上次保養日期</label><span style="color: rgb(255, 0, 0) !important; user-select: auto;">*</span>
-                            <input class="form-control" id="last_time" name="last_time" placeholder="YYYY-mm" required="" type="text" value="0000-00" style="user-select: auto;">
+                            <label class="col-form-label" for="last_time" style="user-select: auto;">上次保養日期</label><span
+                                style="color: rgb(255, 0, 0) !important; user-select: auto;">*</span>
+                            <input class="form-control" id="last_time" name="last_time" placeholder="YYYY-mm"
+                                required="" type="text" value="0000-00" style="user-select: auto;">
                             {% if form.last_time.errors %}
                             <ul>
                                 {% for error in form.last_time.errors %}
-                                    <li style='color:#FF0000!important'>{{error}}</li>
+                                <li style='color:#FF0000!important'>{{error}}</li>
                                 {% endfor %}
                             </ul>
                             {% endif %}
                         </div>
-                        
+
                         <div class="mb-3" style="user-select: auto;">
-                            <label class="col-form-label" for="next_time" style="user-select: auto;">下次保養日期</label><span style="color: rgb(255, 0, 0) !important; user-select: auto;">*</span>
-                            <input class="form-control" id="next_time" name="next_time" placeholder="YYYY-mm" required="" type="text" value="0000-00" style="user-select: auto;">
+                            <label class="col-form-label" for="next_time" style="user-select: auto;">下次保養日期</label><span
+                                style="color: rgb(255, 0, 0) !important; user-select: auto;">*</span>
+                            <input class="form-control" id="next_time" name="next_time" placeholder="YYYY-mm"
+                                required="" type="text" value="0000-00" style="user-select: auto;">
                             {% if form.next_time.errors %}
                             <ul>
                                 {% for error in form.next_time.errors %}
-                                    <li style='color:#FF0000!important'>{{error}}</li>
+                                <li style='color:#FF0000!important'>{{error}}</li>
                                 {% endfor %}
                             </ul>
                             {% endif %}
                         </div>
-                        
+
 
                         <div class="mb-3" style="user-select: auto;">
                             <label class="col-form-label" for="note" style="user-select: auto;">備註</label>
@@ -101,16 +112,18 @@
                             {% if form.note.errors %}
                             <ul>
                                 {% for error in form.note.errors %}
-                                    <li style='color:#FF0000!important'>{{error}}</li>
+                                <li style='color:#FF0000!important'>{{error}}</li>
                                 {% endfor %}
                             </ul>
                             {% endif %}
                         </div>
-                        
+
 
                         <div class="modal-footer" style="user-select: auto;">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="user-select: auto;">關閉</button>
-                            <input class="btn btn-primary" id="submit" name="submit" type="submit" value="儲存" style="user-select: auto;">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                style="user-select: auto;">關閉</button>
+                            <input class="btn btn-primary" id="submit" name="submit" type="submit" value="儲存"
+                                style="user-select: auto;">
                         </div>
                     </form>
                 </div>
@@ -128,11 +141,20 @@
                     <div class="row align-items-center justify-content-start no-gutters">
                         <div class="col-md-6 col-12 me-2">
                             <div class="text-uppercase text-primary fw-bold text-s mb-1"><span>搜尋方式</span></div>
-                                <div class="text-dark fw-bold h5 mb-0">
-                                    <div class="input-group mb-3 p-0">
-                                    <select class="form-select" id="key" name="key" style="max-width:80px"><option value="_id">_id</option><option value="name">姓名</option><option value="phone">電話</option><option value="address">地址</option></select>
-                                    <input class="form-control small" id="value" name="value" type="text" placeholder="搜尋欄"><button class="btn btn-primary py-0" type="button" onclick="find('search');"><i class="fas fa-search"></i></button>
-                                    <button type="button" class="btn btn-warning ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" style="color: white; user-select: auto;">新增</button>
+                            <div class="text-dark fw-bold h5 mb-0">
+                                <div class="input-group mb-3 p-0">
+                                    <select class="form-select" id="type" name="type" style="max-width:80px">
+                                        <option value="_id">_id</option>
+                                        <option value="name">姓名</option>
+                                        <option value="phone">電話</option>
+                                        <option value="address">地址</option>
+                                    </select>
+                                    <input class="form-control small" id="value" name="value" type="text"
+                                        placeholder="搜尋欄"><button class="btn btn-primary py-0" type="button"
+                                        onclick="find('search');"><i class="fas fa-search"></i></button>
+                                    <button type="button" class="btn btn-warning ms-2" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal" data-bs-whatever="@mdo"
+                                        style="color: white; user-select: auto;">新增</button>
                                 </div>
                             </div>
                         </div>
@@ -142,49 +164,58 @@
                         <div class="col-md-12 col-12 me-2" style="user-select: auto;">
                             <!-- <div class="text-uppercase text-primary fw-bold text-s mb-1"><span>客戶清單</span></div> -->
                             <div class="card mb-4" style="user-select: auto;">
-                                <div class="card-header d-flex justify-content-between align-items-center" style="user-select: auto;">
+                                <div class="card-header d-flex justify-content-between align-items-center"
+                                    style="user-select: auto;">
                                     <h6 class="text-primary fw-bold m-0" style="user-select: auto;">客戶清單</h6>
-                                    <!-- <div class="dropdown no-arrow" style="user-select: auto;"><button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="user-select: auto;"><i class="fas fa-ellipsis-v text-gray-400" style="user-select: auto;"></i></button>
-                                        <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in" style="user-select: auto;">
-                                            <p class="text-center dropdown-header" style="user-select: auto;">dropdown header:</p><a class="dropdown-item" href="#" style="user-select: auto;">&nbsp;Action</a><a class="dropdown-item" href="#" style="user-select: auto;">&nbsp;Another action</a>
-                                            <div class="dropdown-divider" style="user-select: auto;"></div><a class="dropdown-item" href="#" style="user-select: auto;">&nbsp;Something else here</a>
-                                        </div>
-                                    </div> -->
+
                                 </div>
                                 <div class="card-body overflow-scroll" style="user-select: auto; height:500px">
                                     <!-- <div class="chart-area" style="user-select: auto;"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div><canvas data-bss-chart="{&quot;type&quot;:&quot;line&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;Earnings&quot;,&quot;fill&quot;:true,&quot;data&quot;:[&quot;0&quot;,&quot;10000&quot;,&quot;5000&quot;,&quot;15000&quot;,&quot;10000&quot;,&quot;20000&quot;,&quot;15000&quot;,&quot;25000&quot;],&quot;backgroundColor&quot;:&quot;rgba(78, 115, 223, 0.05)&quot;,&quot;borderColor&quot;:&quot;rgba(78, 115, 223, 1)&quot;}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:false,&quot;labels&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;}},&quot;title&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;},&quot;scales&quot;:{&quot;xAxes&quot;:[{&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:false,&quot;drawTicks&quot;:false,&quot;borderDash&quot;:[&quot;2&quot;],&quot;zeroLineBorderDash&quot;:[&quot;2&quot;],&quot;drawOnChartArea&quot;:false},&quot;ticks&quot;:{&quot;fontColor&quot;:&quot;#858796&quot;,&quot;fontStyle&quot;:&quot;normal&quot;,&quot;padding&quot;:20}}],&quot;yAxes&quot;:[{&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:false,&quot;drawTicks&quot;:false,&quot;borderDash&quot;:[&quot;2&quot;],&quot;zeroLineBorderDash&quot;:[&quot;2&quot;]},&quot;ticks&quot;:{&quot;fontColor&quot;:&quot;#858796&quot;,&quot;fontStyle&quot;:&quot;normal&quot;,&quot;padding&quot;:20}}]}}}" width="332" height="320" style="display: block; height: 160px; width: 166px; user-select: auto;" class="chartjs-render-monitor"></canvas></div> -->
-                                    <table class="table table-hover" >
+                                    <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">客戶名稱</th>
-                                            <th scope="col">電話</th>
-                                            <th scope="col">地址</th>
-                                            <th scope="col">刪除</th>
+                                                <th scope="col">#</th>
+                                                <th scope="col">客戶名稱</th>
+                                                <th scope="col">電話</th>
+                                                <th scope="col">地址</th>
+                                                <th scope="col">刪除</th>
                                             </tr>
                                         </thead>
-                                        <tbody >
-                                            {% for i in range(0,20)%}
+                                        <tbody id="place">
+                                            {% for result in results[:25]%}
                                             <tr style="user-select: auto;">
-                                                <td style="user-select: auto;">1</td>
-                                                <td style="user-select: auto;"><a href="/customers/1/" style="user-select: auto;">山海觀休閒渡假民宿</a></td>
-                                                <td style="user-select: auto;">9789916,0919235772</td>
-                                                <td style="user-select: auto;">頭城鎮濱海路二段78號</td>
+                                                <td style="user-select: auto;">{{result['_id']}}</td>
+                                                <td style="user-select: auto;"><a href="/customers/{{result['_id']}}/"
+                                                        style="user-select: auto;">{{result['name']}}</a></td>
+                                                <td style="user-select: auto;">{{result['phone']}}</td>
+                                                <td style="user-select: auto;">{{result['address']}}</td>
                                                 <td style="user-select: auto;">
-                                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal1" style="user-select: auto;">刪除</button>
-                                                    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="user-select: auto;">
+                                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal1"
+                                                        style="user-select: auto;">刪除</button>
+                                                    <div class="modal fade" id="exampleModal1" tabindex="-1"
+                                                        aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                                        style="user-select: auto;">
                                                         <div class="modal-dialog" style="user-select: auto;">
                                                             <div class="modal-content" style="user-select: auto;">
                                                                 <div class="modal-header" style="user-select: auto;">
-                                                                    <h5 class="modal-title" id="exampleModalLabel" style="user-select: auto;">確認刪除？</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="user-select: auto;"></button>
+                                                                    <h5 class="modal-title" id="exampleModalLabel"
+                                                                        style="user-select: auto;">確認刪除？</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal" aria-label="Close"
+                                                                        style="user-select: auto;"></button>
                                                                 </div>
                                                                 <div class="modal-body" style="user-select: auto;">
-                                                                    <p class="fw-bold" style="user-select: auto;">請注意！刪除後將無法復原！</p>
+                                                                    <p class="fw-bold" style="user-select: auto;">
+                                                                        請注意！刪除後將無法復原！</p>
                                                                 </div>
                                                                 <div class="modal-footer" style="user-select: auto;">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="user-select: auto;">取消</button>
-                                                                    <button type="button" class="btn btn-danger" onclick="location.href='/customers/1/delete/'" style="user-select: auto;">確認刪除</button>
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal"
+                                                                        style="user-select: auto;">取消</button>
+                                                                    <button type="button" class="btn btn-danger"
+                                                                        onclick="location.href='/customers/{{result['_id']}}/delete/'"
+                                                                        style="user-select: auto;">確認刪除</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -193,26 +224,52 @@
                                             </tr>
                                             {% endfor %}
                                         </tbody>
-                                        </table>
+                                    </table>
                                 </div>
 
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" onclick="last_page()" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#" id="page_index">1</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" onclick="next_page()" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
                     <div class="row align-items-center justify-content-start no-gutters">
                         <div class="col-md-3 col-6">
-                            <div class="text-uppercase text-black fw-bold text-s mb-1 text-center"><span>客戶清單調整</span></div>
+                            <div class="text-uppercase text-black fw-bold text-s mb-1 text-center"><span>客戶清單調整</span>
+                            </div>
                             <div class="text-dark fw-bold h5 mb-0 text-center">
-                                <button class="btn btn-primary  d-sm-inline-block mb-1" onclick="find('search','none');">全部</button>
-                                <button class="btn btn-primary  d-sm-inline-block mb-1" onclick="find('search','this_month','next-time','1');">本月</button>
-                                <button class="btn btn-primary  d-sm-inline-block mb-1" onclick="find('search','next_month','next-time','1');">下月</button>
+                                <button class="btn btn-primary  d-sm-inline-block mb-1"
+                                    onclick="find('search','none');">全部</button>
+                                <button class="btn btn-primary  d-sm-inline-block mb-1"
+                                    onclick="this_month()" unselectable="on" style="user-select：none;-webkit-user-select:none;-moz-user-select:none;">本月</button>
+                                <button class="btn btn-primary  d-sm-inline-block mb-1"
+                                    onclick="next_month()" unselectable="on" style="user-select：none;-webkit-user-select:none;-moz-user-select:none;">下月</button>
                             </div>
                         </div>
                         <div class="col-md-3 col-6">
-                            <div class="text-uppercase text-black fw-bold text-s mb-1 text-center"><span>表格輸出</span></div>
+                            <div class="text-uppercase text-black fw-bold text-s mb-1 text-center"><span>表格輸出</span>
+                            </div>
                             <div class="text-dark fw-bold h5 mb-0 text-center">
-                                <button class="btn btn-primary d-sm-inline-block mb-1" onclick="location.href='/customers/output/?month=this_month'">本月表格</button>
-                                <button class="btn btn-primary d-sm-inline-block mb-1" onclick="location.href='/customers/output/?month=next_month'">下月表格</button>
+                                <button class="btn btn-primary d-sm-inline-block mb-1"
+                                    onclick="location.href='/customers/output/?month=this_month'">本月表格</button>
+                                <button class="btn btn-primary d-sm-inline-block mb-1"
+                                    onclick="location.href='/customers/output/?month=next_month'">下月表格</button>
                             </div>
                         </div>
                     </div>
