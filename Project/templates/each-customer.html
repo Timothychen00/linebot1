@@ -15,7 +15,7 @@
   <!-- 中央顯示區域 -->
   <div class="row  middle-board justify-content-center pt-md-0 pt-4 align-content-center mx-auto  m-3 "
     style="min-height:600px;max-width:800px;">
-    <div class="bd-example" style="margin-top: -150x; padding:10px ">
+    <div class="bd-example overflow-scroll" style="margin-top: -150x; padding:10px ">
       <table class="table table-bordered border border-dark border-3 mt-3">
         <thead>
           <tr>
@@ -51,7 +51,7 @@
           <tr>
             <th scope="row">備註</th>
             <td style="white-space:pre">{{result['note']}}
-              <div class="overflow" style="width:100%;height:200px!important;white-space:normal!important">
+              <div class="overflow-scroll" style="width:100%;height:200px!important;white-space:normal!important">
                 {% if related %}
                 關聯機器：
                 {%for i in related%}
