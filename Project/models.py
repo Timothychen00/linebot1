@@ -7,8 +7,8 @@ from dateutil.relativedelta import relativedelta
 load_dotenv()
 class DB_Model():
     def __init__(self):
-        self.client=pymongo.MongoClient("mongodb+srv://"+os.environ['DB_USER']+":"+os.environ['DB_PASSWORD']+"@cluster0.mgwi6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-        self.client_backup=pymongo.MongoClient("mongodb+srv://"+os.environ['DB_USER']+":"+os.environ['DB_PASSWORD']+"@drinking-bk.soibl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",tlsAllowInvalidCertificates=True,tz_aware=True)
+        self.client=pymongo.MongoClient(os.environ['DB_STRING'])
+        self.client_backup=pymongo.MongoClient(os.environ['DB_BACKUP_STRING'],tlsAllowInvalidCertificates=True,tz_aware=True)
         self.db=self.client.Flask
         self.customers=self.db.customers
         self.users=self.db.users
