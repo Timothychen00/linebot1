@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from dateutil.relativedelta import relativedelta
 load_dotenv()
 
-client=pymongo.MongoClient("mongodb+srv://"+os.environ['DB_USER']+":"+os.environ['DB_PASSWORD']+"@cluster0.mgwi6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+client=pymongo.MongoClient(os.environ['DB_STRING'])
 db=client.Flask
 collection=db.customers
 checked=1
