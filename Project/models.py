@@ -179,7 +179,7 @@ class DB_Model():
         for i in results:
             df.loc[len(df.index)]={"上次":i['last-time'],"姓名":i['name'],"電話":i['phone'],"地址":i['address']}
         # print(df)
-        df.to_excel('Project/static/'+filename+'.xlsx',encoding='utf-8',index=None)
+        df.to_excel('Project/static/'+filename+'.xlsx',index=None)
         
     def backup_data(self):
         results=self.customers.find()
