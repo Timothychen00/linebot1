@@ -2,55 +2,104 @@
 <html lang="en">
 
 <head>
-    <title>首頁</title>
-    <!-- Required meta tags -->
+    {% block head %}
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS v5.0.2 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css/template.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>{% block title%}{% endblock title%} - 鑫沅淨水</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="/static/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/static/fonts/ionicons.min.css">
+    <link rel="shortcut icon" href="/static/images/favicon.ico" />
+    <link rel="bookmark" href="/static/images/favicon.ico" />
+    {% endblock head %}
 </head>
 
-<body>
-    {% block main_content %}
-    <div class="container " style="min-height:100vh">
-        <!-- 標題 -->
-        <div class="row  mt-md-5 mt-1 justify-content-center" >
-           <div class=" d-flex col-3 justify-content-center text-center ">
-               <img src="/static/images/home.png " style="height: 65px; " alt="logo "></span>
-               <a class='text h1'>首頁</a>
-           </div>
-        </div>
-  
-       <!-- 中央顯示區域 -->
-       <div class="row  middle-board  align-items-center justify-content-center mx-auto  m-3 "style="min-height:500px;max-width:800px" >
-          <div class="d-flex align-items-center justify-content-center button mx-5" style="cursor: pointer; " onclick="window.location='/finish'">
-               <img src="/static/images/finish.png " style="height:80px" >
-               <h1>完成任務</h1>
-          </div>
-          <div class="d-flex align-items-center justify-content-center button" style="cursor: pointer; " onclick="window.location='/customers/'">
-               <img src="/static/images/setting.png " style="height:80px">
-               <h1>客戶管理</h1>
-          </div>
-
-            <div class="d-flex align-items-center justify-content-center button" style="cursor: pointer; " onclick="window.location='/delay'">
-               <img src="/static/images/time.png " style="height:80px">
-               <h1>延遲任務</h1>
+<body  id="page-top" class="sidebar-toggled">
+    {%block nav%}
+    <div id="wrapper">
+        <nav
+            class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 toggled">
+            <div class="container-fluid d-flex flex-column p-0"><a
+                    class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="icon ion-waterdrop"></i></div>
+                    <div class="sidebar-brand-text mx-3"><span>鑫沅淨水</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" href="/finish"><i
+                                class="icon ion-checkmark-round"></i><span>完成任務</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/customers"><i
+                                class="fas fa-user"></i><span>客戶管理</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/delay"><i
+                                class="far fa-clock"></i><span>延遲任務</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/logout"><i
+                                class="icon ion-log-out"></i><span>登出</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html"></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                        id="sidebarToggle" type="button"></button></div>
             </div>
-       </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid">
+                        <button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop"
+                            type="button"><i class="fas fa-bars"></i></button>
+                        <!-- <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ..."><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                        </form> -->
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <!-- <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
+                                <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
+                                    <form class="me-auto navbar-search w-100">
+                                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
+                                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li> -->
+                            <li class="nav-item dropdown no-arrow mx-1">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
+                                        aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
+                                            class="badge bg-danger badge-counter">1</span><i
+                                            class="fas fa-bell fa-fw"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
+                                        <h3 class="dropdown-header">通知中心</h3><a
+                                            class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="me-3">
+                                                <div class="bg-primary icon-circle"><i
+                                                        class="fas fa-file-alt text-white"></i></div>
+                                            </div>
+                                            <div><span class="small text-gray-500">6月21日, 2023</span>
+                                                <p style="font-weight: 700;">系統更新成功</p>
+                                            </div>
+                                    </div>
+                                </div>
+                            </li>
 
-       <!-- 按鈕列 -->
-       <div class="row">
-           <div class="col offset-md-11 offset-4 ">
-               <div style="cursor: pointer; " onclick="window.location='/logout'" class="home p-1" >
-                   <img src="/static/images/logout.png " height=35% width=35% alt="logout button ">
-                   <h4>登出</h4>
-               </div>
-           </div>
-       </div>
-       <div class="row  mt-3 text-center"><a style="color: rgb(138, 132, 132);">Copyright © 2022 Iteration.</a></div>
-   </div>
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item dropdown no-arrow">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
+                                        aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
+                                            class="d-none d-lg-inline me-2 text-gray-600 small">鑫沅淨水</span><img
+                                            class="border rounded-circle img-profile"
+                                            src="/static/images/water.png"></a>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+                                        <!-- <a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a><a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity log</a> -->
+                                        <!-- <div class="dropdown-divider"></div> -->
+                                        <a class="dropdown-item" href="/logout"><i
+                                                class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;登出</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+    {%endblock nav%}
+    {% block main_content %}
     {% endblock main_content %}
     <script>
     {% with messages=get_flashed_messages() %}
@@ -61,9 +110,13 @@
         {%endif%}
     {%endwith%}
     </script>
-
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/js/chart.min.js"></script>
+    <script src="/static/js/bs-init.js"></script>
+    <script src="/static/js/theme.js"></script>
     {% block js_extend %}
      <script src='/static/js/ajax.js'></script>
+
     {% endblock js_extend %} 
 
 

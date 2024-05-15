@@ -1,80 +1,82 @@
+var page_index = 1;
+var max_index = 10;
+var search_mode = "total";
+//search
+//total
+//this_month
+//next_month
 
-function getScrollTop()
-{
-    var dashboard=document.getElementById('dashboard');
-    var scrollTop = 0, bodyScrollTop = 0, documentScrollTop = 0;
-    if(dashboard){
-        bodyScrollTop = dashboard.scrollTop;
-    }
-    if(document.documentElement){
-        documentScrollTop = document.documentElement.scrollTop;
-    }
-scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop;
-return scrollTop;
+//find_mode可以通過var也可以通過傳遞變數
+
+function change_mode(mode) {
+    window.page_index = 1;
+    document.getElementById('page_index').innerText = page_index;
+    window.search_mode = mode;
+    find();
+}
+// alert(3);
+
+var next_page = () => {
+    window.page_index += 1;
+    find();//使用當前的var
+    document.getElementById('page_index').innerText = page_index;
 }
 
-function getScrollHeight(){
-        var dashboard=document.getElementById('dashboard');
-    　　var scrollHeight = 0, bodyScrollHeight = 0, documentScrollHeight = 0;
-    　　if(dashboard){
-    　　　　bSH = dashboard.scrollHeight;
-    　　}
-    　　if(document.documentElement){
-    　　　　dSH = document.documentElement.scrollHeight;
-    　　}
-    scrollHeight = (bSH - dSH > 0) ? bSH : dSH ;
-    　　return scrollHeight;
-    }
+var last_page = () => {
+    if (page_index > 1)
+        window.page_index -= 1;
+    find();
+    document.getElementById('page_index').innerText = page_index;
 
-function getWindowHeight(){
-    var dashboard=document.getElementById('dashboard');
-    var windowHeight = 0;
-    if(document.compatMode == "CSS1Compat"){
-        windowHeight = document.documentElement.clientHeight;
-    }else{
-        windowHeight = dashboard.clientHeight;
-    }
-    return windowHeight;
 }
 
-var month='';
-function find(type='dynamic',t_month=null,key_v=null,value_v=null){
-   
-    if (t_month)
-        month=t_month
-    if (key_v==null)
+function find(key_v = null, value_v = null) {
+    // alert(search_mode);
+    console.log(search_mode);
+    //    alert(2);
+    var start = (page_index - 1) * 25;
+    if (search_mode == 'total') {
+        // key_v=null;
+        // value_v=null;
+    } else if (search_mode == 'this_month' || search_mode == 'next_month') {
+        key_v = 'next-time';
+        value_v = '1';
+    }else if(search_mode=='search')
     {
-        key_v=document.getElementById('type').value
-        value_v=document.getElementById('value').value;
+        key_v = document.getElementById('type').value;
+        value_v = document.getElementById('value').value;
     }
-    console.log(value);
-    xhr=new XMLHttpRequest();
 
-    var start=1;
-    table=document.querySelector("#place");
-    if (table){
-        console.log(table.childElementCount);//因爲每一個tr的編號不一定是間隔1，所以要接續之前結果要用childElementCount
-        start=table.childElementCount;
-    }
-    xhr.onload = function(e) {
-        var place=document.getElementById('place');
+    console.log(value);
+    xhr = new XMLHttpRequest();
+
+    // alert(page_index);
+    // alert(start);
+    // var start=1;
+    table = document.querySelector("#place");
+    xhr.onload = function (e) {
+        // alert(1);
+        var place = document.getElementById('place');
         //place.innerHTML=a[0]
-        a=JSON.parse(xhr.response);
-        var month=a[0];
+        a = JSON.parse(xhr.response);
+        console.log(a);
+        var month = a[0];
+
         a.shift();
         console.log(a[1]);
-        length=20;
-        for (let i=0;i<length;i++){
-    
-        place.innerHTML+="\
+        length = 25;
+        place.innerHTML = "";
+        for (let i = start; i < start+length; i++) {
+            // place.innerHTML="";
+            place.innerHTML += "\
             <tr>\
-                <td>"+a[i][0]+"</td>\
-                <td><a href=\'/customers/"+a[i][0]+"/\'>"+a[i][1]+"</a></td>\
-                <td>"+a[i][2]+"</td>\
-                <td>"+a[i][3]+"</td>\
+                <td>"+ a[i][0] + "</td>\
+                <td><a href=\'/customers/"+ a[i][0] + "/\'>" + a[i][1] + "</a></td>\
+                <td>"+ a[i][2] + "</td>\
+                <td>"+ a[i][3] + "</td>\
                 <td>\
-                    <button type=\"button\" class=\"btn btn-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal"+a[i][0]+"\">刪除</button>\
-                    <div class=\"modal fade\" id=\"exampleModal"+a[i][0]+"\" tabindex=\"-1\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\
+                    <button type=\"button\" class=\"btn btn-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal"+ a[i][0] + "\">刪除</button>\
+                    <div class=\"modal fade\" id=\"exampleModal"+ a[i][0] + "\" tabindex=\"-1\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\
                         <div class=\"modal-dialog\">\
                             <div class=\"modal-content\">\
                                 <div class=\"modal-header\">\
@@ -86,7 +88,7 @@ function find(type='dynamic',t_month=null,key_v=null,value_v=null){
                                 </div>\
                                 <div class=\"modal-footer\">\
                                     <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">取消</button>\
-                                    <button type=\"button\" class=\"btn btn-danger\" onclick=\"location.href=\'/customers/"+a[i][0]+"/delete/ \'\" >確認刪除</button>\
+                                    <button type=\"button\" class=\"btn btn-danger\" onclick=\"location.href=\'/customers/"+ a[i][0] + "/delete/ \'\" >確認刪除</button>\
                                 </div>\
                             </div>\
                         </div>\
@@ -96,32 +98,17 @@ function find(type='dynamic',t_month=null,key_v=null,value_v=null){
         }
     }
     // alert(month);
-    var place=document.getElementById('place');
-    url='';
-    if (type=='dynamic')
-    {
-        if (month==null || month=='none')
-            url='/customers/?key='+key_v+'&value='+value_v+"&type=json&start="+start+"&length=20";
-        else
-            url='/customers/?key='+key_v+'&value='+value_v+"&type=json&start="+start+"&length=20&month="+month;
-    }else{
-        place.innerHTML='';
-        if (month==null || month=='none')
-        {
-            url='/customers/?key='+key_v+'&value='+value_v+"&type=json";
-        }else
-            url='/customers/?key='+key_v+'&value='+value_v+"&type=json&month="+month;
-    }
-    xhr.open('GET',url,false)
+    var place = document.getElementById('place');
+    url = '';
+        place.innerHTML = '';
+        if ( search_mode=='total'){
+            url = '/customers/?type=json';
+        }else if (search_mode == 'search') {
+            url = '/customers/?key=' + key_v + '&value=' + value_v + "&type=json";
+        } else if (search_mode == 'this_month' || search_mode == 'next_month'){
+            url = '/customers/?key=' + key_v + '&value=' + value_v + "&type=json&month=" + search_mode;
+        }
+    // }
+    xhr.open('GET', url, false)
     xhr.send()
 }
-var dashboard=document.getElementById('dashboard');
-dashboard.onscroll = function(){
-    d=Math.abs(getScrollTop() - getScrollHeight()+dashboard.offsetHeight);
-    console.log(getScrollTop(),getWindowHeight(),getScrollHeight(),dashboard.offsetHeight,d);
-    if(d<(getScrollTop()*0.35)){
-        find()
-    }
-};
-
-//dashboard.onload=find();

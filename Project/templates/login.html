@@ -1,72 +1,80 @@
-{% extends 'base.html' %}
-{% block main_content %}
-    <div class="container " style="min-height:100vh">
-         <!-- 標題 -->
-        <div class="row row-md-col-1" style=" z-index:1">
-            <div class=" d-flex col-3 text-center ">
-                <img src="/static/images/login.png " style="padding:10px;height: 65px; " alt="logo "></span>
-                <a class='text h1'>登入</a>
-            </div>
-        </div>
-         <!-- 標題 -->
-        <div class="row  middle-board  align-content-center justify-content-center  mx-auto mt-md-5 m-3 "style="min-height:500px; max-width:800px">
-            <div class="col-md-4 col-10">
-                <h1 class="text-center pb-4">登 入</h1>
-                <form action="/" method="post">
-                    {{form.csrf_token()}}
-                    <div class="mb-3">
-                        <label class="form-label">帳號</label>
-                        {{form.username}}
-                        {% if form.username.errors %}
-                        <ul>
-                            {% for err in form.username.errors %}
-                                <li style='color:#FF0000!important'>{{err}}</li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">密碼</label>
-                        {{form.password}}
-                        {% if form.password.errors %}
-                        <ul>
-                            {% for err in form.password.errors %}
-                                <li style='color:#FF0000!important'>{{err}}</li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                    </div>
-                    <div class="mb-3 form-check">
-                        {{form.rememberme.label}}
-                        {{form.rememberme(value='0')}}
-                    </div>
-                    <!-- 按鈕列 -->
-                    <div class="row justify-content-center">
-                        <div class=" d-flex justify-content-center">
-                            <div style="cursor: pointer; " class="home pt-2 m-2" onclick="document.getElementById('submit').click()" >
-                                <img src="static/images/login-1.png " height=45% width=45% alt="login button ">
-                                <input _class="home p-1 m-2" id="submit" name="submit" type="submit" value="登入" style="display:none;">
-                                <br>
-                                <label>登入</label>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>登入頁面 - 鑫沅淨水</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+</head>
+
+<body class="bg-gradient-primary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col">
+                <div class="card shadow-lg o-hidden border-0 my-5">
+                    <div class="card-body p-0">
+                        <div class="row justify-content-center">
+                            <!-- <div class="col-lg-6 d-none d-lg-flex">
+                                <div class="flex-grow-1 bg-login-image" style="background-image: url(&quot;assets/img/dogs/image3.jpeg&quot;);"></div>
+                            </div> -->
+                            <div class="col-md-9 col">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h4 class="text-dark mb-4">歡迎回來</h4>
+                                    </div>
+                                    <form class="user" action="/" method="post">
+                                        {{form.csrf_token()}}
+                                        <div class="mb-3">
+                                            <input class="form-control form-control-user" type="text" id="username"
+                                                name="username" aria-describedby="emailHelp" placeholder="請輸入帳號">
+                                            {% if form.username.errors %}
+                                            <ul>
+                                                {% for err in form.username.errors %}
+                                                <li style='color:#FF0000!important'>{{err}}</li>
+                                                {% endfor %}
+                                            </ul>
+                                            {% endif %}
+                                        </div>
+                                        <div class="mb-3">
+                                            <input class="form-control form-control-user" type="password" id="password"
+                                                name="password" placeholder="密碼">
+                                            {% if form.password.errors %}
+                                            <ul>
+                                                {% for err in form.password.errors %}
+                                                <li style='color:#FF0000!important'>{{err}}</li>
+                                                {% endfor %}
+                                            </ul>
+                                            {% endif %}
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="custom-control custom-checkbox small">
+                                                <div class="form-check">
+                                                    {{form.rememberme.label}}
+                                                    {{form.rememberme(value='0')}}
+                                                </div>
+                                            </div>
+                                        </div><button class="btn btn-primary d-block btn-user w-100"
+                                            type="submit">登入</button>
+                                        <!-- <hr> -->
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-        <div class="row text-center"><a style="color: rgb(138, 132, 132);">Copyright © 2022 Iteration.</a></div>
     </div>
-{% endblock main_content %}
-<script>
-{% with messages=get_flashed_messages() %}
-    {%if messages%}
-        {%for msg in messages%}
-            alert('{{msg}}');
-        {%endfor%}
-    {%endif%}
-{%endwith%}
-</script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/js/bs-init.js"></script>
+    <script src="/static/js/theme.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js " integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p " crossorigin="anonymous "></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js " integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF " crossorigin="anonymous "></script>
+</body>
 
-{% block js_extend %}
-<script src='/static/js/ajax.js'></script>
-{% endblock js_extend %}
+</html>

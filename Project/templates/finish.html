@@ -1,178 +1,169 @@
 {% extends 'base.html' %}
 {% block main_content %}
-<form action="/finish/" method="post" >
-{{form.csrf_token()}}
-<div class="container " style="min-height:100vh">
-    <!-- 標題 -->
-    <div class="row  mt-md-5 mt-1 justify-content-center" >
-        <div class=" d-flex col-3 justify-content-center text-center ">
-            <img src="/static/images/finish.png " style="height: 65px; " alt="logo "></span>
-            <a class='text h1'>完成</a>
+<form action="/finish/" method="post">
+    {{form.csrf_token()}}
+    <div class="container card shadow shadow-1 mb-2 pb-5" style="min-height:100vh">
+        <!-- 標題 -->
+        <div class="row  mt-md-5 mt-1 justify-content-center">
+            <div class=" d-flex col-3 justify-content-center text-center ">
+                <h1 class='text h1'>完成</h1>
+            </div>
         </div>
-    </div>
-    <!-- 中央顯示區域 -->
-    <div class="row  middle-board justify-content-center pt-md-0 pt-4  mx-auto  m-3 "style="min-height:700px;max-width:850px;" >
-        <!-- 搜尋列 -->
-        <div class="row mt-md-4 mt-1  justify-content-center" style="max-height: 60px;">
-            <div class="col-3 ps-4" style="max-height:38px;min-width:100px">
-                <div class="input-group mb-3 p-0">
-                    {{form.key(class_='form-select',id='key',style='min-width:100px')}}
-                    {% if form.key.errors %}
-                    <ul>
-                        {% for error in form.key.errors %}
+        <!-- 中央顯示區域 -->
+        <div class="row  middle-board justify-content-center pt-md-0 pt-4  mx-auto  m-3 "
+            style="min-height:700px;max-width:850px;">
+            <!-- 搜尋列 -->
+            <div class="row mt-md-4 mt-1  justify-content-center" style="max-height: 60px;">
+                <div class="col-3 ps-4" style="max-height:38px;min-width:100px">
+                    <div class="input-group mb-3 p-0">
+                        {{form.key(class_='form-select',id='key',style='min-width:100px')}}
+                        {% if form.key.errors %}
+                        <ul>
+                            {% for error in form.key.errors %}
                             <li style='color:#FF0000!important'>{{error}}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col col-md-3 ps-4 pe-4" style="max-height:38px">
+                    {{form.value(class_='form-control',id='value',value='')}}
+                    {% if form.value.errors %}
+                    <ul>
+                        {% for error in form.value.errors %}
+                        <li style='color:#FF0000!important'>{{error}}</li>
                         {% endfor %}
                     </ul>
                     {% endif %}
                 </div>
-            </div>
-            <div class="col col-md-3 ps-4 pe-4" style="max-height:38px">
-                {{form.value(class_='form-control',id='value',value='')}}
-                {% if form.value.errors %}
-                <ul>
-                    {% for error in form.value.errors %}
-                        <li style='color:#FF0000!important'>{{error}}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}      
-            </div>
 
-        <div class="row justify-content-center mt-md-4" style="max-height: 150px;" >
-            <div class="col-md-6 col-12">
-                {{form.state.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
-                <input class="text-area text-center form-control" id="state" name="state" required="" type="text" value="" readonly>
-                {% if form.state.errors %}
-                <ul>
-                    {% for error in form.state.errors %}
-                        <li style='color:#FF0000!important'>{{error}}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-12">
-                {{form.component.label(class_='form-check-label')}}
-                {{form.component(class_='form-select',multiple='multiple')}}
-                {% if form.component.errors %}
-                    <ul>
-                        {% for error in form.component.errors %}
+                <div class="row justify-content-center mt-md-4" style="max-height: 150px;">
+                    <div class="col-md-6 col-12">
+                        {{form.state.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
+                        <input class="text-area text-center form-control" id="state" name="state" required=""
+                            type="text" value="" readonly>
+                        {% if form.state.errors %}
+                        <ul>
+                            {% for error in form.state.errors %}
                             <li style='color:#FF0000!important'>{{error}}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </div>
-        </div>
-
-
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-12">
-                <div>
-                    {{form.finish_time.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
-                    {{form.finish_time(class_='form-input')}}
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
                 </div>
-                <br>
-                {% if form.finish_time.errors %}
-                    <ul>
-                        {% for error in form.finish_time.errors %}
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-12">
+                        {{form.component.label(class_='form-check-label')}}
+                        {{form.component(class_='form-select',multiple='multiple')}}
+                        {% if form.component.errors %}
+                        <ul>
+                            {% for error in form.component.errors %}
                             <li style='color:#FF0000!important'>{{error}}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </div>
-        </div>
-
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-12">
-                <div>
-                    {{form.next_time.label(class_='col-form-label')}}(YYYY-MM)
-                    {{form.next_time(class_='form-control',placeholder='YYYY-mm')}}
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
                 </div>
-                {% if form.next_time.errors %}
-                    <ul>
-                        {% for error in form.next_time.errors %}
-                            <li style='color:#FF0000!important'>{{error}}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </div>
-        </div>
 
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-12">
-                <div>
-                    {{form.fee.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
-                    {{form.fee(class_='form-control')}}
+
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-12">
+                        <div>
+                            {{form.finish_time.label(class_='col-form-label')}}<span
+                                style='color:#FF0000!important'>*</span>
+                            {{form.finish_time(class_='form-input')}}
+                        </div>
+                        <br>
+                        {% if form.finish_time.errors %}
+                        <ul>
+                            {% for error in form.finish_time.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
                 </div>
-                {% if form.fee.errors %}
-                    <ul>
-                        {% for error in form.fee.errors %}
-                            <li style='color:#FF0000!important'>{{error}}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </div>
-        </div>
 
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-12">
-                <div>
-                    {{form.person.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
-                    {{form.person(class_='form-control')}}
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-12">
+                        <div>
+                            {{form.next_time.label(class_='col-form-label')}}(YYYY-MM)
+                            {{form.next_time(class_='form-control',placeholder='YYYY-mm')}}
+                        </div>
+                        {% if form.next_time.errors %}
+                        <ul>
+                            {% for error in form.next_time.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
                 </div>
-                {% if form.person.errors %}
-                    <ul>
-                        {% for error in form.person.errors %}
-                            <li style='color:#FF0000!important'>{{error}}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </div>
-        </div>
 
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-12">
-                <div>
-                    {{form.note.label(class_='col-form-label')}}
-                    {{form.note(class_='form-control')}}
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-12">
+                        <div>
+                            {{form.fee.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
+                            {{form.fee(class_='form-control')}}
+                        </div>
+                        {% if form.fee.errors %}
+                        <ul>
+                            {% for error in form.fee.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
                 </div>
-                {% if form.note.errors %}
-                    <ul>
-                        {% for error in form.note.errors %}
+
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-12">
+                        <div>
+                            {{form.person.label(class_='col-form-label')}}<span style='color:#FF0000!important'>*</span>
+                            {{form.person(class_='form-control')}}
+                        </div>
+                        {% if form.person.errors %}
+                        <ul>
+                            {% for error in form.person.errors %}
                             <li style='color:#FF0000!important'>{{error}}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-12">
+                        <div>
+                            {{form.note.label(class_='col-form-label')}}
+                            {{form.note(class_='form-control')}}
+                        </div>
+                        {% if form.note.errors %}
+                        <ul>
+                            {% for error in form.note.errors %}
+                            <li style='color:#FF0000!important'>{{error}}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row justify-content-center mt-3 mb-5">
+                    <div class="col-md-2 col-3">
+                        {{form.submit(class_='btn btn-success')}}
+                    </div>
+                </div>
+
             </div>
         </div>
 
-        <div class="row justify-content-center mt-3">
-            <div class="col-md-2 col-3">
-                {{form.submit(class_='btn btn-success')}}
-            </div>
-        </div>  
-    </div>
-</div>
+        <!-- 按鈕 -->
+
         
-<!-- 按鈕 -->
-    <div class="row  justify-content-center mt-5">
-        <div class="col-md-2 col-5 d-flex justify-content-center">
-            <div style="cursor: pointer;  " onclick="window.location='/home'" class="home p-1" >
-                <img src="/static/images/home.png " height=45% width=35% >
-                <h4>回首頁</h4>
-            </div>
-        </div>
-        <div class="col-md-2 col-5 ms-md-5">
-            <div style="cursor: pointer; " onclick="window.location='/logout'" class="home p-1" >
-                <img src="/static/images/logout.png " height=45% width=40%>
-                <h4>登出</h4>
-            </div>
-        </div>
-
-
-    <div class="row  mt-3 text-center"><a style="color: rgb(138, 132, 132);">Copyright © 2022 Iteration.</a></div>
+        
     </div>
 
-</form> 
+    <div class="row  my-4 text-center"><a style="color: rgb(138, 132, 132);">Copyright © 2022 Iteration.</a></div>
+</form>
 
 {% endblock main_content %}

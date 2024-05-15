@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block main_content %}
 
-    <div class="container " style="min-height:100vh">
+    <div class="container card shadow shadow-1 pb-5 " style="min-height:100vh">
         <!-- 標題 -->
         <div class="row  mt-md-5 mt-1 justify-content-center" >
             <div class=" d-flex col-3 justify-content-center text-center ">
-                <img src="/static/images/time.png " style="height: 65px; " alt="logo "></span>
-                <a class='text h1'>延遲</a>
+                <!-- <img src="/static/images/time.png " style="height: 65px; " alt="logo "></span> -->
+                <h1 class='text h1'>延遲</h1>
             </div>
         </div>
         <!-- 中央顯示區域 -->
@@ -108,21 +108,6 @@
         </div>
     </div>
           
-
-    <!-- 按鈕 -->
-    <div class="row  justify-content-center">
-        <div class="col-md-1 col-4  me-1 ">
-            <div style="cursor: pointer;  " onclick="window.location='/home'" class="home p-1" >
-                <img src="/static/images/home.png " height=45% width=35% alt="logout button ">
-                <h4>回首頁</h4>
-            </div>
-        </div>
-        <div class="col-md-1 col-4 ms-md-5">
-            <div style="cursor: pointer; " onclick="window.location='/logout'" class="home p-1" >
-                <img src="/static/images/logout.png " height=45% width=40% alt="logout button ">
-                <h4>登出</h4>
-            </div>
-        </div>
 
     <div class="row  mt-3 text-center"><a style="color: rgb(138, 132, 132);">Copyright © 2022 Iteration.</a></div>
     </div>

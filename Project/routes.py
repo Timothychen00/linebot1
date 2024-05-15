@@ -14,7 +14,7 @@ def print_url():
 def login():
     form=LoginForm()
     if 'logged_in' in session and session['logged_in']:
-        return redirect('/home')
+        return redirect('/customers/')
     
     if form.validate_on_submit():
         username=form.username.data
@@ -35,7 +35,7 @@ def login():
             else:
                 session.permanent=True
                 app_route.permanent_session_lifetime = datetime.timedelta(minutes=5)
-            return redirect("home")
+            return redirect('/customers/')
     return render_template("login.html",form=form)
 
 @app_route.route('/logout')
@@ -109,6 +109,7 @@ def customers_manage():
         type=request.args.get('type')
         month=request.args.get('month')
         start=request.args.get('start')
+        print("start::::::::::",start)
         data_length=request.args.get('length')
         try:
             if key=='_id':
@@ -123,6 +124,7 @@ def customers_manage():
         print(key,value,type,start,data_length,month)
 
         results=db_model.search(key,value,month)
+        # print()
         print(len(results))
         if type=='str':
             if results and len(results)==1:
@@ -132,18 +134,19 @@ def customers_manage():
             else:
                 return "沒有找到"
         elif type=='json':
-            if not data_length:
-                data_length=len(results)
-            if not start:
-                start=0
+            # if not data_length:
+            data_length=len(results)
+            # if not start:
+            #     start=0
             print("length:",data_length)
             processed_results=[]
-            end=data_length+start
-            if data_length+start>len(results):
-                end=len(results)
-            for i in range(start,end):
+            # end=data_length+start
+            # if data_length+start>len(results):
+            #     end=len(results)
+            for i in range(len(results)):
                 processed_results.append([results[i]["_id"],results[i]["name"],results[i]["phone"],results[i]["address"]])
             # print(results)
+            
             processed_results.insert(0,month)
             return jsonify(processed_results)
     
@@ -237,3 +240,10 @@ def backup():
 @app_route.before_request
 def e():
     print("-"*20)
+    
+@app_route.route("/api/results_count")
+def count_result():
+    value=db_model.search()
+    print("\n")
+    print(len(value))
+    return str(len(value))

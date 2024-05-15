@@ -1,162 +1,154 @@
 {% extends 'base.html' %}
 {% block main_content %}
-    <div class="container " style="min-height:100vh">
+<div class=" container " style="min-height:100vh">
 
-      <div class="col-md-1 col-4 ms-md-5">
-        <button onclick="location.href='/customers/{{result['_id']+1}}/'" class="btn btn-primary">下一個</button>
-      </div> 
-        <!-- 標題 -->
-        <div class="row  mt-md-5 mt-1 justify-content-center" >
-            <div class=" d-flex col-3 justify-content-center text-center ">
-                <img src="/static/images/setting.png " style="height: 65px; " alt="logo "></span>
-                <a class='text h1'>用戶</a>
-            </div>
-        </div>
-        <!-- 中央顯示區域 -->
-        <div class="row  middle-board justify-content-center pt-md-0 pt-4 align-content-center mx-auto  m-3 "style="min-height:600px;max-width:800px;" >
-           <div class="bd-example" style="margin-top: -150x; padding:10px ">
-                <table class="table table-bordered border border-dark border-3 mt-3">
-                    <thead>
-                  <tr>
-                    <th class="col-2">ID</th>
-                    <td>{{result['_id']}}</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">名稱</th>
-                    <td>{{result['name']}}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">地址</th>
-                    <td>{{result['address']}}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">電話</th>
-                    <td>{{result['phone']}}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">機器型號</th>
-                    <td>{{result['machine']}}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">上次時間</th>
-                    <td>{{result['last-time']}}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">下次時間</th>
-                    <td>{{result['next-time']}}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">備註</th>
-                    <td style="white-space:pre">{{result['note']}}
-                      <div class="overflow" style="width:100%;height:200px!important;white-space:normal!important">
-                      {% if related %}
-                        關聯機器：
-                        {%for i in related%}
-                          <br><a href="/customers/{{i[0]}}/">{{i[0]}} {{i[1]}}</a>
-                        {%endfor%}
-                      {%endif%}
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              
-                </table>
-              <div class="col ps-3">
-                  <button onclick="location.href='/customers/{{result['_id']}}/edit/'" class="btn btn-secondary">編輯</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="row  middle-board justify-content-center pt-md-2 pt-0  mx-auto  m-3 "style="min-height:600px;max-width:800px;" >
-            <div class="col overflow mt-md-0 mt-4" style="height: 600px;">
-              <table class="table px-2 text-center" id='logs'>
-                <thead>
-                  <tr>
-                    <th scope="col">時間</th>
-                    <th scope="col">類型</th>
-                    <th scope="col">1</th>
-                    <th scope="col">2</th>
-                    <th scope="col">3</th>
-                    <th scope="col">4</th>
-                    <th scope="col">5</th>
-                    <th scope="col">6</th>
-                    <th scope="col">價錢</th>
-                    <th scope="col">人員</th>
-                    <th scope="col">備註</th>
-                    <th scope='col'>刪除</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-
-                    {% for day_item in result['logs'] %}
-                      {%if day_item[1]%}
-                        {%for index in range(day_item[1]|length) %}
-                            <tr>
-                                <td>{{day_item[0]}}</td>
-                                <td>{{day_item[1][index][0]}}</td>
-                                {%for i in "ABCDEF" %}
-                                    <td>
-                                    <div style="width:10px!important;">
-                                    {%if i in day_item[1][index][1] %}
-                                        &#10003;
-                                    {%endif%}
-                                    </div>
-                                    </td>
-                                {%endfor%}
-                                <td>{{day_item[1][index][4]}}</td>
-                                <td>{{day_item[1][index][2]}}</td>
-                                <td>{{day_item[1][index][3]}}</td>
-                                <td>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{index}}{{day_item[0]}}">刪除</button>
-                                    <div class="modal fade" id="exampleModal{{index}}{{day_item[0]}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">確認刪除？</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p class="fw-bold">請注意！刪除後將無法復原！</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                                                    <button type="button" class="btn btn-danger" onclick="location.href='/customers/{{result['_id']}}/delete_log?log_id={{index}}&date={{day_item[0]}}'">確認刪除</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        {%endfor%}
-                        {%endif%}
-                    {% endfor %}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-
-    <!-- 按鈕 -->
-        <div class="row  justify-content-center">
-            <div class="col-md-1 col-4    ">
-                <div style="cursor: pointer;  " onclick="window.location='/home'" class="home p-1" >
-                    <img src="/static/images/home.png " height=45% width=35% alt="logout button ">
-                    <h4>回首頁</h4>
-                </div>
-            </div>
-            <div class="col-md-1 col-4 ms-md-5">
-                <div style="cursor: pointer; " onclick="window.location='/logout'" class="home p-1" >
-                    <img src="/static/images/logout.png " height=45% width=40% alt="logout button ">
-                    <h4>登出</h4>
-                </div>
-            </div>
-
-         
-        </div>
-        <div class="row  mt-3 text-center"><a style="color: rgb(138, 132, 132);">Copyright © 2022 Iteration.</a>
-        </div>
+  <div class=" col-md-1 col-4 ms-md-5">
+    <button onclick="location.href='/customers/{{result['_id']+1}}/'" class="btn btn-primary">下一個</button>
+  </div>
+  <!-- 標題 -->
+  <!-- <div class="card "> -->
+  <div class="row  mt-md-5 mt-1 justify-content-center">
+    <div class=" d-flex col-3 justify-content-center text-center ">
+      <h1 class='text h1'>用戶</h1>
     </div>
+  </div>
+  <!-- 中央顯示區域 -->
+  <div class="row  middle-board justify-content-center pt-md-0 pt-4 align-content-center mx-auto  m-3 "
+    style="min-height:600px;max-width:800px;">
+    <div class="bd-example overflow-scroll" style=" padding:10px ">
+      <table class="table table-bordered border border-dark border-3 mt-3">
+        <thead>
+          <tr>
+            <th class="col-2">ID</th>
+            <td>{{result['_id']}}</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">名稱</th>
+            <td>{{result['name']}}</td>
+          </tr>
+          <tr>
+            <th scope="row">地址</th>
+            <td>{{result['address']}}</td>
+          </tr>
+          <tr>
+            <th scope="row">電話</th>
+            <td>{{result['phone']}}</td>
+          </tr>
+          <tr>
+            <th scope="row">機器型號</th>
+            <td>{{result['machine']}}</td>
+          </tr>
+          <tr>
+            <th scope="row">上次時間</th>
+            <td>{{result['last-time']}}</td>
+          </tr>
+          <tr>
+            <th scope="row">下次時間</th>
+            <td>{{result['next-time']}}</td>
+          </tr>
+          <tr>
+            <th scope="row">備註</th>
+            <td style="white-space:pre">{{result['note']}}
+              <div class="overflow-scroll" style="width:100%;height:200px!important;white-space:normal!important">
+                {% if related %}
+                關聯機器：
+                {%for i in related%}
+                <br><a href="/customers/{{i[0]}}/">{{i[0]}} {{i[1]}}</a>
+                {%endfor%}
+                {%endif%}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+      <div class="col ps-3">
+        <button onclick="location.href='/customers/{{result['_id']}}/edit/'" class="btn btn-secondary">編輯</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row  middle-board justify-content-center pt-md-2 pt-0  mx-auto  m-3 "
+    style="min-height:600px;max-width:800px;">
+    <div class="col overflow-scroll mt-md-0 mt-4" style="height: 600px;">
+      <table class="table px-2 text-center" id='logs'>
+        <thead>
+          <tr>
+            <th scope="col">時間</th>
+            <th scope="col">類型</th>
+            <th scope="col">1</th>
+            <th scope="col">2</th>
+            <th scope="col">3</th>
+            <th scope="col">4</th>
+            <th scope="col">5</th>
+            <th scope="col">6</th>
+            <th scope="col">價錢</th>
+            <th scope="col">人員</th>
+            <th scope="col">備註</th>
+            <th scope='col'>刪除</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          {% for day_item in result['logs'] %}
+          {%if day_item[1]%}
+          {%for index in range(day_item[1]|length) %}
+          <tr>
+            <td>{{day_item[0]}}</td>
+            <td>{{day_item[1][index][0]}}</td>
+            {%for i in "ABCDEF" %}
+            <td>
+              <div style="width:10px!important;">
+                {%if i in day_item[1][index][1] %}
+                &#10003;
+                {%endif%}
+              </div>
+            </td>
+            {%endfor%}
+            <td>{{day_item[1][index][4]}}</td>
+            <td>{{day_item[1][index][2]}}</td>
+            <td>{{day_item[1][index][3]}}</td>
+            <td>
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                data-bs-target="#exampleModal{{index}}{{day_item[0]}}">刪除</button>
+              <div class="modal fade" id="exampleModal{{index}}{{day_item[0]}}" tabindex="-1"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">確認刪除？</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p class="fw-bold">請注意！刪除後將無法復原！</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                      <button type="button" class="btn btn-danger"
+                        onclick="location.href='/customers/{{result['_id']}}/delete_log?log_id={{index}}&date={{day_item[0]}}'">確認刪除</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          {%endfor%}
+          {%endif%}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- </div> -->
+
+
+
+
+  </div>
+  <div class="row  mt-3 text-center"><a style="color: rgb(138, 132, 132);">Copyright © 2022 Iteration.</a>
+  </div>
+</div>
 {% endblock %}
